@@ -178,25 +178,47 @@ FILE
 - A single JSON array [ ]. Valid JSON: double quotes, no trailing commas, no comments.
 - Items are either PLAIN questions or PASSAGE SETS, in the same order as the paper.
 
-EVERY QUESTION (plain, or inside a set) has EXACTLY these four fields:
+EVERY QUESTION (plain, or inside a set) has these four required fields:
   "id": integer, unique, 1,2,3... in file order (sub-questions inside sets continue the numbering)
   "question": string
-  "options": object with exactly the keys "A","B","C","D", each a non-empty string
+  "options": object with exactly the keys "A","B","C","D", each a string
              (do NOT start an option with "A." or "(a)")
   "answer": one capital letter "A"-"D". Exactly one correct answer.
-No other fields.
+Options must be non-empty, EXCEPT an option that is itself a picture (see PICTURES), which is "".
+Optional picture fields ("image", "optionImages") are allowed ONLY where the paper really has a figure. No other fields.
+
+PICTURES
+Use a picture only for things that cannot be written as text: diagrams, graphs, maps, circuits, figures, photos.
+Data tables and anything readable as text must be typed out as text or a | table, never as a picture.
+I will create the image files myself, so you only write the file names, using these exact rules:
+- Figure belonging to one question: "image": "q<id>.webp"            e.g. "q12.webp"
+- Pictures as options: "optionImages": {"A":"q<id>-a.webp","B":"q<id>-b.webp", ...} using only the letters that are pictures, and "" as the text of those options
+- Figure shared by a whole passage set: put "image": "<group>.webp" on the SET itself (not inside its questions),
+  e.g. "map-set.webp". A set must still have passage text, so if there is only a figure write a short line such as "Study the figure and answer the questions."
+- File names: lowercase letters, digits and hyphens only, always ending in .webp. No spaces, no folders, no URLs, no capitals.
+- Optional "imageAlt": one short sentence describing the figure, only if you can see it clearly. Otherwise leave it out.
+- Never describe a figure with ASCII art, and never drop a question just because it has a figure.
 
 PLAIN QUESTION:
 { "id": 1, "question": "...", "options": {"A":"...","B":"...","C":"...","D":"..."}, "answer": "B" }
 
-PASSAGE SET (use it when several questions share one passage or one data table):
+PLAIN QUESTION WITH A FIGURE:
+{ "id": 12, "question": "Identify the structure shown in the figure.", "image": "q12.webp", "options": {"A":"...","B":"...","C":"...","D":"..."}, "answer": "B" }
+
+QUESTION WHOSE OPTIONS ARE PICTURES:
+{ "id": 15, "question": "Which circuit diagram is correct?", "options": {"A":"","B":"","C":"","D":""},
+  "optionImages": {"A":"q15-a.webp","B":"q15-b.webp","C":"q15-c.webp","D":"q15-d.webp"}, "answer": "C" }
+
+PASSAGE SET (use it when several questions share one passage, one data table or one figure):
 {
   "group": "short-unique-name",
   "title": "Directions (Q1-5): Read the passage and answer the questions",
   "passage": "Passage text. Write it ONCE.",
+  "image": "short-unique-name.webp",
   "questions": [ { "id": 2, "question": "...", "options": {...}, "answer": "C" }, ... ]
 }
-A set has no "id". Do not put "group" or "passage" inside its questions.
+A set has no "id". "image" on a set is optional. "group" is lowercase letters, digits and hyphens, unique in the file.
+Do not put "group" or "passage" inside its questions. A question inside a set may have its own "image" or "optionImages" only if it has its own figure.
 
 TEXT RULES
 - Plain text only (no HTML). Use Unicode for math and symbols: m², ₹, °C, →.
@@ -209,7 +231,10 @@ TEXT RULES
   or refer to option letters in the question or in another option.
 - For arrange-in-order questions, put the items on separate lines (\n) in the question.
 
-Return only the JSON.
+Return only the JSON. Do not add a list of images; the file names follow the rules above.
+
+QUESTION PAPER:
+<paste the questions and answers here>
 
 QUESTION PAPER:
 <paste the questions and answers here>
