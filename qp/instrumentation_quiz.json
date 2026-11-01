@@ -1,0 +1,1925 @@
+[
+  {
+    "id": 1,
+    "question": "What is an Oceanographic Research Vessel (ORV)?",
+    "options": {
+      "A": "A ship or boat designed, modified or equipped to carry out research at sea",
+      "B": "A fixed platform anchored to the seafloor to record currents",
+      "C": "An unmanned glider that dives and surfaces repeatedly",
+      "D": "A satellite that maps sea surface height"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 2,
+    "question": "Data collected by non-oceanography ships (ships of opportunity) is available only along which areas?",
+    "options": {
+      "A": "Polar ice margins",
+      "B": "Mid-ocean ridges",
+      "C": "Coastal estuaries only",
+      "D": "Shipping lanes"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 3,
+    "question": "Why does the quality of data collected from ships vary from ship to ship?",
+    "options": {
+      "A": "Because every ship uses a different satellite for positioning",
+      "B": "Because ships only measure at night",
+      "C": "Because of differences in instrument exposure, maintenance and training of personnel",
+      "D": "Because ships cannot carry calibrated instruments"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 4,
+    "question": "What is the minimum endurance required of a research vessel?",
+    "options": {
+      "A": "15 days",
+      "B": "45 days",
+      "C": "30 days",
+      "D": "90 days"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "question": "What is the typical speed of a research vessel, with good manoeuvrability and the ability to operate at low speeds?",
+    "options": {
+      "A": "10 to 12 knots",
+      "B": "2 to 4 knots",
+      "C": "20 to 25 knots",
+      "D": "35 to 40 knots"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 6,
+    "question": "What is the purpose of stabilisers fitted on a research vessel?",
+    "options": {
+      "A": "To increase the speed of the ship",
+      "B": "To generate power for the winches",
+      "C": "To provide positioning information",
+      "D": "To reduce roll"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 7,
+    "question": "Which abbreviation denotes Fishery Research Vessels?",
+    "options": {
+      "A": "PRV",
+      "B": "CRV",
+      "C": "FORV",
+      "D": "ORV"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 8,
+    "question": "Which part of a ship is the backbone running along the bottom from bow to stern?",
+    "options": {
+      "A": "Deck",
+      "B": "Keel",
+      "C": "Rudder",
+      "D": "Shaft"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "question": "Which component is a flat piece at the stern of a ship used for steering?",
+    "options": {
+      "A": "Rudder",
+      "B": "Helm",
+      "C": "Keel",
+      "D": "Propeller"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 10,
+    "question": "Which component connects the engine to the propeller of a ship?",
+    "options": {
+      "A": "Rudder",
+      "B": "Helm",
+      "C": "Bridge",
+      "D": "Shaft"
+    },
+    "answer": "D"
+  },
+  {
+    "group": "ship-motion",
+    "title": "Directions (Q11-13): Read the table of ship motions and answer the questions",
+    "passage": "Ship movement refers to how a ship moves through water and responds to wind, waves and currents. It includes linear and rotational movements.\n\n| Type | Name | Description |\n|---|---|---|\n| Translation | Surge | Forward and backward motion |\n| Translation | Sway | Side-to-side movement |\n| Translation | Heave | Up and down motion |\n| Rotation | Roll | Side-to-side tilting |\n| Rotation | Pitch | Tilting of bow and stern (up/down) |\n| Rotation | Yaw | Turning left or right (changing heading) |\n",
+    "questions": [
+      {
+        "id": 11,
+        "question": "Which motion of a ship is a rotation that tilts the bow and stern up and down?",
+        "options": {
+          "A": "Heave",
+          "B": "Roll",
+          "C": "Pitch",
+          "D": "Surge"
+        },
+        "answer": "C"
+      },
+      {
+        "id": 12,
+        "question": "A ship turns left or right and changes its heading. Which motion is this?",
+        "options": {
+          "A": "Sway",
+          "B": "Yaw",
+          "C": "Roll",
+          "D": "Pitch"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 13,
+        "question": "Which motion is a translation in which the whole ship moves side to side?",
+        "options": {
+          "A": "Sway",
+          "B": "Roll",
+          "C": "Surge",
+          "D": "Yaw"
+        },
+        "answer": "A"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Which three basic components do moorings typically have?",
+    "options": {
+      "A": "A propeller, a rudder and a compass",
+      "B": "A drogue, a barometer and a solar panel",
+      "C": "A transducer, a towfish and a winch",
+      "D": "An anchor, a chain or line for attaching instruments, and flotation devices"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 15,
+    "question": "Why is a mooring described as an Eulerian way of measuring ocean currents?",
+    "options": {
+      "A": "Because it drifts freely with the current",
+      "B": "Because it follows individual water parcels over time",
+      "C": "Because the mooring is stationary at a fixed location",
+      "D": "Because it measures only surface currents"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 16,
+    "question": "Which synthetic material is mentioned as being used for mooring lines, along with steel cable and nylon rope?",
+    "options": {
+      "A": "Teflon",
+      "B": "Kevlar",
+      "C": "Polystyrene",
+      "D": "Neoprene"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "question": "What does the acoustic release between the anchor and the end of the mooring line do?",
+    "options": {
+      "A": "It releases the line on receiving an acoustic signal from the recovery ship so that the mooring surfaces",
+      "B": "It transmits wave data to satellites",
+      "C": "It keeps the mooring line upright",
+      "D": "It measures the current speed at the anchor"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 18,
+    "question": "What distinguishes a subsurface mooring from a surface mooring?",
+    "options": {
+      "A": "It has no anchor",
+      "B": "It carries only meteorological sensors",
+      "C": "It drifts with the ocean currents",
+      "D": "Its uppermost flotation lies below the sea surface"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 19,
+    "question": "Which statement about buoys is correct?",
+    "options": {
+      "A": "A buoy is always anchored to the seabed",
+      "B": "A buoy never transmits data in real time",
+      "C": "A buoy is a floating device that can be anchored or can drift with ocean currents",
+      "D": "A buoy is a submerged robot controlled from a ship"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 20,
+    "question": "Which set lists satellite telecommunication systems through which buoys transmit data in real time?",
+    "options": {
+      "A": "Argo, TAO and RAMA",
+      "B": "Argos, Orbcomm and Iridium",
+      "C": "NEMO, DUACS and TRITON",
+      "D": "AVHRR, MODIS and SMAP"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 21,
+    "question": "At what depth is the drogue of a drifting buoy centred?",
+    "options": {
+      "A": "15 m below the surface",
+      "B": "1.5 m below the surface",
+      "C": "150 m below the surface",
+      "D": "500 m below the surface"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 22,
+    "question": "Why do drifting buoys have a drogue?",
+    "options": {
+      "A": "So that they stay at a fixed geographic position",
+      "B": "So that they can measure water depth",
+      "C": "So that they can dive to 2000 m",
+      "D": "So that they follow the water circulation and are not influenced by the wind"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 23,
+    "question": "Drifting buoys are part of the international programme of which body?",
+    "options": {
+      "A": "Global Drifter Observation Panel",
+      "B": "Ocean Moored Array Commission",
+      "C": "Data Buoy Cooperation Panel (DBCP)",
+      "D": "International Buoy Navigation Council"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 24,
+    "question": "What is the average period for which drifting buoys reliably measure the atmosphere and ocean surface conditions?",
+    "options": {
+      "A": "About 18 days",
+      "B": "About 18 months",
+      "C": "About 5 years",
+      "D": "About 10 years"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 25,
+    "question": "Buoys that track surface currents by drifting with the water are called which type of drifters?",
+    "options": {
+      "A": "Lagrangian drifters",
+      "B": "Eulerian drifters",
+      "C": "Geostrophic drifters",
+      "D": "Barometric drifters"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 26,
+    "question": "Which of the following is true of moored buoys when compared with drifting buoys?",
+    "options": {
+      "A": "They are inexpensive and last about 18 months on average",
+      "B": "They follow the water at the depth of a drogue",
+      "C": "They cannot measure subsurface temperature",
+      "D": "They are anchored at fixed locations and are normally relatively large and expensive platforms"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 27,
+    "question": "Moored buoys can measure subsurface temperatures down to roughly what depth?",
+    "options": {
+      "A": "5 m",
+      "B": "50 m",
+      "C": "500 m or more",
+      "D": "Only the top 1 m"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 28,
+    "question": "Match each moored buoy array with the ocean region it serves.\n\n| Array | Region |\n|---|---|\n| A. TAO/TRITON | 1. Indian Ocean |\n| B. PIRATA | 2. Pacific Ocean |\n| C. RAMA | 3. Atlantic Ocean |\n",
+    "options": {
+      "A": "A-1, B-2, C-3",
+      "B": "A-2, B-3, C-1",
+      "C": "A-3, B-1, C-2",
+      "D": "A-2, B-1, C-3"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 29,
+    "question": "The TAO/TRITON array was set up to better understand and predict climate variations related to which phenomenon?",
+    "options": {
+      "A": "El Niño and the Southern Oscillation (ENSO)",
+      "B": "The Indian monsoon only",
+      "C": "Atlantic hurricanes only",
+      "D": "The Antarctic Circumpolar Current"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 30,
+    "question": "Which group of countries supports the PIRATA array?",
+    "options": {
+      "A": "India, Japan and Australia",
+      "B": "China, Russia and Germany",
+      "C": "UK, Canada and Norway",
+      "D": "France, Brazil and the USA"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 31,
+    "question": "The RAMA array was initiated in 2004 following successful pilot arrays deployed by which countries?",
+    "options": {
+      "A": "France and Brazil",
+      "B": "USA and Canada",
+      "C": "Japan and India",
+      "D": "China and Korea"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 32,
+    "question": "T-Flex moorings began to replace which earlier moorings in the Atlantic and Indian Ocean arrays in 2015?",
+    "options": {
+      "A": "TRITON moorings",
+      "B": "ATLAS moorings",
+      "C": "OMNI moorings",
+      "D": "FLIP moorings"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 33,
+    "question": "Argo floats are best described as:",
+    "options": {
+      "A": "A global network of autonomous robotic instruments collecting real-time oceanographic data",
+      "B": "Ship-mounted sonars that map the seabed",
+      "C": "Moored buoys with fixed surface floats",
+      "D": "Satellite sensors measuring sea surface height"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 34,
+    "question": "To what temperature accuracy does the CTD of an Argo float measure temperature?",
+    "options": {
+      "A": "0.1 °C",
+      "B": "0.01 °C",
+      "C": "1 °C",
+      "D": "0.001 °C"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 35,
+    "question": "How does an Argo float control its buoyancy?",
+    "options": {
+      "A": "It pumps seawater into a ballast tank",
+      "B": "It drops iron weights to descend",
+      "C": "A hydraulic pump moves oil between an internal reservoir and an external bladder",
+      "D": "It changes the angle of its wings"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 36,
+    "question": "What type of batteries power the pumps, sensors, controller and communication system of an Argo float?",
+    "options": {
+      "A": "Lead-acid batteries",
+      "B": "Lithium batteries",
+      "C": "Solar cells only",
+      "D": "Dry-cell alkaline batteries only"
+    },
+    "answer": "B"
+  },
+  {
+    "group": "buoyancy-cases",
+    "title": "Directions (Q37-39): Study the figure showing three buoyancy cases and answer the questions",
+    "passage": "The figure shows a block under three conditions: positive, neutral and negative buoyancy. Gravity and buoyancy forces are shown as arrows.",
+    "image": "buoyancy-cases.webp",
+    "questions": [
+      {
+        "id": 37,
+        "question": "In the figure, which case shows an object that is lighter (less dense) than the fluid and floats at the surface?",
+        "options": {
+          "A": "Positive buoyancy",
+          "B": "Neutral buoyancy",
+          "C": "Negative buoyancy",
+          "D": "Zero gravity"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 38,
+        "question": "Argo floats, which stay suspended at depth, correspond to which case in the figure?",
+        "options": {
+          "A": "Positive buoyancy",
+          "B": "Negative buoyancy",
+          "C": "No buoyancy",
+          "D": "Neutral buoyancy"
+        },
+        "answer": "D"
+      },
+      {
+        "id": 39,
+        "question": "Which case in the figure corresponds to an object heavier than the fluid, such as an AUV that sinks?",
+        "options": {
+          "A": "Neutral buoyancy",
+          "B": "Positive buoyancy",
+          "C": "Negative buoyancy",
+          "D": "Reversed buoyancy"
+        },
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "question": "How do ocean gliders generate forward thrust?",
+    "options": {
+      "A": "By rotating a large propeller",
+      "B": "By changing their buoyancy and glide angle to repeatedly dive and surface",
+      "C": "By burning fuel in a jet",
+      "D": "By being towed behind a ship"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 41,
+    "question": "Which sensor on a glider is used to measure chlorophyll?",
+    "options": {
+      "A": "Fluorescence sensor",
+      "B": "Oxygen optode",
+      "C": "CTD",
+      "D": "Pressure gauge"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 42,
+    "question": "Who is regarded as the father of oceanography from space?",
+    "options": {
+      "A": "Dr. Seasat",
+      "B": "Dr. Argos",
+      "C": "Dr. Mercator",
+      "D": "Dr. Ewing"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 43,
+    "question": "Which was the first successful meteorological satellite, launched by NASA on April 1, 1960?",
+    "options": {
+      "A": "Seasat-1",
+      "B": "Argos-1",
+      "C": "TIROS-1",
+      "D": "Terra"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 44,
+    "question": "Seasat-1 was launched by NASA's Jet Propulsion Laboratory in which year?",
+    "options": {
+      "A": "1960",
+      "B": "1978",
+      "C": "1969",
+      "D": "1988"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 45,
+    "question": "Which Seasat instrument measured sea surface wind speed and direction?",
+    "options": {
+      "A": "Scatterometer",
+      "B": "Radar altimeter",
+      "C": "Microwave radiometer",
+      "D": "Synthetic aperture radar"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 46,
+    "question": "The Argos data collection and positioning system on NOAA polar-orbiting satellites provides:",
+    "options": {
+      "A": "Two-way voice communication with ships",
+      "B": "Depth soundings of the seafloor",
+      "C": "Profiles of ocean temperature and salinity",
+      "D": "One-way communication from data collection platforms together with their positioning"
+    },
+    "answer": "D"
+  },
+  {
+    "group": "satellite-orbits",
+    "title": "Directions (Q47-49): Study the figure of satellite orbits and answer the questions",
+    "passage": "The figure shows a geostationary orbit and a polar orbit around the Earth, with a satellite on each.",
+    "image": "satellite-orbits.webp",
+    "questions": [
+      {
+        "id": 47,
+        "question": "The satellite in the equatorial orbit of the figure remains fixed over one location. At what altitude does it orbit?",
+        "options": {
+          "A": "800 km",
+          "B": "3,580 km",
+          "C": "35,800 km",
+          "D": "358,000 km"
+        },
+        "answer": "C"
+      },
+      {
+        "id": 48,
+        "question": "The satellite in the polar orbit of the figure orbits in a sun-synchronous orbit at roughly what altitude?",
+        "options": {
+          "A": "35,800 km",
+          "B": "800 km",
+          "C": "80 km",
+          "D": "8,000 km"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 49,
+        "question": "How often does the sun-synchronous polar-orbiting satellite pass over the same location?",
+        "options": {
+          "A": "Twice per day",
+          "B": "Once per year",
+          "C": "Continuously",
+          "D": "Once per hour"
+        },
+        "answer": "A"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "question": "Which statement about radiometers is correct?",
+    "options": {
+      "A": "A radiometer emits radar pulses towards the ocean",
+      "B": "A radiometer is an active sonar",
+      "C": "A radiometer is a type of current meter",
+      "D": "A radiometer is a passive remote sensing instrument"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 51,
+    "question": "Match each type of radiometer with an example sensor.\n\n| Radiometer type | Example |\n|---|---|\n| A. Optical radiometer | 1. AMSR-E |\n| B. Thermal infrared radiometer | 2. MODIS |\n| C. Microwave radiometer | 3. AVHRR thermal bands |\n",
+    "options": {
+      "A": "A-1, B-2, C-3",
+      "B": "A-3, B-1, C-2",
+      "C": "A-2, B-3, C-1",
+      "D": "A-2, B-1, C-3"
+    },
+    "answer": "C"
+  },
+  {
+    "group": "em-spectrum",
+    "title": "Directions (Q52-54): Study the figure of the sun's radiation across the electromagnetic spectrum and answer the questions",
+    "passage": "The figure shows the amount of radiation across wavelengths, with the percentage of the sun's energy marked for different regions.",
+    "image": "em-spectrum.webp",
+    "questions": [
+      {
+        "id": 52,
+        "question": "According to the figure, what percentage of the sun's energy is emitted in the visible region?",
+        "options": {
+          "A": "7 %",
+          "B": "44 %",
+          "C": "37 %",
+          "D": "11 %"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 53,
+        "question": "According to the figure, what percentage of the sun's energy is emitted at ultraviolet wavelengths?",
+        "options": {
+          "A": "7 %",
+          "B": "44 %",
+          "C": "37 %",
+          "D": "Less than 1 %"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 54,
+        "question": "According to the figure, what percentage of the sun's energy lies in the near-infrared region between 0.7 µm and 1.5 µm?",
+        "options": {
+          "A": "44 %",
+          "B": "7 %",
+          "C": "11 %",
+          "D": "37 %"
+        },
+        "answer": "D"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "question": "The visible region of the electromagnetic spectrum lies between which wavelengths?",
+    "options": {
+      "A": "0.1 and 0.4 µm",
+      "B": "0.7 and 3 µm",
+      "C": "0.4 and 0.7 µm",
+      "D": "3 and 14 µm"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 56,
+    "question": "Which colour corresponds to the peak of the sun's energy output?",
+    "options": {
+      "A": "Red",
+      "B": "Blue-green",
+      "C": "Violet",
+      "D": "Yellow-orange"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 57,
+    "question": "Almost all of the energy emitted by the relatively cool Earth is at which wavelengths?",
+    "options": {
+      "A": "Infrared wavelengths",
+      "B": "Ultraviolet wavelengths",
+      "C": "Visible wavelengths",
+      "D": "X-ray wavelengths"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 58,
+    "question": "What is an atmospheric window?",
+    "options": {
+      "A": "A gap in the clouds over the ocean",
+      "B": "A wavelength range completely absorbed by water vapour",
+      "C": "A layer of the atmosphere where satellites orbit",
+      "D": "A wavelength range in which atmospheric absorption is minimal so radiation can pass through"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 59,
+    "question": "Which spectral band is very important for vegetation studies because healthy plants reflect strongly in it?",
+    "options": {
+      "A": "Thermal infrared (TIR)",
+      "B": "Microwave",
+      "C": "Near infrared (NIR)",
+      "D": "Ultraviolet"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 60,
+    "question": "The shortwave infrared (SWIR) band, 1.3–3 µm, is sensitive to which property?",
+    "options": {
+      "A": "Emitted heat from the sea surface",
+      "B": "Moisture content in soil and vegetation",
+      "C": "Colour of the ocean",
+      "D": "Sea surface roughness"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 61,
+    "question": "The thermal infrared band (3–14 µm) is used to measure which quantity?",
+    "options": {
+      "A": "Emitted heat, used for surface temperature",
+      "B": "Reflected blue light",
+      "C": "Radar backscatter",
+      "D": "Soil colour"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 62,
+    "question": "Which remote sensing instrument works day and night and can penetrate clouds?",
+    "options": {
+      "A": "Optical radiometer in the visible band",
+      "B": "Thermal infrared radiometer",
+      "C": "LiDAR bathymetric sensor",
+      "D": "Synthetic Aperture Radar (SAR)"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 63,
+    "question": "In airborne remote sensing, LiDAR is used for which purpose?",
+    "options": {
+      "A": "Measuring sea surface salinity",
+      "B": "Measuring deep-sea currents",
+      "C": "Measuring shallow-water depth (bathymetry) and water clarity",
+      "D": "Measuring wind direction at 10 m"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 64,
+    "question": "Aircraft-mounted SAR differs from satellite SAR in that it gives:",
+    "options": {
+      "A": "Coarser resolution than satellites",
+      "B": "Finer resolution than satellites",
+      "C": "No wave information",
+      "D": "Only temperature data"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 65,
+    "question": "Which submersible is tethered to the ship, allowing control signals to be sent between topside operators and the vehicle?",
+    "options": {
+      "A": "Remotely operated vehicle (ROV)",
+      "B": "Human-occupied vehicle (HOV)",
+      "C": "Autonomous underwater vehicle (AUV)",
+      "D": "Drifting buoy"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 66,
+    "question": "Which submersible is pre-programmed and operates without real-time control by human operators?",
+    "options": {
+      "A": "Remotely operated vehicle (ROV)",
+      "B": "Human-occupied vehicle (HOV)",
+      "C": "Surface drifter",
+      "D": "Autonomous underwater vehicle (AUV)"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 67,
+    "question": "What is the difference between a submarine and a submersible?",
+    "options": {
+      "A": "A submersible can carry nuclear weapons",
+      "B": "A submarine is always unmanned",
+      "C": "A submarine has enough power to leave port and return to port under its own power",
+      "D": "A submersible is always tethered to a ship"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 68,
+    "question": "Which navigation method determines a ship's position by keeping an account of the distance and direction of travel from a known point of departure?",
+    "options": {
+      "A": "Piloting",
+      "B": "Dead reckoning",
+      "C": "Celestial navigation",
+      "D": "Electronic navigation"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 69,
+    "question": "In which navigation method does the navigator direct the vessel by observing landmarks such as lighthouses, beacons and buoys and by taking soundings?",
+    "options": {
+      "A": "Piloting",
+      "B": "Dead reckoning",
+      "C": "Celestial navigation",
+      "D": "Electronic navigation"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 70,
+    "question": "Match each term with its meaning.\n\n| Term | Meaning |\n|---|---|\n| A. Course | 1. Direction in which the ship is pointed at a given time |\n| B. Heading | 2. Intended direction of the ship's travel |\n| C. Track | 3. Direction of the straight line between departure point and present position |\n",
+    "options": {
+      "A": "A-1, B-2, C-3",
+      "B": "A-3, B-1, C-2",
+      "C": "A-2, B-3, C-1",
+      "D": "A-2, B-1, C-3"
+    },
+    "answer": "D"
+  },
+  {
+    "group": "modern-navigation",
+    "title": "Directions (Q71-74): Read the table of modern navigation methods and answer the questions",
+    "passage": "| Method | Description | Application |\n|---|---|---|\n| Dead reckoning | Advances a prior position using the ship's course and speed; the new position is a DR position. Correcting it for leeway, current effects and steering error gives an estimated position (EP). | Used at all times |\n| Pilotage | Navigating in restricted waters with frequent determination of position relative to geographic and hydrographic features. | When within sight of land |\n| Celestial navigation | Reducing celestial measurements to lines of position using tables, spherical trigonometry and almanacs. | Used primarily as a backup to satellite and other electronic systems in the open ocean |\n| Radio navigation | Uses radio waves to determine position, by radio direction finding or hyperbolic systems such as Decca, Omega and LORAN-C. | Losing ground to GPS |\n| Radar navigation | Uses radar to determine distance from or bearing of objects whose position is known. | Primarily when within radar range of land |\n| Satellite navigation | Uses artificial Earth satellite systems, such as GPS. | Used in all situations |\n",
+    "questions": [
+      {
+        "id": 71,
+        "question": "Correcting a dead reckoning position for leeway, current effects and steering error gives which position?",
+        "options": {
+          "A": "Fixed position",
+          "B": "Celestial position",
+          "C": "Estimated position (EP)",
+          "D": "Hyperbolic position"
+        },
+        "answer": "C"
+      },
+      {
+        "id": 72,
+        "question": "Which method is used primarily as a backup to satellite and other electronic systems in the open ocean?",
+        "options": {
+          "A": "Pilotage",
+          "B": "Celestial navigation",
+          "C": "Radar navigation",
+          "D": "Dead reckoning"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 73,
+        "question": "Which of the following is a hyperbolic radio navigation system?",
+        "options": {
+          "A": "LORAN-C",
+          "B": "GPS",
+          "C": "Argos",
+          "D": "SONAR"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 74,
+        "question": "Which method is applied when the vessel is within sight of land in restricted waters?",
+        "options": {
+          "A": "Celestial navigation",
+          "B": "Satellite navigation",
+          "C": "Radio navigation",
+          "D": "Pilotage"
+        },
+        "answer": "D"
+      }
+    ]
+  },
+  {
+    "group": "gps-dgps",
+    "title": "Directions (Q75-78): Read the comparison of GPS and DGPS and answer the questions",
+    "passage": "| Aspect | GPS | DGPS |\n|---|---|---|\n| Definition | Satellite-based system giving position, velocity and time anywhere on Earth | Enhanced GPS that uses ground-based reference stations to correct GPS errors |\n| Source of signals | 24+ satellites; receiver finds position from signal travel time | GPS satellites plus land-based reference stations |\n| Accuracy | 5–10 m; errors due to atmospheric delays, satellite clock errors and multipath effects | 0.5–1 m, sometimes below 10 cm in high-grade systems |\n| Cost | Cheaper, standard receivers widely available | More expensive due to correction signal infrastructure |\n| Uses | Car navigation, smartphones, basic marine navigation, hiking | Hydrographic surveying, port and harbour navigation, coastal mapping, dredging |\n",
+    "questions": [
+      {
+        "id": 75,
+        "question": "What is the typical accuracy of standard GPS?",
+        "options": {
+          "A": "0.5–1 m",
+          "B": "Below 10 cm",
+          "C": "5–10 m",
+          "D": "50–100 m"
+        },
+        "answer": "C"
+      },
+      {
+        "id": 76,
+        "question": "How does DGPS improve accuracy over GPS?",
+        "options": {
+          "A": "It uses more satellites than GPS in a higher orbit",
+          "B": "A reference station that knows its exact position calculates the GPS error and broadcasts corrections that the user device applies",
+          "C": "It averages many GPS readings over a day",
+          "D": "It replaces satellite signals with radar"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 77,
+        "question": "Which application most needs DGPS rather than standard GPS?",
+        "options": {
+          "A": "Hydrographic surveying",
+          "B": "Hiking",
+          "C": "Smartphone maps",
+          "D": "Car navigation"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 78,
+        "question": "Which of the following causes errors in standard GPS?",
+        "options": {
+          "A": "Ground reference stations",
+          "B": "Correction signals",
+          "C": "Differential broadcasts",
+          "D": "Atmospheric delays, satellite clock errors and multipath effects"
+        },
+        "answer": "D"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "question": "Lines of equal latitude are called:",
+    "options": {
+      "A": "Meridians of latitude",
+      "B": "Great circles of latitude",
+      "C": "Parallels of latitude",
+      "D": "Graticules"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 80,
+    "question": "At what latitude are the poles located?",
+    "options": {
+      "A": "0°",
+      "B": "90°",
+      "C": "45°",
+      "D": "180°"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 81,
+    "question": "In the Northern Hemisphere, how can latitude be determined using the North Star?",
+    "options": {
+      "A": "From the angle of Polaris above the horizon",
+      "B": "From the time Polaris sets",
+      "C": "From the colour of Polaris",
+      "D": "From the distance of Polaris from the Moon"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 82,
+    "question": "Which constellations can be used to find the south celestial pole in the Southern Hemisphere?",
+    "options": {
+      "A": "Ursa Major and Polaris",
+      "B": "Orion and Taurus",
+      "C": "Scorpius and Leo",
+      "D": "The Southern Cross and Centaurus"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 83,
+    "question": "Which instrument, developed later, allowed more accurate angle measurements than the astrolabe?",
+    "options": {
+      "A": "Compass",
+      "B": "Barometer",
+      "C": "Sextant",
+      "D": "Thermometer"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 84,
+    "question": "Given 1° = 60′ and 1′ = 60″, how many seconds of arc are in 1°?",
+    "options": {
+      "A": "60",
+      "B": "3600",
+      "C": "360",
+      "D": "216000"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 85,
+    "question": "Longitude is measured east or west of which reference line?",
+    "options": {
+      "A": "The prime meridian passing through Greenwich, England",
+      "B": "The equator",
+      "C": "The Tropic of Cancer",
+      "D": "The International Date Line"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 86,
+    "question": "Which statement about meridians of longitude is correct?",
+    "options": {
+      "A": "They are parallel lines that never meet",
+      "B": "They become smaller circles near the poles",
+      "C": "They are measured from 0° to 90°",
+      "D": "They are great circles of equal length that converge towards the poles"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 87,
+    "question": "Which map projection is the standard for navigational charts because it preserves directions?",
+    "options": {
+      "A": "Goode homolosine projection",
+      "B": "Robinson projection",
+      "C": "Mercator projection",
+      "D": "Physiographic projection"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 88,
+    "question": "Why does the Mercator projection exaggerate size and distance at high latitudes?",
+    "options": {
+      "A": "Because latitude lines are drawn closer together near the poles",
+      "B": "Because the distance between lines of longitude remains constant, so the poles are stretched to the width of the equator",
+      "C": "Because it uses a conical developable surface",
+      "D": "Because it shows true areas near the equator only"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 89,
+    "question": "What is the main disadvantage of the Goode homolosine projection?",
+    "options": {
+      "A": "The oceans and Greenland are split apart, and it is not useful for navigation",
+      "B": "It exaggerates areas at high latitudes more than Mercator",
+      "C": "It shows only the Northern Hemisphere",
+      "D": "It cannot show continents"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 90,
+    "question": "The Robinson planisphere projection is used mostly for:",
+    "options": {
+      "A": "Navigation charts",
+      "B": "Depth sounding",
+      "C": "Celestial navigation",
+      "D": "Data presentation"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 91,
+    "question": "What do bathymetric maps show?",
+    "options": {
+      "A": "Lines connecting areas of equal temperature",
+      "B": "Lines connecting areas of equal wind speed",
+      "C": "Lines connecting areas of equal depth",
+      "D": "Satellite tracks over the ocean"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 92,
+    "question": "What should be noted about physiographic maps?",
+    "options": {
+      "A": "They show true depths without distortion",
+      "B": "They show bathymetry as a 3D relief map with significant vertical exaggeration",
+      "C": "They are flat maps of latitude and longitude only",
+      "D": "They show only land topography"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 93,
+    "question": "A flat map can show one or more, but never all, of which set of properties?",
+    "options": {
+      "A": "True directions, distances, areas and shapes",
+      "B": "True depths, salinity and temperature",
+      "C": "True latitude, longitude and altitude",
+      "D": "True winds, tides and currents"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 94,
+    "question": "In the figure, which projection class uses a planar surface that touches the globe at a point?",
+    "image": "q94.webp",
+    "options": {
+      "A": "Cylindrical",
+      "B": "Conical",
+      "C": "Mercator",
+      "D": "Azimuthal"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 95,
+    "question": "Which pair describes the possible aspects of a map projection?",
+    "options": {
+      "A": "Tangent or secant",
+      "B": "Cylindrical, conical or azimuthal",
+      "C": "Normal, transverse or oblique",
+      "D": "Equivalent, equidistant or conformal"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 96,
+    "question": "Which list gives the distortion or preservation properties of map projections?",
+    "options": {
+      "A": "Normal, transverse or oblique",
+      "B": "Equivalent, equidistant or conformal",
+      "C": "Tangent or secant",
+      "D": "Cylindrical, conical or azimuthal"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 97,
+    "question": "Which sampling requirement represents the ability of an instrument to repeat an observation without deviation?",
+    "options": {
+      "A": "Precision",
+      "B": "Accuracy",
+      "C": "Range",
+      "D": "Resolution"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 98,
+    "question": "Accuracy of an instrument refers to:",
+    "options": {
+      "A": "How closely repeated measurements agree with each other",
+      "B": "The smallest change that can be displayed",
+      "C": "The upper and lower limits of measurement",
+      "D": "How closely the measured value corresponds to the true value"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 99,
+    "question": "Resolution of an instrument refers to:",
+    "options": {
+      "A": "The upper and lower limits it can measure",
+      "B": "How close the result is to the true value",
+      "C": "The smallest change in value that the instrument can detect or display",
+      "D": "How often the instrument is calibrated"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 100,
+    "question": "A temperature sensor has range −5 to 45 °C, accuracy ± 0.002 °C and resolution 0.0001 °C. Which statement is correct?",
+    "options": {
+      "A": "It guarantees every reading is within 0.0001 °C of the true value",
+      "B": "It can display changes as small as 0.0001 °C, but a reading may differ from the true value by up to 0.002 °C",
+      "C": "It cannot measure temperatures above 0 °C",
+      "D": "Its range is 0.002 °C"
+    },
+    "answer": "B"
+  },
+  {
+    "group": "accuracy-targets",
+    "title": "Directions (Q101-103): Study the target figure and answer the questions",
+    "passage": "The figure shows four targets, A to D. The red dots show the results of repeated measurements, and the centre of each target represents the true value.",
+    "image": "accuracy-targets.webp",
+    "questions": [
+      {
+        "id": 101,
+        "question": "Which target shows measurements that are both accurate and precise?",
+        "options": {
+          "A": "B",
+          "B": "A",
+          "C": "C",
+          "D": "D"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 102,
+        "question": "Which target shows measurements that are precise (tightly grouped) but not accurate?",
+        "options": {
+          "A": "A",
+          "B": "B",
+          "C": "C",
+          "D": "D"
+        },
+        "answer": "D"
+      },
+      {
+        "id": 103,
+        "question": "Which target shows measurements that are neither accurate nor precise?",
+        "options": {
+          "A": "B",
+          "B": "D",
+          "C": "C",
+          "D": "A"
+        },
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "question": "Why is calibration of measuring instruments necessary?",
+    "options": {
+      "A": "Because instruments become more precise with age",
+      "B": "Because the accuracy of measuring devices degrades over time due to wear, shock or harsh environments",
+      "C": "Because it increases the range of the instrument",
+      "D": "Because it removes the need for sampling"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 105,
+    "question": "What is calibration?",
+    "options": {
+      "A": "Configuring or adjusting an instrument to meet the manufacturer's specifications, especially accuracy",
+      "B": "Counting the number of samples taken",
+      "C": "Recording data at irregular intervals",
+      "D": "Converting depth to pressure"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 106,
+    "question": "How should the sampling interval be chosen?",
+    "options": {
+      "A": "As short as the instrument allows",
+      "B": "As long as possible to save battery",
+      "C": "Equal to the length of the whole experiment",
+      "D": "So that the highest variability of interest is recorded without oversampling"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 107,
+    "question": "Why is sampling at irregular intervals sometimes recommended?",
+    "options": {
+      "A": "To increase the Nyquist frequency",
+      "B": "To reduce the instrument range",
+      "C": "To avoid built-in bias in the sampling scheme",
+      "D": "To improve the accuracy of calibration"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 108,
+    "question": "A signal has a maximum frequency of 5 kHz. What is the minimum sampling rate to represent it without aliasing?",
+    "options": {
+      "A": "2.5 kHz",
+      "B": "10 kHz",
+      "C": "5 kHz",
+      "D": "20 kHz"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 109,
+    "question": "If a signal is sampled at 10 kHz, what is the sampling period?",
+    "options": {
+      "A": "0.0001 s",
+      "B": "0.001 s",
+      "C": "0.01 s",
+      "D": "0.00001 s"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 110,
+    "question": "A discrete signal is sampled at 8 kHz. What is the Nyquist (folding) frequency?",
+    "options": {
+      "A": "16 kHz",
+      "B": "8 kHz",
+      "C": "2 kHz",
+      "D": "4 kHz"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 111,
+    "question": "What is bathymetry?",
+    "options": {
+      "A": "The study of ocean waves",
+      "B": "The measurement of ocean salinity",
+      "C": "The study of the underwater depth of ocean floors",
+      "D": "The mapping of ocean currents"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 112,
+    "question": "A sounding line or lead line consists of:",
+    "options": {
+      "A": "A tethered robot with a camera",
+      "B": "A length of thin rope with a plummet, generally of lead, at its end",
+      "C": "A sonar transducer fixed to the hull",
+      "D": "A drifting pole with a float"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 113,
+    "question": "A fathom is equal to six feet (1.8 m). A depth of 10 fathoms is approximately:",
+    "options": {
+      "A": "18 m",
+      "B": "6 m",
+      "C": "10 m",
+      "D": "60 m"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 114,
+    "question": "An echo sounder gives depth as d = v × t / 2. If the speed of sound is 1500 m/s and the echo returns after 4 s, what is the depth?",
+    "options": {
+      "A": "6000 m",
+      "B": "1500 m",
+      "C": "375 m",
+      "D": "3000 m"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 115,
+    "question": "In the echo sounder equation d = v × t / 2, why is the time divided by 2?",
+    "options": {
+      "A": "Because sound travels twice as fast in water",
+      "B": "Because only half of the pulse is reflected",
+      "C": "Because the measured time covers the downward trip and the return trip of the pulse",
+      "D": "Because the transducer sends two pulses"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 116,
+    "question": "Why does deeper water require a lower frequency transducer in an echo sounder?",
+    "options": {
+      "A": "Low frequency signals travel faster",
+      "B": "Low frequency signals are less susceptible to attenuation in the water column",
+      "C": "High frequency signals cannot be reflected",
+      "D": "Low frequency gives finer detail"
+    },
+    "answer": "B"
+  },
+  {
+    "group": "echosounder-sonar",
+    "title": "Directions (Q117-119): Read the comparison of echosounders and sonar and answer the questions",
+    "passage": "| Aspect | Echosounder | Sonar |\n|---|---|---|\n| Primary purpose | Measure water depth and profile the seafloor | Navigation, object detection and imaging |\n| Operation principle | Sends a single vertical sound pulse downward and measures the time for the echo to return | Emits sound waves in multiple directions to detect and map objects or areas underwater |\n| Frequency range | High frequencies (e.g., 30–200 kHz) | Wide range, from low (long-range detection) to high (imaging) |\n| Types | Single-beam and multi-beam echosounder | Active sonar (emits sound) and passive sonar (listens) |\n| Typical users | Fisheries, hydrographic surveys, recreational boaters | Military, search and rescue, oceanographers, marine archaeologists |\n",
+    "questions": [
+      {
+        "id": 117,
+        "question": "Which statement describes an echosounder?",
+        "options": {
+          "A": "It sends a single vertical sound pulse downward and measures the echo return time",
+          "B": "It listens to underwater sounds without emitting any",
+          "C": "It emits sound in all directions to image objects",
+          "D": "It measures current speed using the Doppler shift"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 118,
+        "question": "Which sonar type listens to underwater sounds without emitting sound?",
+        "options": {
+          "A": "Active sonar",
+          "B": "Single-beam echosounder",
+          "C": "Multi-beam echosounder",
+          "D": "Passive sonar"
+        },
+        "answer": "D"
+      },
+      {
+        "id": 119,
+        "question": "Which frequency range is typical for echosounders?",
+        "options": {
+          "A": "0.1–1 kHz",
+          "B": "1–3 MHz",
+          "C": "30–200 kHz",
+          "D": "10–30 Hz"
+        },
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "group": "sidescan-multibeam",
+    "title": "Directions (Q120-122): Read the comparison of side-scan and multibeam sonar and answer the questions",
+    "passage": "| Aspect | Side-scan sonar | Multibeam sonar |\n|---|---|---|\n| Primary purpose | Detailed 2D images of the seafloor and underwater objects | Measures water depth and creates 3D maps of seafloor topography |\n| Output | Grayscale images showing textures and features (no depth data) | Precise depth data and 3D terrain models |\n| Directionality | Emits sound outward to the sides of the sonar device | Emits sound downward in a fan-shaped array beneath the vessel |\n| Applications | Wreck and object detection, search and rescue, habitat mapping | Navigation, hydrographic surveys, engineering and construction |\n| Deployment | Towed behind a vessel or mounted on underwater vehicles | Typically hull-mounted or deployed on AUVs |\n",
+    "questions": [
+      {
+        "id": 120,
+        "question": "Which sonar provides precise depth data for bathymetric maps?",
+        "options": {
+          "A": "Side-scan sonar",
+          "B": "Multibeam sonar",
+          "C": "Passive sonar",
+          "D": "Lead line"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 121,
+        "question": "Which sonar is best for detecting shipwrecks through detailed 2D images but gives no depth data?",
+        "options": {
+          "A": "Side-scan sonar",
+          "B": "Multibeam sonar",
+          "C": "Sub-bottom profiler",
+          "D": "Single-beam echosounder"
+        },
+        "answer": "A"
+      },
+      {
+        "id": 122,
+        "question": "Which sonar emits sound downward in a fan-shaped array beneath the vessel?",
+        "options": {
+          "A": "Side-scan sonar",
+          "B": "Towfish sonar",
+          "C": "Passive sonar",
+          "D": "Multibeam sonar"
+        },
+        "answer": "D"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "question": "In side-scan sonar, what is the trade-off between high-frequency and low-frequency systems?",
+    "options": {
+      "A": "High frequency gives longer range and less detail",
+      "B": "Low frequency gives more detail and shorter range",
+      "C": "High frequency gives more detail but limited range; low frequency covers more area with less detail",
+      "D": "Frequency has no effect on coverage"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 124,
+    "question": "Where can the transducer array of a side-scan sonar be mounted?",
+    "options": {
+      "A": "Only on the seabed",
+      "B": "On the ship's hull or on a platform such as a towfish",
+      "C": "Only on a satellite",
+      "D": "Only on a drifting buoy"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 125,
+    "question": "Which data does a multibeam sonar record to build a 3D representation of the seafloor?",
+    "options": {
+      "A": "Return time, intensity and angle of the echoes",
+      "B": "Surface wind speed and direction",
+      "C": "Water salinity and temperature",
+      "D": "Magnetic field strength"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 126,
+    "question": "Why does low-frequency sound travel much farther underwater than high-frequency sound?",
+    "options": {
+      "A": "It travels at a higher speed",
+      "B": "It is amplified by the seabed",
+      "C": "It is not affected by temperature",
+      "D": "It experiences significantly less absorption by water molecules"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 127,
+    "question": "What does a sub-bottom profiler do?",
+    "options": {
+      "A": "Measures current speed at several depths",
+      "B": "Collects water samples at different depths",
+      "C": "Uses low-frequency sound pulses that penetrate sediments to map layers beneath the seafloor",
+      "D": "Measures wave height at the surface"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 128,
+    "question": "How does a sub-bottom profiler determine sediment layer thickness and composition?",
+    "options": {
+      "A": "By measuring the colour of the sediments",
+      "B": "By calculating the time taken for sound pulses to return to the ship",
+      "C": "By measuring the pressure on the seabed",
+      "D": "By counting the number of pulses emitted"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 129,
+    "question": "Turbidity is a measure of:",
+    "options": {
+      "A": "How clear or cloudy a liquid appears due to suspended particles",
+      "B": "The salt content of water",
+      "C": "The temperature of water",
+      "D": "The speed of sound in water"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 130,
+    "question": "Which two units are standard for reporting turbidity?",
+    "options": {
+      "A": "PSU and dbar",
+      "B": "kHz and µm",
+      "C": "cm/s and knots",
+      "D": "FNU and NTU"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 131,
+    "question": "In the scattered light method of a turbidity meter, what happens as the amount of suspended particles increases?",
+    "options": {
+      "A": "The scattered light decreases",
+      "B": "The scattered light stays the same",
+      "C": "The scattered light increases",
+      "D": "The light beam is completely absorbed"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 132,
+    "question": "Which turbidity measurement method measures the reduction in strength of light passing through a sample column of water?",
+    "options": {
+      "A": "Scattered light measurement",
+      "B": "Attenuation measurement",
+      "C": "Conductivity measurement",
+      "D": "Pressure measurement"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 133,
+    "question": "In the convention of the notes, a current direction of 270° corresponds to which compass direction?",
+    "options": {
+      "A": "West",
+      "B": "North",
+      "C": "East",
+      "D": "South"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 134,
+    "question": "Typical horizontal current speeds in the ocean reach up to about:",
+    "options": {
+      "A": "2 cm/s",
+      "B": "20 m/s",
+      "C": "2000 cm/s",
+      "D": "200 cm/s (2 m/s)"
+    },
+    "answer": "D"
+  },
+  {
+    "group": "current-methods",
+    "title": "Directions (Q135-137): Read the classification of current measurement methods and answer the questions",
+    "passage": "| Category | Method | Instruments or techniques |\n|---|---|---|\n| Direct | Eulerian | Ekman current meter, direct reading current meter, recording current meter |\n| Direct | Lagrangian | Drift bottle, drift pole, fluorescent dye, neutrally buoyant float (Swallow float) |\n| Indirect | Electromagnetic method | – |\n| Indirect | Geostrophic method | – |\n",
+    "questions": [
+      {
+        "id": 135,
+        "question": "Which of the following is an Eulerian method of measuring currents?",
+        "options": {
+          "A": "Drift bottle",
+          "B": "Fluorescent dye",
+          "C": "Ekman current meter",
+          "D": "Swallow float"
+        },
+        "answer": "C"
+      },
+      {
+        "id": 136,
+        "question": "Which of the following is a Lagrangian technique?",
+        "options": {
+          "A": "Recording current meter",
+          "B": "Drift pole",
+          "C": "Direct reading current meter",
+          "D": "Geostrophic method"
+        },
+        "answer": "B"
+      },
+      {
+        "id": 137,
+        "question": "Which of the following is an indirect method of measuring currents?",
+        "options": {
+          "A": "Geostrophic method",
+          "B": "Drift bottle",
+          "C": "Ekman current meter",
+          "D": "Neutrally buoyant float"
+        },
+        "answer": "A"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "question": "A neutrally buoyant float (Swallow float) is used under which method of measuring currents?",
+    "options": {
+      "A": "Eulerian method",
+      "B": "Geostrophic method",
+      "C": "Electromagnetic method",
+      "D": "Lagrangian method"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 139,
+    "question": "What are the three main parts of the Ekman current meter?",
+    "options": {
+      "A": "Propeller, transducer and hydrophone",
+      "B": "Rudder, helm and compass",
+      "C": "Propeller, magnetic compass with compass ball receptacle, and vane",
+      "D": "Hexagonal cam, conical tail and fish weight"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 140,
+    "question": "What is the role of the vane in the Ekman current meter?",
+    "options": {
+      "A": "It measures the number of revolutions",
+      "B": "It orients the instrument so that the propeller faces the approaching current",
+      "C": "It stores the phosphor-bronze balls",
+      "D": "It releases the messenger weight"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 141,
+    "question": "The compass ball receptacle of the Ekman current meter has 36 chambers. Each chamber represents a direction interval of:",
+    "options": {
+      "A": "10°",
+      "B": "1°",
+      "C": "36°",
+      "D": "90°"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 142,
+    "question": "How is the propeller of an Ekman current meter released at the required depth?",
+    "options": {
+      "A": "The ship's captain turns a knob on deck",
+      "B": "An acoustic signal triggers the release",
+      "C": "The water pressure automatically opens the lever",
+      "D": "A messenger weight is dropped which moves the lever and releases the propeller"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 143,
+    "question": "How is the current speed obtained with an Ekman current meter?",
+    "options": {
+      "A": "From the angle of the vane",
+      "B": "From the weight of the messenger",
+      "C": "From the number of propeller revolutions recorded on the dials during the measurement period",
+      "D": "From the depth reading of the cable"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 144,
+    "question": "What is the main advantage of a direct reading current meter?",
+    "options": {
+      "A": "It needs no electrical cable",
+      "B": "It shows speed and direction directly on an indicator unit on board, so the observer need not calculate them manually",
+      "C": "It records data for months without retrieval",
+      "D": "It measures currents at 100 depths simultaneously"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 145,
+    "question": "The underwater measuring unit of the direct reading current meter has a hexagonal cam that produces six electrical pulses per propeller revolution. How many pulses are produced when the propeller completes 20 revolutions?",
+    "options": {
+      "A": "120",
+      "B": "26",
+      "C": "60",
+      "D": "240"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 146,
+    "question": "What is the function of the conical tail of the direct reading current meter?",
+    "options": {
+      "A": "To protect the propeller from damage",
+      "B": "To sense the magnetic direction",
+      "C": "To keep the instrument vertically taut",
+      "D": "To help the instrument align itself with the current"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 147,
+    "question": "What is the purpose of the sounding weight (fish weight) beneath the direct reading current meter?",
+    "options": {
+      "A": "To generate electrical pulses",
+      "B": "To display current speed",
+      "C": "To prevent the current from pushing the instrument downstream and keep it at the intended depth",
+      "D": "To release the propeller"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 148,
+    "question": "How is the underwater unit connected to the indicator unit on the ship?",
+    "options": {
+      "A": "By an acoustic link",
+      "B": "By a long six-core screened electrical cable",
+      "C": "By a radio link",
+      "D": "By a hydraulic hose"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 149,
+    "question": "What principle do acoustic current meters and ADCPs use to measure current speed?",
+    "options": {
+      "A": "The Doppler shift in frequency of sound reflected from particles in the water",
+      "B": "The rotation of a propeller",
+      "C": "The electrical conductivity of water",
+      "D": "The pressure of the water column"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 150,
+    "question": "What is the effect of fouling on the transducer heads of acoustic current instruments?",
+    "options": {
+      "A": "It reduces accuracy but not range",
+      "B": "It has no effect",
+      "C": "It stops the Doppler shift",
+      "D": "It reduces the range of the instrument but not its accuracy"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 151,
+    "question": "Which of the following is an advantage of acoustic current instruments?",
+    "options": {
+      "A": "They work only at a single depth",
+      "B": "They need long strings of current meters",
+      "C": "They have no moving parts that can foul or provide inertial resistance to changes in current",
+      "D": "They measure only surface currents"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 152,
+    "question": "How does an ADCP obtain a vertical profile of water velocity?",
+    "options": {
+      "A": "It lowers a propeller to each depth in turn",
+      "B": "It divides the water column into depth bins and calculates the velocity for each bin from the time delay of the backscatter signal",
+      "C": "It averages the speed of surface drifters",
+      "D": "It measures the pressure at each depth"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 153,
+    "question": "In an ADCP, particles moving toward the instrument send back sound waves with what frequency?",
+    "options": {
+      "A": "A higher frequency than that transmitted",
+      "B": "A lower frequency than that transmitted",
+      "C": "The same frequency as that transmitted",
+      "D": "A random frequency"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 154,
+    "question": "Why must scientists compromise between the distance and the precision of ADCP measurements?",
+    "options": {
+      "A": "Low-frequency pings give more precise data",
+      "B": "High-frequency pings travel farthest",
+      "C": "Frequency does not affect range",
+      "D": "High-frequency pings give more precise data, but low-frequency pings travel farther in the water"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 155,
+    "question": "Why might an ADCP give unreliable data in very clear tropical water?",
+    "options": {
+      "A": "Too many particles absorb the pings",
+      "B": "The sound speed is too high",
+      "C": "The pings may not hit enough particles to produce reliable data",
+      "D": "The Doppler effect does not occur in warm water"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 156,
+    "question": "What is a drift pole?",
+    "options": {
+      "A": "A steel rod fixed to the seabed",
+      "B": "A weighted wooden pole a few metres long that floats with only 0.5 to 1 m emerging, used to determine surface currents near landmarks",
+      "C": "A rope with a lead weight",
+      "D": "A pole used to hold a current meter on a ship"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 157,
+    "question": "What is the geoid?",
+    "options": {
+      "A": "The shape the ocean surface would take if it were under the influence of the Earth's gravity only",
+      "B": "The shape of the ocean surface including winds and tides",
+      "C": "The average height of the sea surface over many years",
+      "D": "An ellipsoid used to define the GPS reference"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 158,
+    "question": "Since 2021, which reference ellipsoid has replaced the Topex/Poseidon ellipsoid in DUACS altimeter processing?",
+    "options": {
+      "A": "NEMO",
+      "B": "ITRF",
+      "C": "TIROS",
+      "D": "WGS84"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 159,
+    "question": "An altimeter measures the range between the sea surface and the satellite. If the satellite altitude is 1,336,040 m and the measured range is 1,336,000 m, what is the Sea Surface Height (SSH = altitude − range)?",
+    "options": {
+      "A": "4 m",
+      "B": "400 m",
+      "C": "40 m",
+      "D": "2,672,040 m"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 160,
+    "question": "What does the Mean Sea Surface (MSS) represent?",
+    "options": {
+      "A": "The instantaneous sea surface at a given time",
+      "B": "The time-averaged state of the sea surface",
+      "C": "The height of the sea surface above the geoid",
+      "D": "The distance between satellite and ellipsoid"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 161,
+    "question": "In numerical models such as NEMO, the SSH defined as the 'height of sea surface above geoid' corresponds to which altimetry quantity?",
+    "options": {
+      "A": "Absolute Dynamic Topography (ADT)",
+      "B": "Mean Sea Surface (MSS)",
+      "C": "Sea Level Anomaly (SLA)",
+      "D": "Altimeter range"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 162,
+    "question": "In a pressure gauge for waves, a recording of pressure versus time is equivalent to which record?",
+    "options": {
+      "A": "Wave direction versus time",
+      "B": "Water temperature versus time",
+      "C": "Salinity versus time",
+      "D": "Wave height versus time"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 163,
+    "question": "Which in-situ method of wave measurement is described as the most widely used globally and uses accelerometers, tilt sensors and GPS?",
+    "options": {
+      "A": "Wave staff",
+      "B": "Step-resistance gauge",
+      "C": "Wave rider (data) buoys",
+      "D": "Acoustic wave gauge"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 164,
+    "question": "How do acoustic wave gauges measure wave height?",
+    "options": {
+      "A": "They sit on the seabed and measure pressure",
+      "B": "They emit sound waves downward from above the surface and measure the reflection time",
+      "C": "They measure the resistance of a rod",
+      "D": "They use a propeller"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 165,
+    "question": "In a step-resistance wave gauge, what happens to the total resistance as the water level rises along the rod?",
+    "options": {
+      "A": "It decreases, because more electrodes are short-circuited by the water",
+      "B": "It increases",
+      "C": "It remains constant",
+      "D": "It becomes infinite"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 166,
+    "question": "Which remote sensing method gives significant wave height from radar pulses reflected from the sea surface?",
+    "options": {
+      "A": "Coastal HF radar",
+      "B": "Pressure gauge",
+      "C": "Wave staff",
+      "D": "Satellite radar altimetry"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 167,
+    "question": "Which remote sensing method captures high-resolution images of sea surface patterns and is used to determine wave direction, wavelength and spectra?",
+    "options": {
+      "A": "Satellite radar altimetry",
+      "B": "Acoustic wave gauge",
+      "C": "Synthetic Aperture Radar (SAR)",
+      "D": "Step-resistance gauge"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 168,
+    "question": "Coastal HF radars measure which wave properties from Doppler shift signals?",
+    "options": {
+      "A": "Wave height only",
+      "B": "Wave period and direction",
+      "C": "Salinity and temperature",
+      "D": "Tide height only"
+    },
+    "answer": "B"
+  }
+]
