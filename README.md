@@ -236,6 +236,5 @@ Return only the JSON. Do not add a list of images; the file names follow the rul
 QUESTION PAPER:
 <paste the questions and answers here>
 
-QUESTION PAPER:
-<paste the questions and answers here>
+
 ```
