@@ -231,10 +231,35 @@ TEXT RULES
   or refer to option letters in the question or in another option.
 - For arrange-in-order questions, put the items on separate lines (\n) in the question.
 
+ANSWER LENGTH HEURISTIC (balance option lengths)
+- The correct option must NOT be noticeably longer or more detailed than the wrong options.
+- Keep all four options of a question close in length, wording style and level of detail, so the correct answer cannot be guessed from its length.
+- Do NOT add extra explanation, qualifiers or detail to the correct option to make it "more complete".
+- If the paper's original options differ a lot in length, keep their meaning and the correct answer unchanged, but tighten the longest option or lightly expand the shortest ones (without adding new facts) so the four look balanced.
+- Never change which option is correct, and never change the factual content of an option; only adjust its length and phrasing.
+- Do not apply this to options that are naturally short (numbers, names, years, single words, option codes like "A-2, B-1, C-4, D-3").
+
+INPUT TYPE (question paper OR notes)
+- First, decide what I pasted below:
+  (a) A QUESTION PAPER: it already contains questions (usually with options and/or answers). Convert it exactly as described above, keeping the questions, options and answers from the paper.
+  (b) NOTES / STUDY MATERIAL: it contains no ready-made questions (only facts, topics, explanations, or a chapter). In this case, create the questions and answers yourself from the notes.
+- If it is a mix, convert the existing questions as they are and create new questions only for the parts that are notes.
+- When creating questions from notes:
+  - Base every question and answer ONLY on facts in the notes. Do not add outside facts or guess.
+  - Cover all the important points of the notes as evenly as possible; skip trivial details.
+  - Write clear, exam-style multiple-choice questions with exactly four options and exactly one correct answer.
+  - Make the three wrong options believable (related terms, close values, common confusions), never silly or obviously wrong.
+  - Do not repeat the same question in different words.
+  - Spread the correct answers across A, B, C and D instead of favouring one letter.
+  - If the notes contain a passage, data table or figure that several questions depend on, use a PASSAGE SET as described above.
+  - Apply the ANSWER LENGTH HEURISTIC to the options you create.
+- If I mention a number of questions, create exactly that many; otherwise create as many as the notes reasonably support.
+- Do not tell me which type it was and do not add any explanation. All the same FILE, PICTURES and TEXT RULES apply, and the output is still only the JSON.
+
 Return only the JSON. Do not add a list of images; the file names follow the rules above.
 
-QUESTION PAPER:
-<paste the questions and answers here>
+QUESTION PAPER OR NOTES:
+<paste the questions and answers here, or paste the notes>
 
 
 ```
