@@ -6,7 +6,7 @@
       custom domain or the auto-detection is wrong.
    2. files.json (optional manual list) if GitHub cannot be asked.
    3. questions.json as a last resort. */
-const GH = { owner: "silentassassin14", repo: "mcq-practice", path: "", branch: "main" };   // e.g. { owner: "don", repo: "mcq", path: "", branch: "main" }
+const GH = { owner: "silentassassin14", repo: "don-bootcamp", path: "", branch: "main" };   // e.g. { owner: "don", repo: "mcq", path: "", branch: "main" }
 const FOLDER = "qp";   // quiz files live in this folder, next to index.html and app.js
 const RAW_BASE = "https://raw.githubusercontent.com/" + GH.owner + "/" + GH.repo + "/" + GH.branch + "/";   // where new files are downloaded from
 const CACHE_PREFIX = "mcq_cache:";    // saved copies of downloaded files (used when offline)
