@@ -1570,6 +1570,36 @@ async function xferDecode(code) {
   };
 }
 
+/* ----- load a helper script from a CDN only when it is first needed (so the app still works offline) ----- */
+const xLibs = {};
+function xLoad(name, urls, test) {
+  if (test()) return Promise.resolve();
+  if (xLibs[name]) return xLibs[name];
+  xLibs[name] = (async () => {
+    for (const u of urls) {
+      try {
+        await new Promise((res, rej) => {
+          const s = document.createElement("script");
+          s.src = u; s.onload = res; s.onerror = () => { s.remove(); rej(new Error("load")); };
+          document.head.appendChild(s);
+        });
+        if (test()) return;
+      } catch (e) { /* try the next address */ }
+    }
+    xLibs[name] = null;
+    throw new Error("Could not load the " + name + " helper. Check the internet connection and try again.");
+  })();
+  return xLibs[name];
+}
+const xLoadQrMaker = () => xLoad("QR maker", [
+  "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js",
+  "https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js",
+], () => typeof window.qrcode === "function");
+const xLoadQrReader = () => xLoad("QR reader", [
+  "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js",
+], () => typeof window.jsQR === "function");
+
 /* ----- small pop-up window ----- */
 function xferModal(title, bodyHtml) {
   closeXferModal();
@@ -1582,9 +1612,104 @@ function xferModal(title, bodyHtml) {
   document.body.appendChild(o);
   return o;
 }
-function closeXferModal() { const o = document.getElementById("xferModal"); if (o) o.remove(); }
+function closeXferModal() {
+  xStopScan();   // always switch the camera off when the window closes
+  const o = document.getElementById("xferModal");
+  if (o) o.remove();
+}
 
-/* ----- PC: Share ----- */
+/* ----- QR code: draw the code as a picture ----- */
+async function xDrawQr(code) {
+  await xLoadQrMaker();
+  let qr;
+  try { qr = window.qrcode(0, "L"); qr.addData(code, "Byte"); qr.make(); }
+  catch (e) { throw new Error("This code is too long for a QR code. Copy the text code instead."); }
+  const n = qr.getModuleCount(), quiet = 4;
+  const cell = Math.max(2, Math.floor(680 / (n + quiet * 2)));
+  const size = (n + quiet * 2) * cell;
+  const c = document.createElement("canvas");
+  c.width = size; c.height = size;
+  c.style.cssText = "width:100%;max-width:340px;height:auto;image-rendering:pixelated;background:#fff;border-radius:8px";
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = "#000";
+  for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (qr.isDark(r, k)) ctx.fillRect((k + quiet) * cell, (r + quiet) * cell, cell, cell);
+  c.setAttribute("role", "img"); c.setAttribute("aria-label", "QR code of the quiz progress");
+  return c;
+}
+
+/* ----- QR code: read it from a camera picture or an image file ----- */
+let xDet = null, xScan = null;
+async function xDecodeImage(el, w, h, fallback) {
+  if (typeof window.BarcodeDetector === "function") {
+    try {
+      xDet = xDet || new window.BarcodeDetector({ formats: ["qr_code"] });
+      const r = await xDet.detect(el);
+      if (r && r[0] && r[0].rawValue) return r[0].rawValue;
+      if (!fallback) return "";
+    } catch (e) { /* use the jsQR reader below */ }
+  }
+  await xLoadQrReader();
+  const sc = Math.min(1, 900 / Math.max(w, h));
+  const cw = Math.max(1, Math.round(w * sc)), ch = Math.max(1, Math.round(h * sc));
+  const c = document.createElement("canvas");
+  c.width = cw; c.height = ch;
+  const ctx = c.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(el, 0, 0, cw, ch);
+  const d = ctx.getImageData(0, 0, cw, ch);
+  const r = window.jsQR(d.data, cw, ch, { inversionAttempts: "attemptBoth" });
+  return r && r.data ? r.data : "";
+}
+function xStopScan() {
+  if (xScan) {
+    xScan.stop = true;
+    try { xScan.stream.getTracks().forEach(t => t.stop()); } catch (e) { /* ignore */ }
+    xScan = null;
+  }
+  const b = document.getElementById("xVideoBox");
+  if (b) b.innerHTML = "";
+}
+async function xStartScan(onCode) {
+  xStopScan();
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia)
+    throw new Error("The camera is not available here (it needs a secure https page). Use \"Choose QR picture\" instead.");
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false }); }
+  catch (e) { throw new Error("The camera could not be opened. Allow camera access for this page (inside a blog the frame also needs permission), or use \"Choose QR picture\" instead."); }
+  const box = document.getElementById("xVideoBox");
+  if (!box) { stream.getTracks().forEach(t => t.stop()); return; }
+  const video = document.createElement("video");
+  video.setAttribute("playsinline", ""); video.muted = true; video.srcObject = stream;
+  video.style.cssText = "width:100%;border-radius:10px;background:#000";
+  box.innerHTML = ""; box.appendChild(video);
+  const st = { stream, stop: false };
+  xScan = st;
+  try { await video.play(); } catch (e) { /* the loop below simply waits for frames */ }
+  const loop = async () => {
+    if (st.stop) return;
+    if (video.readyState >= 2 && video.videoWidth) {
+      try {
+        const v = await xDecodeImage(video, video.videoWidth, video.videoHeight, false);
+        if (v && !st.stop) { xStopScan(); onCode(v); return; }
+      } catch (e) { xStopScan(); toast(errText(e), "error"); return; }
+    }
+    setTimeout(loop, 250);
+  };
+  loop();
+}
+async function xReadPicture(file) {
+  let bmp = null, el, w, h, cleanup = () => {};
+  if (window.createImageBitmap) { try { bmp = await createImageBitmap(file); } catch (e) { bmp = null; } }
+  if (bmp) { el = bmp; w = bmp.width; h = bmp.height; cleanup = () => { try { bmp.close(); } catch (e) { /* ignore */ } }; }
+  else {
+    const url = URL.createObjectURL(file);
+    el = await new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = () => rej(new Error("That picture could not be opened.")); im.src = url; });
+    w = el.naturalWidth; h = el.naturalHeight; cleanup = () => URL.revokeObjectURL(url);
+  }
+  try { return await xDecodeImage(el, w, h, true); } finally { cleanup(); }
+}
+
+/* ----- Share (PC) ----- */
 async function shareQuiz() {
   if (!(quiz.active || quiz.results) || !quiz.list.length) { toast("There is no quiz in progress to share.", "warn"); return; }
   const m = xferModal("Share quiz progress", `<p class="muted">Making code…</p>`);
@@ -1592,11 +1717,13 @@ async function shareQuiz() {
   try { code = await xferEncode(); }
   catch (e) { m.querySelector(".card").innerHTML += notice("Could not make the code. " + errText(e), "error"); return; }
   m.querySelector(".card").innerHTML = `<h3 style="margin-top:0">Share quiz progress</h3>
-    <p class="muted" style="font-size:13px">On the other device open the file <b>${esc(currentFile)}</b>, press <b>Enter code</b> and paste this code.
-    Question ${quiz.results ? "results" : (quiz.idx + 1) + " of " + quiz.list.length} · ${code.length} characters.</p>
-    <textarea id="xCode" readonly rows="6" style="width:100%;font-family:monospace;font-size:12px;word-break:break-all">${esc(code)}</textarea>
-    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xCopy">Copy code</button>
-    <button class="btn secondary" id="xClose">Close</button></div>`;
+    <p class="muted" style="font-size:13px">On the other device open the file <b>${esc(currentFile)}</b>, press <b>Enter code</b>, then paste this code or scan the QR code.
+    ${quiz.results ? "Results" : "Question " + (quiz.idx + 1) + " of " + quiz.list.length} · ${code.length} characters.</p>
+    <textarea id="xCode" readonly rows="5" style="width:100%;font-family:monospace;font-size:12px;word-break:break-all">${esc(code)}</textarea>
+    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xCopy" type="button">Copy code</button>
+    <button class="btn secondary" id="xQrBtn" type="button">Show QR code</button>
+    <button class="btn secondary" id="xClose" type="button">Close</button></div>
+    <div id="xQr" style="text-align:center;margin-top:12px"></div>`;
   const ta = $("#xCode");
   $("#xCopy").onclick = async () => {
     const ok = await copyText(code);
@@ -1604,23 +1731,70 @@ async function shareQuiz() {
     toast(ok ? "Code copied." : "Select the code and copy it manually.", ok ? "success" : "warn");
   };
   $("#xClose").onclick = closeXferModal;
+  $("#xQrBtn").onclick = async () => {
+    const b = $("#xQrBtn"), box = $("#xQr");
+    if (box.firstChild) { box.innerHTML = ""; b.textContent = "Show QR code"; return; }
+    b.disabled = true;
+    box.innerHTML = `<p class="muted" style="font-size:13px">Making QR code…</p>`;
+    try {
+      const c = await xDrawQr(code);
+      box.innerHTML = "";
+      box.appendChild(c);
+      box.insertAdjacentHTML("beforeend", `<p class="muted" style="font-size:12px;margin:8px 0 0">On the other device: Enter code → Scan QR code. Keep the screen bright and hold the phone steady.</p>`);
+      b.textContent = "Hide QR code";
+    } catch (e) { box.innerHTML = notice(errText(e), "error"); }
+    b.disabled = false;
+  };
   if (await copyText(code)) toast("Code copied.", "success");
 }
 
-/* ----- Phone: Enter code ----- */
+/* ----- Enter code (phone) ----- */
 function enterCodeDialog() {
   if (!questions.length) { toast("Wait until the questions are loaded.", "warn"); return; }
-  xferModal("Enter code", `<p class="muted" style="font-size:13px">Paste the code made by "Share quiz" on the other device. Both devices must have <b>${esc(currentFile)}</b> open.</p>
-    <textarea id="xIn" rows="6" style="width:100%;font-family:monospace;font-size:12px" placeholder="Paste code here" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+  xferModal("Enter code", `<p class="muted" style="font-size:13px">Paste the code made by "Share quiz" on the other device, or scan its QR code. Both devices must have <b>${esc(currentFile)}</b> open.</p>
+    <div class="btnrow" style="margin-bottom:8px"><button class="btn secondary" id="xScan" type="button">Scan QR code</button>
+    <button class="btn secondary" id="xPic" type="button">Choose QR picture</button></div>
+    <input type="file" id="xPicIn" accept="image/*" hidden>
+    <div id="xVideoBox" style="margin-bottom:8px"></div>
+    <textarea id="xIn" rows="5" style="width:100%;font-family:monospace;font-size:12px" placeholder="Paste code here" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     <div id="xErr"></div>
-    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xGo">Continue quiz here</button>
-    <button class="btn secondary" id="xCancel">Cancel</button></div>`);
+    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xGo" type="button">Continue quiz here</button>
+    <button class="btn secondary" id="xCancel" type="button">Cancel</button></div>`);
   $("#xCancel").onclick = closeXferModal;
+
+  const gotCode = v => {
+    $("#xIn").value = v;
+    toast("QR code read.", "success");
+    $("#xGo").click();
+  };
+  $("#xScan").onclick = async () => {
+    const b = $("#xScan");
+    if (xScan) { xStopScan(); b.textContent = "Scan QR code"; return; }
+    $("#xErr").innerHTML = "";
+    b.textContent = "Stop scanning";
+    try {
+      await xStartScan(v => { const bb = $("#xScan"); if (bb) bb.textContent = "Scan QR code"; gotCode(v); });
+      if (!xScan) b.textContent = "Scan QR code";
+    } catch (e) { b.textContent = "Scan QR code"; $("#xErr").innerHTML = notice(errText(e), "error"); }
+  };
+  $("#xPic").onclick = () => $("#xPicIn").click();
+  $("#xPicIn").onchange = async e => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    $("#xErr").innerHTML = "";
+    xStopScan();
+    try {
+      const v = await xReadPicture(f);
+      if (v) gotCode(v); else $("#xErr").innerHTML = notice("No QR code was found in that picture. Try a clearer, closer picture.", "warn");
+    } catch (err) { $("#xErr").innerHTML = notice(errText(err), "error"); }
+  };
+
   $("#xGo").onclick = async () => {
     const btn = $("#xGo"), err = $("#xErr");
     err.innerHTML = "";
     const text = $("#xIn").value.trim();
-    if (!text) { err.innerHTML = notice("Paste the code first.", "warn"); return; }
+    if (!text) { err.innerHTML = notice("Paste or scan the code first.", "warn"); return; }
     btn.disabled = true;
     try {
       const s = await xferDecode(text);
@@ -1639,24 +1813,65 @@ function enterCodeDialog() {
   $("#xIn").focus();
 }
 
-/* ----- the two buttons (floating, so no existing page code is touched) ----- */
+/* ----- the two buttons now live in the sidebar, under the file box ----- */
 function installTransferButtons() {
-  if (document.getElementById("xferBar")) return;
-  const bar = document.createElement("div");
-  bar.id = "xferBar";
-  bar.style.cssText = "position:fixed;right:12px;bottom:12px;z-index:9000;display:none;gap:8px;flex-wrap:wrap;justify-content:flex-end";
-  bar.innerHTML = `<button class="btn secondary" id="xShare" type="button">Share quiz</button>
+  if (document.getElementById("xferBox")) return;
+  const anchor = $("#bankBox") || $("#nav");
+  if (!anchor) return;
+  const box = document.createElement("div");
+  box.id = "xferBox";
+  box.style.cssText = "display:none;flex-direction:column;gap:8px;margin:10px 0";
+  box.innerHTML = `<button class="btn secondary" id="xShare" type="button">Share quiz</button>
     <button class="btn secondary" id="xEnter" type="button">Enter code</button>`;
-  document.body.appendChild(bar);
+  anchor.insertAdjacentElement("afterend", box);
   $("#xShare").onclick = shareQuiz;
   $("#xEnter").onclick = enterCodeDialog;
   const sync = () => {
-    const onPage = current === "dashboard" || current === "quiz";
     const sharable = (quiz.active || quiz.results) && quiz.list.length > 0;
-    bar.style.display = onPage && questions.length ? "flex" : "none";
+    box.style.display = questions.length ? "flex" : "none";
     $("#xShare").style.display = sharable ? "" : "none";
   };
   new MutationObserver(sync).observe(page, { childList: true });   // runs after every redraw of the page
   sync();
 }
 installTransferButtons();
+
+/* ----- open / close the sidebar ----- */
+function installSidebarToggle() {
+  if (document.getElementById("xSideToggle")) return;
+  const nav = $("#nav");
+  if (!nav) return;
+  let side = nav.closest("aside, .sidebar, #sidebar, .side, [class*='side']");
+  if (!side) { side = $("#bankBox"); while (side && !side.contains(nav)) side = side.parentElement; }
+  if (!side || side === document.body || side.contains(page)) return;   // cannot tell which part is the sidebar: leave the layout alone
+
+  const KEY = "mcq_sidebar_hidden";
+  const parent = side.parentElement;
+  const main = page.closest("main") || page.parentElement;
+  const sideFixed = getComputedStyle(side).position === "fixed";
+  const parentIsGrid = parent && getComputedStyle(parent).display.indexOf("grid") >= 0;
+  const keep = { grid: parent ? parent.style.gridTemplateColumns : "", ml: main ? main.style.marginLeft : "", ps: main ? main.style.paddingLeft : "" };
+
+  const btn = document.createElement("button");
+  btn.id = "xSideToggle"; btn.type = "button"; btn.className = "btn secondary";
+  btn.style.cssText = "position:fixed;top:10px;right:10px;z-index:9500;padding:6px 12px;font-size:13px";
+  document.body.appendChild(btn);
+
+  let hidden = false;
+  const apply = h => {
+    hidden = h;
+    side.style.display = h ? "none" : "";
+    if (parentIsGrid) parent.style.gridTemplateColumns = h ? "minmax(0, 1fr)" : keep.grid;
+    if (main && sideFixed) { main.style.marginLeft = h ? "0" : keep.ml; }
+    document.body.classList.toggle("xside-off", h);
+    btn.textContent = h ? "☰ Show menu" : "✕ Hide menu";
+    btn.setAttribute("aria-expanded", String(!h));
+    btn.setAttribute("aria-label", h ? "Open sidebar" : "Close sidebar");
+    try { localStorage.setItem(KEY, h ? "1" : "0"); } catch (e) { /* ignore */ }
+  };
+  btn.onclick = () => apply(!hidden);
+  let start = false;
+  try { start = localStorage.getItem(KEY) === "1"; } catch (e) { /* ignore */ }
+  apply(start);
+}
+installSidebarToggle();
