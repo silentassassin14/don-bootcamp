@@ -689,6 +689,9 @@ function quizMenu() {
 
 function shuffleOptions(q) { return buildOpts(q, shuffle(LETTERS)); }
 
+/* passage panel: hidden or shown (remembered on this device) */
+let passageHidden = (() => { try { return localStorage.getItem("mcq_passage_hidden") === "1"; } catch (e) { return false; } })();
+
 function quizActive() {
   const total = quiz.list.length;
   const q = quiz.list[quiz.idx];
@@ -740,7 +743,8 @@ function quizActive() {
   body += `</div>`;
 
   if (hasPassage) {
-    h += `<div class="qlayout">
+    h += `<div class="btnrow" style="margin-bottom:10px"><button class="btn secondary" id="passToggle" type="button"></button></div>
+    <div class="qlayout">
       <aside class="passage" data-group="${esc(q.group)}" aria-label="Passage">
         <h4>${esc(q.passageTitle || "Passage")}</h4><div class="rich">${richText(q.passage || "")}</div>${figure(q.passageImage, "Passage image", { zoom: true })}
       </aside>
@@ -748,9 +752,26 @@ function quizActive() {
   } else {
     h += body;   // plain question: exactly the same markup as before
   }
-  page.classList.toggle("wide", hasPassage);
+  page.classList.toggle("wide", hasPassage && !passageHidden);
   page.innerHTML = h;
   if (keepScroll) { const np = page.querySelector(".passage"); if (np) np.scrollTop = keepScroll; }
+  if (hasPassage) {
+    const pBtn = $("#passToggle"), pPanel = page.querySelector(".passage"), pLay = page.querySelector(".qlayout");
+    const showPassage = () => {
+      pPanel.style.display = passageHidden ? "none" : "";
+      pLay.style.gridTemplateColumns = passageHidden ? "minmax(0, 1fr)" : "";
+      page.classList.toggle("wide", !passageHidden);
+      pBtn.textContent = passageHidden ? "Show passage" : "Hide passage";
+      pBtn.setAttribute("aria-expanded", String(!passageHidden));
+    };
+    pBtn.onclick = () => {
+      passageHidden = !passageHidden;
+      try { localStorage.setItem("mcq_passage_hidden", passageHidden ? "1" : "0"); } catch (e) { /* ignore */ }
+      showPassage();
+      pBtn.blur();   // so the A-D / arrow / Enter keys keep working
+    };
+    showPassage();
+  }
 
   if (!done) {
     $("#qSubmit").onclick = () => {
