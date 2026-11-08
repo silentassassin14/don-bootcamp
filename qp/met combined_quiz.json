@@ -1,0 +1,2729 @@
+[
+ {
+  "id": 1,
+  "question": "For a Boyle's-law isotherm pV = k, the local slope dP/dV equals:",
+  "options": {
+   "A": "−k/V²",
+   "B": "k/V",
+   "C": "−k/V",
+   "D": "k/V²"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 2,
+  "question": "Moist air has total pressure 1000 hPa and actual vapour pressure 20 hPa. What is the dry-air partial pressure?",
+  "options": {
+   "A": "1020 hPa",
+   "B": "980 hPa",
+   "C": "20 hPa",
+   "D": "1000 hPa"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 3,
+  "question": "Which expression gives the approximate virtual temperature for specific humidity q?",
+  "options": {
+   "A": "T(1 − 0.61q)",
+   "B": "T(1 + 0.22q)",
+   "C": "T(1 + 0.61q)",
+   "D": "T(1 + 1.61q)"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 4,
+  "question": "Why is moist air less dense than dry air at the same pressure and temperature?",
+  "options": {
+   "A": "Water vapour molecules are heavier than dry-air molecules",
+   "B": "Water vapour has a higher specific heat than dry air",
+   "C": "Water vapour lowers the total pressure of the air",
+   "D": "Water vapour molecules are lighter than dry-air molecules"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 5,
+  "question": "What is the approximate specific heat of dry air at constant pressure?",
+  "options": {
+   "A": "1004 J kg⁻¹ K⁻¹",
+   "B": "717 J kg⁻¹ K⁻¹",
+   "C": "287 J kg⁻¹ K⁻¹",
+   "D": "461 J kg⁻¹ K⁻¹"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 6,
+  "question": "In a reversible isothermal expansion of an ideal gas, the heat absorbed equals:",
+  "options": {
+   "A": "the increase in internal energy",
+   "B": "the work done by the gas",
+   "C": "the decrease in enthalpy",
+   "D": "zero"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 7,
+  "question": "For an adiabatic process, the First Law reduces to:",
+  "options": {
+   "A": "ΔU = Q",
+   "B": "Q = W",
+   "C": "ΔU = −W",
+   "D": "W = 0"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 8,
+  "question": "What is the approximate value of the dry adiabatic lapse rate g/cₚ?",
+  "options": {
+   "A": "4.0 K km⁻¹",
+   "B": "6.5 K km⁻¹",
+   "C": "7.2 K km⁻¹",
+   "D": "9.8 K km⁻¹"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 9,
+  "question": "Why does a saturated parcel cool more slowly on ascent than an unsaturated parcel?",
+  "options": {
+   "A": "Condensation releases latent heat offsetting expansion cooling",
+   "B": "Saturated air is denser than unsaturated air at the same level",
+   "C": "Water vapour absorbs solar radiation inside the rising parcel",
+   "D": "Pressure falls more slowly with height inside saturated air"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 10,
+  "question": "What average tropospheric lapse rate does the ISA standard profile use?",
+  "options": {
+   "A": "4.0 K km⁻¹",
+   "B": "6.5 K km⁻¹",
+   "C": "8.0 K km⁻¹",
+   "D": "9.8 K km⁻¹"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 11,
+  "question": "Which statement defines dew-point temperature?",
+  "options": {
+   "A": "Temperature at which liquid water boils at ambient pressure",
+   "B": "Lowest temperature a ventilated wet-bulb thermometer can read",
+   "C": "Temperature at which cooled air becomes saturated at constant pressure",
+   "D": "Temperature at which the relative humidity of air falls to zero"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 12,
+  "question": "For unsaturated air, which ordering of dew point (Td), wet-bulb (Tw) and dry-bulb (T) temperatures is correct?",
+  "options": {
+   "A": "T ≤ Tw ≤ Td",
+   "B": "Tw ≤ Td ≤ T",
+   "C": "Td ≤ T ≤ Tw",
+   "D": "Td ≤ Tw ≤ T"
+  },
+  "answer": "D"
+ },
+ {
+  "group": "a1-humidity-data",
+  "title": "Directions (Q13-16): Use the data below to answer the questions",
+  "passage": "An air sample at 1000 hPa has the following properties. Take ε = 0.622.\n\n|Quantity|Value|\n|---|---|\n|Air temperature|20 °C|\n|Saturation vapour pressure at 20 °C|23.4 hPa|\n|Actual vapour pressure|11.7 hPa|\n",
+  "questions": [
+   {
+    "id": 13,
+    "question": "What is the relative humidity of the sample?",
+    "options": {
+     "A": "50%",
+     "B": "25%",
+     "C": "75%",
+     "D": "100%"
+    },
+    "answer": "A"
+   },
+   {
+    "id": 14,
+    "question": "What is the vapour pressure deficit of the sample?",
+    "options": {
+     "A": "5.9 hPa",
+     "B": "11.7 hPa",
+     "C": "23.4 hPa",
+     "D": "35.1 hPa"
+    },
+    "answer": "B"
+   },
+   {
+    "id": 15,
+    "question": "What is the approximate mixing ratio of the sample?",
+    "options": {
+     "A": "3.7 g kg⁻¹",
+     "B": "5.9 g kg⁻¹",
+     "C": "7.4 g kg⁻¹",
+     "D": "14.7 g kg⁻¹"
+    },
+    "answer": "C"
+   },
+   {
+    "id": 16,
+    "question": "If the sample is warmed with its vapour pressure unchanged, what happens to relative humidity?",
+    "options": {
+     "A": "It rises to 100%",
+     "B": "It stays at 50%",
+     "C": "It becomes 0%",
+     "D": "It falls below 50%"
+    },
+    "answer": "D"
+   }
+  ]
+ },
+ {
+  "id": 17,
+  "question": "What reference pressure is conventionally used for potential temperature?",
+  "options": {
+   "A": "1000 hPa",
+   "B": "850 hPa",
+   "C": "500 hPa",
+   "D": "700 hPa"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 18,
+  "question": "What is the approximate value of κ = R_d/cₚ?",
+  "options": {
+   "A": "0.1654",
+   "B": "0.2854",
+   "C": "0.4000",
+   "D": "0.7140"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 19,
+  "question": "If the environmental lapse rate lies between the saturated and dry adiabatic lapse rates, the atmosphere is:",
+  "options": {
+   "A": "absolutely stable",
+   "B": "absolutely unstable",
+   "C": "conditionally unstable",
+   "D": "neutral for dry parcels"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 20,
+  "question": "How does a subsidence inversion form?",
+  "options": {
+   "A": "Surface cooling on clear, calm nights",
+   "B": "Warm air overrunning colder air",
+   "C": "Cold dense air draining into valleys",
+   "D": "Adiabatic warming of subsiding air"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 21,
+  "question": "Which relation correctly links specific humidity q to mixing ratio r?",
+  "options": {
+   "A": "q = r/(1 + r)",
+   "B": "q = r(1 + r)",
+   "C": "q = r/(1 − r)",
+   "D": "q = 1 − r"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 22,
+  "question": "Which expression is the Clausius–Clapeyron equation for saturation vapour pressure over liquid water?",
+  "options": {
+   "A": "d ln eₛ/dT = RᵥT²/Lᵥ",
+   "B": "d ln eₛ/dT = Lᵥ/(RᵥT²)",
+   "C": "d ln eₛ/dT = Lᵥ/(R_dT)",
+   "D": "d ln eₛ/dT = LᵥT²/Rᵥ"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 23,
+  "question": "Which relation holds approximately for the latent heat of sublimation?",
+  "options": {
+   "A": "Lₛ ≈ Lᵥ − L_f",
+   "B": "Lₛ ≈ Lᵥ × L_f",
+   "C": "Lₛ ≈ Lᵥ + L_f",
+   "D": "Lₛ ≈ L_f/Lᵥ"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 24,
+  "question": "A Carnot engine operates between reservoirs at 400 K and 300 K. What is its efficiency?",
+  "options": {
+   "A": "75%",
+   "B": "33%",
+   "C": "40%",
+   "D": "25%"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 25,
+  "question": "What shape does the Carnot cycle form on a T–S diagram?",
+  "options": {
+   "A": "Rectangle",
+   "B": "Right triangle",
+   "C": "Ellipse",
+   "D": "Rectangular hyperbola"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 26,
+  "question": "Which process is isentropic?",
+  "options": {
+   "A": "Any adiabatic process",
+   "B": "A reversible adiabatic process",
+   "C": "Any isothermal process",
+   "D": "An irreversible adiabatic process"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 27,
+  "question": "Which statement is the Clausius form of the Second Law?",
+  "options": {
+   "A": "Heat from one reservoir cannot be fully converted into work",
+   "B": "The entropy of a closed system always decreases over time",
+   "C": "Heat cannot flow spontaneously from colder to hotter body",
+   "D": "Energy can be freely created in an isolated system"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 28,
+  "question": "What is the key assumption of a pseudo-adiabatic process?",
+  "options": {
+   "A": "Condensate stays in the parcel as cloud water",
+   "B": "Condensation never occurs in the parcel",
+   "C": "The parcel cools at the dry adiabatic rate",
+   "D": "Condensate falls out of the parcel immediately"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 29,
+  "question": "What does equivalent potential temperature represent?",
+  "options": {
+   "A": "Potential temperature after all vapour condenses and releases its heat",
+   "B": "Temperature a parcel reaches when first lifted until saturated",
+   "C": "Dry potential temperature evaluated at the lifting condensation level",
+   "D": "Wet-bulb temperature evaluated after descent to the 1000 hPa level"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 30,
+  "question": "What is the approximate scale height of an isothermal atmosphere at 288 K?",
+  "options": {
+   "A": "5.6 km",
+   "B": "8.4 km",
+   "C": "11.0 km",
+   "D": "15.2 km"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 31,
+  "question": "Which cloud genus often produces a 22° halo around the Sun or Moon?",
+  "options": {
+   "A": "Cirrus",
+   "B": "Cirrocumulus",
+   "C": "Cirrostratus",
+   "D": "Altostratus"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 32,
+  "question": "Which cloud makes the Sun appear dim, as if seen through ground glass?",
+  "options": {
+   "A": "Stratus",
+   "B": "Cirrostratus",
+   "C": "Altocumulus",
+   "D": "Altostratus"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 33,
+  "question": "Which cloud is thick, dark and widespread, producing continuous steady rain or snow?",
+  "options": {
+   "A": "Nimbostratus",
+   "B": "Stratocumulus",
+   "C": "Cirrocumulus",
+   "D": "Altocumulus"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 34,
+  "question": "Using the rule of thumb z_LCL ≈ 125 (T − Td), what is the LCL height for T = 25 °C and Td = 15 °C?",
+  "options": {
+   "A": "625 m",
+   "B": "1250 m",
+   "C": "2500 m",
+   "D": "3125 m"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 35,
+  "question": "Which lifting mechanism forces air up a hill or mountain slope?",
+  "options": {
+   "A": "Convective",
+   "B": "Frontal",
+   "C": "Orographic",
+   "D": "Convergence"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 36,
+  "question": "What is the typical dry diameter range of cloud condensation nuclei?",
+  "options": {
+   "A": "0.5–5 nm",
+   "B": "5–50 µm",
+   "C": "0.5–5 mm",
+   "D": "0.05–1 µm"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 37,
+  "question": "Köhler theory describes CCN activation by combining which two effects?",
+  "options": {
+   "A": "Solute (Raoult) and curvature (Kelvin) effects",
+   "B": "Coriolis force and pressure-gradient force effects",
+   "C": "Boyle's law and Charles's law gas effects",
+   "D": "Clausius and Kelvin–Planck statement effects"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 38,
+  "question": "For the same liquid-water content, what does a higher CCN concentration generally produce?",
+  "options": {
+   "A": "Larger droplets that rain out faster",
+   "B": "Smaller droplets that delay coalescence",
+   "C": "Fewer droplets of roughly similar size",
+   "D": "A colder cloud base with larger droplets"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 39,
+  "question": "At about what temperature does homogeneous freezing of small pure supercooled droplets become important?",
+  "options": {
+   "A": "−10 °C",
+   "B": "−20 °C",
+   "C": "−38 °C",
+   "D": "−60 °C"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 40,
+  "question": "Which description matches immersion freezing?",
+  "options": {
+   "A": "Vapour deposits directly as ice on a particle",
+   "B": "A particle collides with a supercooled droplet",
+   "C": "A droplet freezes spontaneously without a nucleus",
+   "D": "A particle inside a supercooled droplet starts freezing"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 41,
+  "question": "What is the key physical cause of the collision–coalescence process?",
+  "options": {
+   "A": "Larger drops fall faster than smaller ones",
+   "B": "Ice crystals grow at the expense of droplets",
+   "C": "Vapour pressure over water exceeds that over ice",
+   "D": "Droplets freeze on contact with ice nuclei"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 42,
+  "question": "What is the principle of the Wegener–Bergeron–Findeisen process?",
+  "options": {
+   "A": "Larger drops overtake and merge with smaller drops",
+   "B": "Saturation vapour pressure over water exceeds that over ice",
+   "C": "Sea-salt particles lower the vapour pressure of solutions",
+   "D": "Warm air rises and cools at the dry adiabatic rate"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 43,
+  "question": "What forms when an ice particle undergoes extensive riming?",
+  "options": {
+   "A": "Aggregated snowflake",
+   "B": "Melted raindrop",
+   "C": "Graupel",
+   "D": "Homogeneously frozen droplet"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 44,
+  "question": "How do ice pellets form?",
+  "options": {
+   "A": "Snow reaches the ground without any melting",
+   "B": "Supercooled drops freeze on contact with surfaces",
+   "C": "Snow melts completely in a deep warm layer only",
+   "D": "Melted drops refreeze in a deep cold layer"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 45,
+  "question": "What does the Convective Condensation Level (CCL) mark?",
+  "options": {
+   "A": "Level where a surface-heated parcel becomes saturated",
+   "B": "Level where a forced-lift parcel becomes saturated",
+   "C": "Level of neutral buoyancy for a rising parcel",
+   "D": "Level where a parcel first becomes positively buoyant"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 46,
+  "question": "What is the Level of Free Convection (LFC)?",
+  "options": {
+   "A": "Level where a lifted parcel first becomes saturated",
+   "B": "Level above which a lifted parcel is positively buoyant",
+   "C": "Level where parcel buoyancy returns to zero aloft",
+   "D": "Level where CAPE reaches its maximum value"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 47,
+  "question": "What is the Equilibrium Level (EL)?",
+  "options": {
+   "A": "Level where a parcel starts rising freely",
+   "B": "Height of the cloud base",
+   "C": "Upper level where parcel buoyancy returns to zero",
+   "D": "Level where parcel temperature equals its dew point"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 48,
+  "question": "What does CAPE measure?",
+  "options": {
+   "A": "Energy needed to lift a parcel from source to LFC",
+   "B": "Total liquid water content of a cloud layer",
+   "C": "Kinetic energy supplied by vertical wind shear",
+   "D": "Positive buoyant energy between the LFC and EL"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 49,
+  "question": "What does CIN represent?",
+  "options": {
+   "A": "Energy barrier to lift a parcel to the LFC",
+   "B": "Positive buoyant energy between LFC and EL",
+   "C": "Energy released by condensation at the LCL",
+   "D": "Energy supplied by vertical wind shear"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 50,
+  "question": "Why is virtual temperature used in CAPE and CIN calculations?",
+  "options": {
+   "A": "To remove the effect of pressure on buoyancy",
+   "B": "To account for the effect of water vapour on air density",
+   "C": "To convert temperatures from °C to K",
+   "D": "To ignore moisture differences between parcel and environment"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 51,
+  "question": "For a fixed mass of gas at constant pressure, which relation holds (T in kelvin)?",
+  "options": {
+   "A": "V ∝ 1/T",
+   "B": "V ∝ T²",
+   "C": "V ∝ T",
+   "D": "V ∝ √T"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 52,
+  "question": "According to Avogadro's law, equal volumes of gases at the same pressure and temperature contain:",
+  "options": {
+   "A": "equal total masses of gas",
+   "B": "equal mass densities of gas",
+   "C": "equal internal energies of gas",
+   "D": "equal numbers of molecules"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 53,
+  "question": "What is the approximate mean molar mass of dry air?",
+  "options": {
+   "A": "29 g mol⁻¹",
+   "B": "18 g mol⁻¹",
+   "C": "32 g mol⁻¹",
+   "D": "44 g mol⁻¹"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 54,
+  "question": "Which gas is the second most abundant in dry air near the surface?",
+  "options": {
+   "A": "Argon",
+   "B": "Oxygen",
+   "C": "Carbon dioxide",
+   "D": "Neon"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 55,
+  "question": "What is the gas constant of water vapour, Rᵥ?",
+  "options": {
+   "A": "287.05 J kg⁻¹ K⁻¹",
+   "B": "461.5 J kg⁻¹ K⁻¹",
+   "C": "1004 J kg⁻¹ K⁻¹",
+   "D": "717 J kg⁻¹ K⁻¹"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 56,
+  "question": "Which expression gives air density from the ideal gas law?",
+  "options": {
+   "A": "ρ = p/(RT)",
+   "B": "ρ = pRT",
+   "C": "ρ = RT/p",
+   "D": "ρ = pT/R"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 57,
+  "question": "For an ideal gas, internal energy depends only on:",
+  "options": {
+   "A": "pressure",
+   "B": "volume",
+   "C": "density",
+   "D": "temperature"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 58,
+  "question": "How many degrees of freedom are active for N₂ and O₂ at ordinary temperatures?",
+  "options": {
+   "A": "3",
+   "B": "4",
+   "C": "5",
+   "D": "7"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 59,
+  "question": "In an isochoric process of an ideal gas, the heat supplied equals:",
+  "options": {
+   "A": "m cᵥ ΔT",
+   "B": "m cₚ ΔT",
+   "C": "p ΔV",
+   "D": "zero"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 60,
+  "question": "What is the boundary work in a constant-pressure process?",
+  "options": {
+   "A": "V(p₂ − p₁)",
+   "B": "p(V₂ − V₁)",
+   "C": "nR*T ln(V₂/V₁)",
+   "D": "zero"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 61,
+  "question": "Which expression defines enthalpy?",
+  "options": {
+   "A": "H = U − pV",
+   "B": "H = U/(pV)",
+   "C": "H = U + pV",
+   "D": "H = pV − U"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 62,
+  "question": "Which form of the First Law is used for atmospheric parcels?",
+  "options": {
+   "A": "δq = cᵥ dT + α dp",
+   "B": "δq = cₚ dT + α dp",
+   "C": "δq = cᵥ dT − α dp",
+   "D": "δq = cₚ dT − α dp"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 63,
+  "question": "For a closed cycle, the net work done equals:",
+  "options": {
+   "A": "zero for any complete cycle",
+   "B": "the change in internal energy of the gas",
+   "C": "the net entropy change of the gas",
+   "D": "the area enclosed on the P–V diagram"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 64,
+  "question": "On a P–V diagram, the reversible adiabat through a given state is:",
+  "options": {
+   "A": "less steep than the isotherm",
+   "B": "identical to the isotherm",
+   "C": "steeper than the isotherm",
+   "D": "horizontal"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 65,
+  "question": "Which relation holds for a reversible adiabatic process of an ideal gas?",
+  "options": {
+   "A": "TV = constant",
+   "B": "TVᵞ⁻¹ = constant",
+   "C": "Tp = constant",
+   "D": "pV = constant"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 66,
+  "question": "What is the approximate value of γ = cₚ/cᵥ for dry air?",
+  "options": {
+   "A": "1.40",
+   "B": "0.71",
+   "C": "1.67",
+   "D": "2.00"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 67,
+  "question": "About how much does a dry unsaturated parcel cool when lifted 500 m?",
+  "options": {
+   "A": "2.0 °C",
+   "B": "3.3 °C",
+   "C": "4.9 °C",
+   "D": "6.5 °C"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 68,
+  "question": "In saturated air with ideal ventilation, the wet-bulb temperature is:",
+  "options": {
+   "A": "below the dry-bulb temperature",
+   "B": "above the dry-bulb temperature",
+   "C": "below the dew point temperature",
+   "D": "equal to the dry-bulb temperature"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 69,
+  "question": "What does a psychrometer consist of?",
+  "options": {
+   "A": "Paired dry-bulb and wet-bulb thermometers",
+   "B": "A thermometer plus a recording barograph",
+   "C": "Two aneroid pressure capsules in a case",
+   "D": "A hair strand and a bimetal strip"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 70,
+  "question": "A small dew-point depression generally indicates:",
+  "options": {
+   "A": "very low relative humidity",
+   "B": "high relative humidity",
+   "C": "zero water vapour",
+   "D": "permanent supersaturation"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 71,
+  "question": "Over what temperature range is the Tetens formula convenient?",
+  "options": {
+   "A": "−100 to 0 °C",
+   "B": "−40 to +50 °C",
+   "C": "100 to 200 °C",
+   "D": "200 to 400 °C"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 72,
+  "question": "At the same subfreezing temperature, saturation vapour pressure over supercooled liquid water is:",
+  "options": {
+   "A": "higher than over ice",
+   "B": "lower than over ice",
+   "C": "identical to that over ice",
+   "D": "zero"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 73,
+  "question": "As temperature rises at fixed pressure, saturation mixing ratio:",
+  "options": {
+   "A": "falls slightly",
+   "B": "stays unchanged",
+   "C": "falls to zero",
+   "D": "rises strongly"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 74,
+  "question": "A rising parcel expands while its mixing ratio stays constant. Its absolute humidity:",
+  "options": {
+   "A": "rises",
+   "B": "stays unchanged",
+   "C": "falls",
+   "D": "becomes equal to its mixing ratio"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 75,
+  "question": "Which variable is the mass of vapour per unit mass of moist air?",
+  "options": {
+   "A": "Specific humidity",
+   "B": "Mixing ratio",
+   "C": "Absolute humidity",
+   "D": "Vapour pressure deficit"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 76,
+  "question": "Mixing ratio is the mass of water vapour per unit mass of:",
+  "options": {
+   "A": "moist air",
+   "B": "dry air",
+   "C": "total water",
+   "D": "liquid water"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 77,
+  "question": "What is the value of ε = R_d/Rᵥ?",
+  "options": {
+   "A": "0.286",
+   "B": "1.61",
+   "C": "0.622",
+   "D": "0.378"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 78,
+  "question": "What is the SI unit of entropy?",
+  "options": {
+   "A": "J",
+   "B": "J kg⁻¹",
+   "C": "K J⁻¹",
+   "D": "J K⁻¹"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 79,
+  "question": "For a reversible cycle, the Clausius integral ∮δQ/T equals:",
+  "options": {
+   "A": "a negative value",
+   "B": "a positive value",
+   "C": "unity",
+   "D": "zero"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 80,
+  "question": "The entropy of an isolated system:",
+  "options": {
+   "A": "always decreases",
+   "B": "always stays constant",
+   "C": "never decreases",
+   "D": "oscillates with time"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 81,
+  "question": "What does the Kelvin–Planck statement say?",
+  "options": {
+   "A": "Heat flows from hot to cold without any work",
+   "B": "No cyclic engine can turn all heat into work",
+   "C": "Entropy of any system must always increase",
+   "D": "Energy is always lost in every cycle"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 82,
+  "question": "Which of the following causes irreversibility?",
+  "options": {
+   "A": "Friction and viscosity",
+   "B": "Quasi-static compression",
+   "C": "Infinitesimal temperature differences",
+   "D": "Very slow isothermal expansion"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 83,
+  "question": "Which Carnot stage follows isothermal expansion at the hot temperature?",
+  "options": {
+   "A": "Isothermal compression at T_C",
+   "B": "Adiabatic compression to T_H",
+   "C": "Adiabatic expansion to T_C",
+   "D": "Isochoric heating at T_H"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 84,
+  "question": "Carnot efficiency depends only on:",
+  "options": {
+   "A": "the working substance used",
+   "B": "the physical size of the engine",
+   "C": "the amount of heat absorbed",
+   "D": "the two reservoir temperatures"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 85,
+  "question": "A Carnot engine works between 600 K and 300 K. What is its efficiency?",
+  "options": {
+   "A": "50%",
+   "B": "25%",
+   "C": "75%",
+   "D": "100%"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 86,
+  "question": "During evaporation, water:",
+  "options": {
+   "A": "releases latent heat to the surrounding air",
+   "B": "absorbs latent heat from its surroundings",
+   "C": "exchanges no energy with surroundings",
+   "D": "freezes at constant temperature"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 87,
+  "question": "Which process releases latent heat?",
+  "options": {
+   "A": "Melting",
+   "B": "Deposition",
+   "C": "Evaporation",
+   "D": "Sublimation"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 88,
+  "question": "What is the approximate latent heat of vaporisation at 100 °C?",
+  "options": {
+   "A": "2.26 × 10⁶ J kg⁻¹",
+   "B": "2.50 × 10⁶ J kg⁻¹",
+   "C": "3.34 × 10⁵ J kg⁻¹",
+   "D": "2.83 × 10⁶ J kg⁻¹"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 89,
+  "question": "Which expression gives sensible heat?",
+  "options": {
+   "A": "Q = mL",
+   "B": "Q = pΔV",
+   "C": "Q = TΔS",
+   "D": "Q = mcΔT"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 90,
+  "question": "What is the approximate latent heat of sublimation of water near 0 °C?",
+  "options": {
+   "A": "3.34 × 10⁵ J kg⁻¹",
+   "B": "2.50 × 10⁶ J kg⁻¹",
+   "C": "2.83 × 10⁶ J kg⁻¹",
+   "D": "4.19 × 10³ J kg⁻¹"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 91,
+  "question": "Which latent heat is used in the Clausius–Clapeyron equation over ice?",
+  "options": {
+   "A": "Latent heat of sublimation",
+   "B": "Latent heat of fusion",
+   "C": "Latent heat of vaporisation",
+   "D": "Specific heat at constant pressure"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 92,
+  "question": "Why does warming air at fixed moisture lower its relative humidity?",
+  "options": {
+   "A": "Water vapour is destroyed when the air is heated",
+   "B": "Saturation vapour pressure rises with temperature",
+   "C": "Total pressure falls as the air warms and expands",
+   "D": "Dry air becomes more massive when it is heated"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 93,
+  "question": "How does a reversible saturated adiabat differ from a pseudo-adiabat?",
+  "options": {
+   "A": "It ignores latent heat of condensation",
+   "B": "It removes all vapour from the parcel",
+   "C": "It retains condensate in the parcel",
+   "D": "It follows the dry adiabat throughout"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 94,
+  "question": "Above the LCL, a lifted parcel follows:",
+  "options": {
+   "A": "an isotherm",
+   "B": "an isobar",
+   "C": "a dry adiabat",
+   "D": "a saturated adiabat"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 95,
+  "question": "Potential temperature is conserved during:",
+  "options": {
+   "A": "condensation with precipitation falling out",
+   "B": "strong turbulent mixing of layers",
+   "C": "radiative cooling of the parcel",
+   "D": "dry reversible adiabatic motion"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 96,
+  "question": "Potential temperature increasing with height indicates:",
+  "options": {
+   "A": "dry convective instability",
+   "B": "dry neutral stratification",
+   "C": "stable stratification",
+   "D": "a superadiabatic layer"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 97,
+  "question": "Potential temperature decreasing with height indicates:",
+  "options": {
+   "A": "stable stratification of air",
+   "B": "dry convective instability",
+   "C": "an isothermal layer of air",
+   "D": "a temperature inversion layer"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 98,
+  "question": "What are isentropes in the atmosphere?",
+  "options": {
+   "A": "Surfaces of constant potential temperature",
+   "B": "Lines of constant pressure on a map",
+   "C": "Surfaces of constant specific humidity",
+   "D": "Lines of constant wind speed aloft"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 99,
+  "question": "Which equation expresses hydrostatic balance?",
+  "options": {
+   "A": "dp/dz = ρg",
+   "B": "dp/dz = −g/ρ",
+   "C": "dp/dz = −ρg",
+   "D": "dp/dz = −ρ/g"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 100,
+  "question": "What is the barometric formula for an isothermal atmosphere?",
+  "options": {
+   "A": "p(z) = p₀ [1 − gz/(RT)]",
+   "B": "p(z) = p₀ [1 + gz/(RT)]",
+   "C": "p(z) = p₀ exp[gz/(RT)]",
+   "D": "p(z) = p₀ exp[−gz/(RT)]"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 101,
+  "question": "What does the environmental lapse rate describe?",
+  "options": {
+   "A": "Observed decrease of air temperature with height",
+   "B": "Cooling rate of a dry air parcel when it rises",
+   "C": "Cooling rate of a saturated parcel when it rises",
+   "D": "Decrease of air pressure with increasing height"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 102,
+  "question": "In a temperature inversion, the environmental lapse rate is:",
+  "options": {
+   "A": "positive",
+   "B": "negative",
+   "C": "equal to 9.8 K km⁻¹",
+   "D": "equal to 6.5 K km⁻¹"
+  },
+  "answer": "B"
+ },
+ {
+  "group": "a2-lcl-estimate",
+  "title": "Directions (Q103-106): Use the surface data below to answer the questions",
+  "passage": "A surface air parcel is lifted dry-adiabatically until it saturates.\n\n|Quantity|Value|\n|---|---|\n|Surface temperature|30 °C|\n|Surface dew point|18 °C|\n|LCL rule of thumb|z = 125 (T − Td) m|\n",
+  "questions": [
+   {
+    "id": 103,
+    "question": "What is the approximate LCL height above the surface?",
+    "options": {
+     "A": "750 m",
+     "B": "1500 m",
+     "C": "2250 m",
+     "D": "3000 m"
+    },
+    "answer": "B"
+   },
+   {
+    "id": 104,
+    "question": "About how much does the parcel cool between the surface and the LCL?",
+    "options": {
+     "A": "15 °C",
+     "B": "9 °C",
+     "C": "24 °C",
+     "D": "30 °C"
+    },
+    "answer": "A"
+   },
+   {
+    "id": 105,
+    "question": "If the surface dew point were 28 °C instead, the LCL would be:",
+    "options": {
+     "A": "higher, near 3000 m",
+     "B": "unchanged, near 1500 m",
+     "C": "lower, near 750 m",
+     "D": "lower, near 250 m"
+    },
+    "answer": "D"
+   },
+   {
+    "id": 106,
+    "question": "What is the relative humidity of the parcel at the LCL?",
+    "options": {
+     "A": "50%",
+     "B": "75%",
+     "C": "100%",
+     "D": "0%"
+    },
+    "answer": "C"
+   }
+  ]
+ },
+ {
+  "id": 107,
+  "question": "How does the CCL relate to the LCL?",
+  "options": {
+   "A": "At or above the LCL",
+   "B": "Always below the LCL",
+   "C": "Always equal to the LCL",
+   "D": "Always at the tropopause"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 108,
+  "question": "What does a large CIN imply?",
+  "options": {
+   "A": "Very strong updrafts developing at once",
+   "B": "A strong cap requiring more lifting",
+   "C": "No cloud base can ever form",
+   "D": "A zero equilibrium level for the parcel"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 109,
+  "question": "What are the units of CAPE?",
+  "options": {
+   "A": "K km⁻¹",
+   "B": "hPa",
+   "C": "J kg⁻¹",
+   "D": "m s⁻¹"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 110,
+  "question": "How is the LCL found on a Skew-T chart?",
+  "options": {
+   "A": "Where the environmental curve meets the isotherm through T",
+   "B": "Where the parcel curve crosses the equilibrium level",
+   "C": "Where CAPE becomes zero on the sounding",
+   "D": "Where the dry adiabat from T meets the Td mixing-ratio line"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 111,
+  "question": "Which statement about CAPE is correct?",
+  "options": {
+   "A": "It fixes storm severity exactly",
+   "B": "It is independent of parcel choice",
+   "C": "It does not guarantee thunderstorms",
+   "D": "It has one universal severe threshold"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 112,
+  "question": "Which parcel choices can be used for CAPE and CIN calculations?",
+  "options": {
+   "A": "Only the surface-based parcel is allowed to be used",
+   "B": "Surface-based, mixed-layer or most-unstable parcel",
+   "C": "Only the mixed-layer parcel is allowed to be used",
+   "D": "Only parcels lifted from the tropopause level"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 113,
+  "question": "How many principal cloud genera does the WMO recognise?",
+  "options": {
+   "A": "10",
+   "B": "8",
+   "C": "12",
+   "D": "14"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 114,
+  "question": "Which description fits cumulonimbus?",
+  "options": {
+   "A": "Thin white veil of ice crystals across the sky",
+   "B": "Low uniform grey layer of stratiform cloud",
+   "C": "Deep thunderstorm cloud with an anvil top",
+   "D": "Small white grains arranged in rows or ripples"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 115,
+  "question": "Which description fits stratus?",
+  "options": {
+   "A": "Detached white filaments of ice crystals",
+   "B": "Thick rain-bearing sheet at mid levels",
+   "C": "Heaps of cloud with rounded domed tops",
+   "D": "Uniform low grey layer, may give drizzle"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 116,
+  "question": "Which description fits cirrus?",
+  "options": {
+   "A": "Detached white ice-crystal filaments",
+   "B": "Grey low layer of cloud with gaps",
+   "C": "Dark thick rain-bearing cloud layer",
+   "D": "Heaps of cloud with flat bases"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 117,
+  "question": "Which description fits altocumulus?",
+  "options": {
+   "A": "Thin veil of ice cloud giving a halo",
+   "B": "Mid-level white or grey patches or rolls",
+   "C": "Low fog-like sheet near the ground",
+   "D": "Tall anvil-topped thunderstorm cloud"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 118,
+  "question": "In cloud names, the term nimbo- or nimbus means:",
+  "options": {
+   "A": "high",
+   "B": "precipitation",
+   "C": "heap",
+   "D": "middle"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 119,
+  "question": "In cloud names, the prefix alto- means:",
+  "options": {
+   "A": "middle",
+   "B": "high",
+   "C": "layer",
+   "D": "heap"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 120,
+  "question": "How does frontal lifting occur?",
+  "options": {
+   "A": "Surface heating makes air buoyant",
+   "B": "Winds meet and slow near the surface",
+   "C": "Air rises over a mountain barrier",
+   "D": "Dense cold air undercuts warm air"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 121,
+  "question": "How does convergence lifting occur?",
+  "options": {
+   "A": "Warm air rises over a hill slope",
+   "B": "Cold air sinks under warm air masses",
+   "C": "Low-level winds meet, forcing air upward",
+   "D": "Sunlight heats the ground very strongly"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 122,
+  "question": "What happens on the lee side of a mountain in the rain-shadow effect?",
+  "options": {
+   "A": "Air descends and warms",
+   "B": "Air rises and cools",
+   "C": "Cloud thickens rapidly",
+   "D": "Rainfall increases sharply"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 123,
+  "question": "What is the approximate tropical height range of low clouds?",
+  "options": {
+   "A": "6 to 18 km",
+   "B": "Surface to about 2 km",
+   "C": "2 to 8 km",
+   "D": "12 to 20 km"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 124,
+  "question": "What is the main marine source of cloud condensation nuclei?",
+  "options": {
+   "A": "Mineral dust from arid deserts",
+   "B": "Pollen fragments from vegetation",
+   "C": "Sea salt from breaking waves",
+   "D": "Soot from fossil-fuel combustion"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 125,
+  "question": "Which are anthropogenic cloud condensation nuclei?",
+  "options": {
+   "A": "Sea-salt particles from waves",
+   "B": "Pollen fragments from plants",
+   "C": "Soil dust from dry land",
+   "D": "Sulfate and soot aerosols"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 126,
+  "question": "What is the typical supersaturation in many clouds?",
+  "options": {
+   "A": "10–20%",
+   "B": "5–10%",
+   "C": "1–5%",
+   "D": "0.1–1%"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 127,
+  "question": "Which droplet concentration is typical of polluted continental clouds?",
+  "options": {
+   "A": "1–5 cm⁻³",
+   "B": "10–20 cm⁻³",
+   "C": "200–1000 cm⁻³ or more",
+   "D": "50–300 cm⁻³ only"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 128,
+  "question": "What is the typical diameter of newly formed cloud droplets?",
+  "options": {
+   "A": "0.5–5 mm",
+   "B": "10–20 µm",
+   "C": "1–5 nm",
+   "D": "5–10 mm"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 129,
+  "question": "What is the diameter of common raindrops?",
+  "options": {
+   "A": "0.5–5 mm",
+   "B": "10–20 µm",
+   "C": "1–2 µm",
+   "D": "1–5 cm"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 130,
+  "question": "Which materials act as atmospheric ice nuclei?",
+  "options": {
+   "A": "Sea-salt crystals suspended in marine air",
+   "B": "Pure water vapour molecules in clear air",
+   "C": "Mineral dust and some biological particles",
+   "D": "Ozone molecules in the stratosphere layer"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 131,
+  "question": "What is deposition nucleation?",
+  "options": {
+   "A": "A droplet freezes without a nucleus",
+   "B": "A particle in a droplet starts freezing",
+   "C": "A particle hits a supercooled droplet",
+   "D": "Vapour turns directly to ice on a particle"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 132,
+  "question": "What is contact freezing?",
+  "options": {
+   "A": "An ice-active particle hits a supercooled droplet",
+   "B": "A droplet freezes spontaneously near −38 °C",
+   "C": "Vapour deposits directly onto a particle",
+   "D": "Snow melts and refreezes below the cloud"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 133,
+  "question": "What is secondary ice production?",
+  "options": {
+   "A": "Freezing of droplets near −38 °C",
+   "B": "Extra ice crystals formed from existing ice",
+   "C": "Condensation of vapour on sea-salt nuclei",
+   "D": "Evaporation of ice back into vapour"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 134,
+  "question": "What is the approximate temperature range of mixed-phase clouds?",
+  "options": {
+   "A": "+20 to 0 °C",
+   "B": "0 to −38 °C",
+   "C": "−60 to −80 °C",
+   "D": "+40 to +20 °C"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 135,
+  "question": "Where is collision–coalescence especially effective?",
+  "options": {
+   "A": "Deep, humid tropical maritime clouds",
+   "B": "Thin cirrus layers high in the sky",
+   "C": "Very cold clouds colder than −40 °C",
+   "D": "Clear dry air with no cloud droplets"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 136,
+  "question": "What is the effect of a very narrow droplet-size spectrum?",
+  "options": {
+   "A": "Faster growth of very large raindrops",
+   "B": "Immediate freezing of all the droplets",
+   "C": "Larger cloud base heights in all clouds",
+   "D": "Inefficient collisions that delay warm rain"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 137,
+  "question": "When are ice crystals most likely to aggregate?",
+  "options": {
+   "A": "Near −40 °C, where ice is dry",
+   "B": "In clear air without any cloud",
+   "C": "Near 0 °C, where ice is sticky",
+   "D": "Only above +10 °C in warm cloud"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 138,
+  "question": "What is riming?",
+  "options": {
+   "A": "Supercooled droplets freezing onto falling ice",
+   "B": "Ice crystals sticking to each other in cloud",
+   "C": "Droplets merging together in a warm cloud",
+   "D": "Vapour condensing onto sea-salt nuclei in air"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 139,
+  "question": "What is the usual product of the WBF process?",
+  "options": {
+   "A": "Drizzle only from warm clouds",
+   "B": "Snow, or rain after melting",
+   "C": "Fog at the surface level",
+   "D": "Hail only from deep storms"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 140,
+  "question": "What is freezing rain?",
+  "options": {
+   "A": "Snow melting in a warm layer",
+   "B": "Ice pellets bouncing off the ground",
+   "C": "Hail falling from cumulonimbus",
+   "D": "Supercooled drops freezing on contact"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 141,
+  "question": "In which conditions does the saturated adiabatic lapse rate approach the dry value?",
+  "options": {
+   "A": "Warm, humid tropical air",
+   "B": "Air near saturation at 30 °C",
+   "C": "Air inside deep thunderstorms",
+   "D": "Very cold, dry air"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 142,
+  "question": "Which expression gives potential temperature?",
+  "options": {
+   "A": "θ = T (p/p₀)^κ",
+   "B": "θ = T + κ ln(p₀/p)",
+   "C": "θ = T (p₀/p)^κ",
+   "D": "θ = T κ (p₀/p)"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 143,
+  "question": "How is partial pressure related to mole fraction in Dalton's law?",
+  "options": {
+   "A": "pᵢ = p/xᵢ",
+   "B": "pᵢ = xᵢ p",
+   "C": "pᵢ = xᵢ/p",
+   "D": "pᵢ = p − xᵢ"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 144,
+  "question": "What is the ISA sea-level air density?",
+  "options": {
+   "A": "1.225 kg m⁻³",
+   "B": "0.525 kg m⁻³",
+   "C": "2.250 kg m⁻³",
+   "D": "12.25 kg m⁻³"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 145,
+  "question": "What is the standard sea-level pressure?",
+  "options": {
+   "A": "760 hPa",
+   "B": "1000 hPa",
+   "C": "1013.25 hPa",
+   "D": "1100 hPa"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 146,
+  "question": "What is the mean translational kinetic energy per molecule?",
+  "options": {
+   "A": "k_BT",
+   "B": "(1/2)k_BT",
+   "C": "(5/2)k_BT",
+   "D": "(3/2)k_BT"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 147,
+  "question": "One hectopascal equals:",
+  "options": {
+   "A": "100 Pa",
+   "B": "10 Pa",
+   "C": "1000 Pa",
+   "D": "10 000 Pa"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 148,
+  "question": "A temperature difference of 1 K equals a difference of:",
+  "options": {
+   "A": "0.5 °C",
+   "B": "1 °C",
+   "C": "273 °C",
+   "D": "10 °C"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 149,
+  "question": "How long does one rotation of Earth about its axis take?",
+  "options": {
+   "A": "12 hours",
+   "B": "365 days",
+   "C": "24 hours",
+   "D": "27 days"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 150,
+  "question": "How long does one revolution of Earth around the Sun take?",
+  "options": {
+   "A": "24 hours",
+   "B": "29.5 days",
+   "C": "100 days",
+   "D": "365.25 days"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 151,
+  "question": "What is the approximate tilt of Earth's axis from the perpendicular to its orbital plane?",
+  "options": {
+   "A": "23.5°",
+   "B": "45°",
+   "C": "66.5°",
+   "D": "90°"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 152,
+  "question": "What is the main cause of the seasons?",
+  "options": {
+   "A": "Changing Earth–Sun distance through the year",
+   "B": "Axial tilt changing solar angle and day length",
+   "C": "Variation in the Moon's orbit around Earth",
+   "D": "Changes in Earth's rotation speed with time"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 153,
+  "question": "Where is the Sun overhead at noon during the June solstice?",
+  "options": {
+   "A": "Equator",
+   "B": "Tropic of Cancer",
+   "C": "Tropic of Capricorn",
+   "D": "Arctic Circle"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 154,
+  "question": "Which hemisphere has its longest day at the December solstice?",
+  "options": {
+   "A": "Southern Hemisphere",
+   "B": "Northern Hemisphere",
+   "C": "Both hemispheres equally",
+   "D": "Neither hemisphere"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 155,
+  "question": "Where is the Sun overhead at noon during an equinox?",
+  "options": {
+   "A": "Tropic of Cancer",
+   "B": "Tropic of Capricorn",
+   "C": "The poles",
+   "D": "The equator"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 156,
+  "question": "What is the subsolar point?",
+  "options": {
+   "A": "Point where the longest day occurs on Earth",
+   "B": "Point on Earth that lies nearest to the Moon",
+   "C": "Point where the Sun is overhead at solar noon",
+   "D": "Point of lowest surface temperature on Earth"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 157,
+  "question": "In which direction does Earth rotate?",
+  "options": {
+   "A": "West to east",
+   "B": "East to west",
+   "C": "North to south",
+   "D": "South to north"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 158,
+  "question": "Which effect on moving air and water results from Earth's rotation?",
+  "options": {
+   "A": "Doppler effect",
+   "B": "Coriolis effect",
+   "C": "Greenhouse effect",
+   "D": "Twomey effect"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 159,
+  "question": "In which atmospheric layer does temperature increase with height because of ozone absorption?",
+  "options": {
+   "A": "Troposphere",
+   "B": "Mesosphere",
+   "C": "Stratosphere",
+   "D": "Exosphere"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 160,
+  "question": "Roughly what fraction of atmospheric mass lies in the troposphere?",
+  "options": {
+   "A": "10–15%",
+   "B": "25–30%",
+   "C": "50–55%",
+   "D": "75–80%"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 161,
+  "question": "Where is the tropopause generally highest?",
+  "options": {
+   "A": "At the poles",
+   "B": "At mid-latitudes",
+   "C": "In the tropics",
+   "D": "Over the oceans only"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 162,
+  "question": "How does temperature change with height in the mesosphere?",
+  "options": {
+   "A": "It increases steadily",
+   "B": "It decreases",
+   "C": "It stays constant",
+   "D": "It rises then falls"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 163,
+  "question": "Why does temperature increase with height in the thermosphere?",
+  "options": {
+   "A": "It absorbs energetic UV and X-ray radiation",
+   "B": "It is heated by convection from the surface",
+   "C": "It contains most of the water vapour present",
+   "D": "It is warmed by heat from ocean currents"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 164,
+  "question": "Which region is the outermost part of the atmosphere?",
+  "options": {
+   "A": "Troposphere",
+   "B": "Stratosphere",
+   "C": "Exosphere",
+   "D": "Mesosphere"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 165,
+  "question": "Which boundary separates the stratosphere from the mesosphere?",
+  "options": {
+   "A": "Tropopause",
+   "B": "Mesopause",
+   "C": "Thermopause",
+   "D": "Stratopause"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 166,
+  "question": "What is the approximate volume fraction of nitrogen in dry air?",
+  "options": {
+   "A": "78.08%",
+   "B": "20.95%",
+   "C": "0.93%",
+   "D": "0.04%"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 167,
+  "question": "What is the approximate volume fraction of argon in dry air?",
+  "options": {
+   "A": "0.04%",
+   "B": "0.93%",
+   "C": "20.95%",
+   "D": "78.08%"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 168,
+  "question": "What is the approximate volume fraction of carbon dioxide in dry air?",
+  "options": {
+   "A": "0.9%",
+   "B": "0.04%",
+   "C": "4%",
+   "D": "21%"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 169,
+  "question": "Why is water vapour important for the atmosphere's energy balance?",
+  "options": {
+   "A": "It absorbs and emits infrared radiation",
+   "B": "It reflects all incoming shortwave radiation",
+   "C": "It blocks all terrestrial radiation",
+   "D": "It has no effect on any radiation"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 170,
+  "question": "What are aerosols?",
+  "options": {
+   "A": "Gases that make up the dry air of the atmosphere",
+   "B": "Pure water vapour that forms all the clouds",
+   "C": "Tiny solid or liquid particles suspended in air",
+   "D": "Radiation emitted from the Sun's visible surface"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 171,
+  "question": "Which is a natural source of aerosols?",
+  "options": {
+   "A": "Sea spray",
+   "B": "Fossil-fuel combustion",
+   "C": "Industrial emissions",
+   "D": "Vehicle exhaust"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 172,
+  "question": "Which is a human source of aerosols?",
+  "options": {
+   "A": "Volcanic eruptions",
+   "B": "Fossil-fuel combustion",
+   "C": "Sea spray",
+   "D": "Desert dust"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 173,
+  "question": "What are cloud condensation nuclei?",
+  "options": {
+   "A": "Ice crystals found in cirrus clouds",
+   "B": "Raindrops falling in warm clouds",
+   "C": "Aerosol particles on which vapour condenses",
+   "D": "Gas molecules that absorb ultraviolet light"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 174,
+  "question": "Which of the following reduces visibility?",
+  "options": {
+   "A": "Clean dry air",
+   "B": "Clear cold air",
+   "C": "Strong sunshine alone",
+   "D": "Fog, haze and smoke"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 175,
+  "question": "According to the Beer–Lambert law, a longer path length through the atmosphere:",
+  "options": {
+   "A": "increases transmitted intensity",
+   "B": "leaves transmitted intensity unchanged",
+   "C": "makes extinction coefficient zero",
+   "D": "reduces transmitted intensity"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 176,
+  "question": "What does atmospheric turbidity describe?",
+  "options": {
+   "A": "Wind speed near the ground surface",
+   "B": "Temperature change with height aloft",
+   "C": "Reduced transparency caused by aerosols",
+   "D": "Rate of cloud formation in air"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 177,
+  "question": "How does Rayleigh scattering intensity vary with wavelength?",
+  "options": {
+   "A": "I ∝ λ",
+   "B": "I ∝ 1/λ⁴",
+   "C": "I ∝ λ²",
+   "D": "I ∝ constant"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 178,
+  "question": "Rayleigh scattering occurs when particles are:",
+  "options": {
+   "A": "much smaller than the wavelength",
+   "B": "comparable in size to the wavelength",
+   "C": "much larger than the wavelength",
+   "D": "completely absent from the air"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 179,
+  "question": "Why does the daytime sky appear blue?",
+  "options": {
+   "A": "Oxygen molecules emit blue light themselves",
+   "B": "The ocean reflects blue light up into the sky",
+   "C": "Short wavelengths are scattered more strongly",
+   "D": "Clouds absorb red light from the Sun's rays"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 180,
+  "question": "Mie scattering occurs when particles are:",
+  "options": {
+   "A": "much smaller than the wavelength",
+   "B": "much larger than the wavelength",
+   "C": "absent from the air entirely",
+   "D": "comparable in size to the wavelength"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 181,
+  "question": "Why do clouds and fog usually look white or grey?",
+  "options": {
+   "A": "Large droplets scatter all colours about equally",
+   "B": "Droplets absorb only the blue light from the Sun",
+   "C": "Droplets themselves emit white light at all times",
+   "D": "Droplets scatter only the red light of sunlight"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 182,
+  "question": "Why are sunrise and sunset skies often red or orange?",
+  "options": {
+   "A": "The Sun's temperature changes at dawn",
+   "B": "Longer paths scatter out much blue light",
+   "C": "Ozone emits red light at low angles",
+   "D": "Water vapour reflects only red light"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 183,
+  "question": "What is an effect of atmospheric refraction near sunrise?",
+  "options": {
+   "A": "The Sun appears to rise much later",
+   "B": "The Sun appears before geometric sunrise",
+   "C": "The Sun appears blue near the horizon",
+   "D": "The Sun appears to split in two"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 184,
+  "question": "In the lower atmosphere, the refractive index is greater in:",
+  "options": {
+   "A": "denser air",
+   "B": "hotter air",
+   "C": "drier air only",
+   "D": "air with less pressure"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 185,
+  "question": "What is the colour order of a primary rainbow?",
+  "options": {
+   "A": "Violet on the outer edge, red on the inner edge",
+   "B": "All colours mixed evenly across the bow",
+   "C": "Blue on the outer edge, green on the inner edge",
+   "D": "Red on the outer edge, violet on the inner edge"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 186,
+  "question": "At what angular radius from the antisolar point is a primary rainbow seen?",
+  "options": {
+   "A": "22°",
+   "B": "10°",
+   "C": "42°",
+   "D": "90°"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 187,
+  "question": "How does a halo form?",
+  "options": {
+   "A": "Refraction of light by hexagonal ice crystals",
+   "B": "Diffraction by small water droplets in air",
+   "C": "Reflection from ocean waves at the horizon",
+   "D": "Absorption by ozone in the stratosphere"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 188,
+  "question": "What is the angular radius of the common halo?",
+  "options": {
+   "A": "10°",
+   "B": "22°",
+   "C": "42°",
+   "D": "60°"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 189,
+  "question": "What produces a corona around the Sun or Moon?",
+  "options": {
+   "A": "Refraction in hexagonal ice crystals",
+   "B": "Reflection from large raindrops",
+   "C": "Diffraction by small, similar droplets",
+   "D": "Scattering by air molecules only"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 190,
+  "question": "What is a glory?",
+  "options": {
+   "A": "A ring formed by hexagonal ice crystals",
+   "B": "A bright arc low above the horizon",
+   "C": "A white haze seen near the horizon",
+   "D": "Coloured rings around an observer's shadow"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 191,
+  "question": "What characterises an inferior mirage?",
+  "options": {
+   "A": "Cold air lying above a warm surface layer",
+   "B": "Objects appear stretched upward over snow fields",
+   "C": "No refraction of light is involved in the image",
+   "D": "Hot surface air makes the sky look like water"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 192,
+  "question": "What characterises a superior mirage?",
+  "options": {
+   "A": "It appears only over very hot paved roads in summer",
+   "B": "It is caused by reflection from high clouds above",
+   "C": "Cold air below warm air makes objects look elevated",
+   "D": "It occurs without any vertical temperature gradient"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 193,
+  "question": "According to c = λν, longer wavelengths have:",
+  "options": {
+   "A": "higher frequencies",
+   "B": "lower frequencies",
+   "C": "the same frequency",
+   "D": "faster speeds in vacuum"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 194,
+  "question": "What is the conventional wavelength range of shortwave radiation in climate budgets?",
+  "options": {
+   "A": "0.3–4 µm",
+   "B": "4–100 µm",
+   "C": "100–1000 µm",
+   "D": "1–10 mm"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 195,
+  "question": "What is the conventional wavelength range of longwave radiation in climate budgets?",
+  "options": {
+   "A": "0.3–4 µm",
+   "B": "0.1–0.3 µm",
+   "C": "4–100 µm",
+   "D": "1–10 m"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 196,
+  "question": "What is a black body?",
+  "options": {
+   "A": "Any object that appears dark in colour to the eye",
+   "B": "A body that reflects all radiation falling on it",
+   "C": "A body that emits no radiation at any wavelength",
+   "D": "An ideal body that absorbs all incident radiation"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 197,
+  "question": "For an opaque surface, which relation holds between absorptivity α and reflectivity ρ?",
+  "options": {
+   "A": "α + ρ = 1",
+   "B": "α − ρ = 1",
+   "C": "α × ρ = 1",
+   "D": "α = 2ρ"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 198,
+  "question": "What is albedo?",
+  "options": {
+   "A": "Fraction of radiation absorbed by the atmosphere",
+   "B": "Fraction of incoming solar radiation reflected",
+   "C": "Ratio of emission to black-body emission",
+   "D": "Amount of longwave radiation emitted"
+  },
+  "answer": "B"
+ },
+ {
+  "group": "m-effective-temp-data",
+  "title": "Directions (Q199-202): Use the data below to answer the questions",
+  "passage": "Use the following approximate values for the Earth system.\n\n|Quantity|Value|\n|---|---|\n|Solar constant S₀|1361 W m⁻²|\n|Planetary albedo|0.30|\n|Effective radiating temperature|255 K|\n|Stefan–Boltzmann constant σ|5.67 × 10⁻⁸ W m⁻² K⁻⁴|\n|Wien constant b|2.898 × 10⁻³ m K|\n",
+  "questions": [
+   {
+    "id": 199,
+    "question": "At which wavelength does Earth's emission peak, using Wien's law?",
+    "options": {
+     "A": "0.50 µm",
+     "B": "11.4 µm",
+     "C": "5.7 µm",
+     "D": "22.8 µm"
+    },
+    "answer": "B"
+   },
+   {
+    "id": 200,
+    "question": "What is the global-mean absorbed solar radiation, S₀(1 − α)/4?",
+    "options": {
+     "A": "About 238 W m⁻²",
+     "B": "About 340 W m⁻²",
+     "C": "About 1361 W m⁻²",
+     "D": "About 102 W m⁻²"
+    },
+    "answer": "A"
+   },
+   {
+    "id": 201,
+    "question": "Using the Stefan–Boltzmann law, what flux does a black body at 255 K emit?",
+    "options": {
+     "A": "About 120 W m⁻²",
+     "B": "About 480 W m⁻²",
+     "C": "About 340 W m⁻²",
+     "D": "About 240 W m⁻²"
+    },
+    "answer": "D"
+   },
+   {
+    "id": 202,
+    "question": "What do the answers to the previous two questions show about the Earth system?",
+    "options": {
+     "A": "It is warming rapidly overall",
+     "B": "It is cooling rapidly overall",
+     "C": "It is near radiative balance",
+     "D": "It is in thermal runaway now"
+    },
+    "answer": "C"
+   }
+  ]
+ },
+ {
+  "id": 203,
+  "question": "What does Planck's law describe?",
+  "options": {
+   "A": "Spectral distribution of black-body radiation",
+   "B": "Total emission summed over all wavelengths",
+   "C": "Scattering of light by small gas molecules",
+   "D": "Absorption of ultraviolet light by ozone"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 204,
+  "question": "As the temperature of a black body increases, its peak emission wavelength:",
+  "options": {
+   "A": "shifts to longer wavelengths",
+   "B": "shifts to shorter wavelengths",
+   "C": "stays at the same wavelength",
+   "D": "vanishes at high temperature"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 205,
+  "question": "According to the Stefan–Boltzmann law, black-body emission is proportional to:",
+  "options": {
+   "A": "T",
+   "B": "T²",
+   "C": "T⁴",
+   "D": "1/T"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 206,
+  "question": "What does Kirchhoff's law state?",
+  "options": {
+   "A": "Emitted flux is proportional to the fourth power of T",
+   "B": "Peak emission wavelength varies inversely with T",
+   "C": "Radiation travels at the speed of light in vacuum",
+   "D": "Emissivity equals absorptivity at each wavelength"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 207,
+  "question": "Near which wavelength does the Sun's emission peak?",
+  "options": {
+   "A": "11 µm",
+   "B": "100 µm",
+   "C": "2 mm",
+   "D": "0.50 µm"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 208,
+  "question": "What is terrestrial radiation?",
+  "options": {
+   "A": "Shortwave radiation arriving from the Sun",
+   "B": "Ultraviolet radiation absorbed by the ozone layer",
+   "C": "Longwave infrared radiation from Earth's surface",
+   "D": "Visible light reflected back by clouds to space"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 209,
+  "question": "What is the main atmospheric window for terrestrial infrared radiation?",
+  "options": {
+   "A": "0.3–0.7 µm",
+   "B": "8–13 µm",
+   "C": "50–100 µm",
+   "D": "1–2 mm"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 210,
+  "question": "How do greenhouse gases affect infrared radiation?",
+  "options": {
+   "A": "They absorb and re-emit it",
+   "B": "They reflect it back like mirrors",
+   "C": "They destroy it entirely",
+   "D": "They convert it into visible light"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 211,
+  "question": "What is the role of water vapour in present-day climate change?",
+  "options": {
+   "A": "It is the main external climate driver",
+   "B": "It has no greenhouse effect at all",
+   "C": "It acts mainly as an amplifying feedback",
+   "D": "It is produced only by industrial sources"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 212,
+  "question": "Which sources emit methane?",
+  "options": {
+   "A": "Cement kilns, steel furnaces and boilers",
+   "B": "Volcanic dust, volcanic ash and desert sand",
+   "C": "Ocean spray, sea foam and breaking waves",
+   "D": "Wetlands, livestock and rice cultivation"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 213,
+  "question": "Which sources emit nitrous oxide?",
+  "options": {
+   "A": "Agricultural soils and fertilisers",
+   "B": "Wetlands and swamps in the tropics only",
+   "C": "Ocean evaporation and heavy rainfall",
+   "D": "Stratospheric ozone destruction over poles"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 214,
+  "question": "What causes sea-level rise in a warming climate?",
+  "options": {
+   "A": "Increased tides and tidal range",
+   "B": "Thermal expansion and land-ice loss",
+   "C": "Stronger Coriolis force on oceans",
+   "D": "Decreased evaporation from oceans"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 215,
+  "question": "What is the approximate value of the solar constant?",
+  "options": {
+   "A": "340 W m⁻²",
+   "B": "1361 W m⁻²",
+   "C": "238 W m⁻²",
+   "D": "102 W m⁻²"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 216,
+  "question": "Why is ice–albedo feedback a positive feedback?",
+  "options": {
+   "A": "Melting exposes darker, more absorbing surfaces",
+   "B": "Melting increases reflection of incoming sunlight",
+   "C": "Ice absorbs more radiation than open water does",
+   "D": "Melting cools the surface and reduces warming"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 217,
+  "question": "Why does the global-mean absorbed solar radiation contain a factor of four?",
+  "options": {
+   "A": "Earth has four distinct seasons during each year",
+   "B": "Four separate atmospheric layers absorb sunlight",
+   "C": "The solar constant is divided by the albedo value",
+   "D": "Intercepted area is πR² but surface area is 4πR²"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 218,
+  "question": "What is the global-mean incoming solar radiation at the top of the atmosphere?",
+  "options": {
+   "A": "1361 W m⁻²",
+   "B": "238 W m⁻²",
+   "C": "340 W m⁻²",
+   "D": "102 W m⁻²"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 219,
+  "question": "What is the approximate global-mean reflected solar radiation?",
+  "options": {
+   "A": "102 W m⁻²",
+   "B": "238 W m⁻²",
+   "C": "340 W m⁻²",
+   "D": "1361 W m⁻²"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 220,
+  "question": "How does land compare with the ocean in thermal behaviour?",
+  "options": {
+   "A": "Land has higher heat capacity and a smaller daily range",
+   "B": "Land has lower heat capacity and a larger daily range",
+   "C": "Land and ocean show identical thermal behaviour",
+   "D": "Land stores far more heat than the ocean"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 221,
+  "question": "How does the annual energy budget differ between tropics and poles?",
+  "options": {
+   "A": "Tropics have a deficit and poles a surplus",
+   "B": "Both regions are exactly in balance every year",
+   "C": "Tropics have a surplus, high latitudes a deficit",
+   "D": "Both regions have an annual surplus"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 222,
+  "question": "What transports energy poleward?",
+  "options": {
+   "A": "Only the ocean currents",
+   "B": "Only the atmospheric winds",
+   "C": "Only the tides and waves",
+   "D": "Both atmosphere and oceans"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 223,
+  "question": "What is the Gulf Stream?",
+  "options": {
+   "A": "A cold ocean current moving equatorward",
+   "B": "A stratospheric westerly wind in winter",
+   "C": "A polar jet stream in the upper troposphere",
+   "D": "A warm current carrying heat poleward"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 224,
+  "question": "Which latitude band does the Hadley cell cover?",
+  "options": {
+   "A": "30° to 60°",
+   "B": "60° to the poles",
+   "C": "Equator to about 30°",
+   "D": "Poles only"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 225,
+  "question": "What is the Ferrel cell?",
+  "options": {
+   "A": "A direct tropical circulation cell with trades",
+   "B": "An indirect mid-latitude cell with westerlies",
+   "C": "A high-latitude polar cell with easterlies",
+   "D": "A large wind-driven gyre in the ocean basin"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 226,
+  "question": "How does the polar cell circulate?",
+  "options": {
+   "A": "Cold air sinks near poles and flows equatorward",
+   "B": "Warm air rises over the poles and spreads out",
+   "C": "Air flows poleward along the surface everywhere",
+   "D": "Air stagnates there with no circulation at all"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 227,
+  "question": "What is radiative forcing?",
+  "options": {
+   "A": "A force that moves large air masses horizontally",
+   "B": "The energy of direct sunlight at local noon time",
+   "C": "A change in Earth's energy balance due to a driver",
+   "D": "The total heat energy stored in the world's oceans"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 228,
+  "question": "What is the usual forcing from reflective sulphate aerosols?",
+  "options": {
+   "A": "Large positive",
+   "B": "Zero",
+   "C": "Positive at all times",
+   "D": "Generally negative"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 229,
+  "question": "What does black carbon do?",
+  "options": {
+   "A": "Absorbs sunlight and warms the atmosphere",
+   "B": "Reflects all the sunlight back to space",
+   "C": "Absorbs no radiation of any kind at all",
+   "D": "Cools the surrounding air that contains it"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 230,
+  "question": "What is the Twomey effect?",
+  "options": {
+   "A": "Fewer, larger droplets and a darker cloud",
+   "B": "More, smaller droplets and a brighter cloud",
+   "C": "Larger raindrops forming much more quickly",
+   "D": "Ice crystals growing quickly on mineral dust"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 231,
+  "question": "Which equation gives the ocean net surface heat flux, with fluxes positive into the ocean?",
+  "options": {
+   "A": "Qnet = QSW × QLW × QH × QE",
+   "B": "Qnet = QSW + QLW + QH + QE",
+   "C": "Qnet = QSW − QLW × QH × QE",
+   "D": "Qnet = QSW × QLW / (QH + QE)"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 232,
+  "question": "What is the ocean's latent heat flux?",
+  "options": {
+   "A": "Energy removed from the ocean by evaporation",
+   "B": "Energy gained from absorbed sunlight at the surface",
+   "C": "Direct conduction of heat between air and sea",
+   "D": "Infrared emission by the ocean surface"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 233,
+  "question": "What is sensible heat flux between ocean and air?",
+  "options": {
+   "A": "Energy carried off by evaporation of water",
+   "B": "Energy supplied by absorbed sunlight at the surface",
+   "C": "Energy lost by infrared emission from the surface",
+   "D": "Direct transfer due to a temperature difference"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 234,
+  "question": "Where is most of the present-day excess heat accumulating?",
+  "options": {
+   "A": "In the atmosphere",
+   "B": "In the land surface",
+   "C": "In the oceans",
+   "D": "In the stratosphere"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 235,
+  "question": "What is the shortwave effect of clouds?",
+  "options": {
+   "A": "Reflect sunlight to space, a cooling influence",
+   "B": "Absorb all sunlight, a warming influence",
+   "C": "Has no effect on incoming solar radiation",
+   "D": "Emits extra sunlight down to the surface"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 236,
+  "question": "What is the longwave effect of clouds?",
+  "options": {
+   "A": "Increase outgoing longwave radiation strongly",
+   "B": "Reduce outgoing longwave, a warming influence",
+   "C": "Eliminate all terrestrial radiation",
+   "D": "Convert it into shortwave radiation"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 237,
+  "question": "What is the global net cloud radiative effect?",
+  "options": {
+   "A": "A strong warming influence",
+   "B": "Exactly zero",
+   "C": "A cooling influence",
+   "D": "Always a warming influence"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 238,
+  "question": "Which cloud type has a significant longwave warming influence and weaker shortwave reflection?",
+  "options": {
+   "A": "Low stratus",
+   "B": "Fair-weather cumulus",
+   "C": "Fog",
+   "D": "High thin cirrus"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 239,
+  "question": "What is the typical radiative behaviour of low stratus?",
+  "options": {
+   "A": "Strong longwave warming and little reflection",
+   "B": "No radiative effect on the climate",
+   "C": "Weak shortwave reflection and net warming",
+   "D": "Strong shortwave reflection, net cooling"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 240,
+  "question": "Under the usual TOA convention, the shortwave cloud effect is generally:",
+  "options": {
+   "A": "positive",
+   "B": "zero",
+   "C": "negative",
+   "D": "undefined"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 241,
+  "question": "What happens if absorbed solar radiation exceeds outgoing longwave radiation?",
+  "options": {
+   "A": "The Earth system loses energy",
+   "B": "The Earth system gains energy",
+   "C": "The albedo drops to zero",
+   "D": "Radiative forcing vanishes"
+  },
+  "answer": "B"
+ },
+ {
+  "id": 242,
+  "question": "In an idealised balanced budget, outgoing longwave radiation equals roughly:",
+  "options": {
+   "A": "238 W m⁻²",
+   "B": "340 W m⁻²",
+   "C": "102 W m⁻²",
+   "D": "1361 W m⁻²"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 243,
+  "question": "How does evaporation transfer energy from the surface to the atmosphere?",
+  "options": {
+   "A": "As sensible heat by conduction",
+   "B": "As shortwave radiation",
+   "C": "As latent heat in water vapour",
+   "D": "As kinetic energy of waves"
+  },
+  "answer": "C"
+ },
+ {
+  "id": 244,
+  "question": "What can the latent heat released by condensation do?",
+  "options": {
+   "A": "Cool the rising air very sharply",
+   "B": "Stop all further cloud formation",
+   "C": "Convert water vapour into ozone",
+   "D": "Strengthen buoyancy and convection"
+  },
+  "answer": "D"
+ },
+ {
+  "id": 245,
+  "question": "Which gas absorbs ultraviolet radiation in the stratosphere?",
+  "options": {
+   "A": "Ozone",
+   "B": "Argon",
+   "C": "Nitrogen",
+   "D": "Methane"
+  },
+  "answer": "A"
+ },
+ {
+  "id": 246,
+  "question": "What is the difference between scattering and absorption?",
+  "options": {
+   "A": "They are the same process with different names",
+   "B": "Scattering redirects radiation; absorption takes up energy",
+   "C": "Scattering heats the air; absorption redirects light",
+   "D": "Absorption redirects radiation; scattering takes up energy"
+  },
+  "answer": "B"
+ }
+]
