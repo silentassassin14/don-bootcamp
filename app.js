@@ -1818,6 +1818,12 @@ function installTransferButtons() {
   if (document.getElementById("xferBox")) return;
   const anchor = $("#bankBox") || $("#nav");
   if (!anchor) return;
+  if (!document.getElementById("xferStyle")) {
+    const st = document.createElement("style");
+    st.id = "xferStyle";
+    st.textContent = "#page.xcenter{margin-left:auto;margin-right:auto;width:100%;max-width:820px}#page.xcenter.wide{max-width:1200px}";
+    document.head.appendChild(st);
+  }
   const box = document.createElement("div");
   box.id = "xferBox";
   box.style.cssText = "display:none;flex-direction:column;gap:8px;margin:10px 0";
@@ -1828,6 +1834,7 @@ function installTransferButtons() {
   $("#xEnter").onclick = enterCodeDialog;
   const sync = () => {
     const sharable = (quiz.active || quiz.results) && quiz.list.length > 0;
+    page.classList.toggle("xcenter", current === "quiz");   // quiz screens sit in the middle of the page
     box.style.display = questions.length ? "flex" : "none";
     $("#xShare").style.display = sharable ? "" : "none";
   };
@@ -1850,11 +1857,14 @@ function installSidebarToggle() {
   const main = page.closest("main") || page.parentElement;
   const sideFixed = getComputedStyle(side).position === "fixed";
   const parentIsGrid = parent && getComputedStyle(parent).display.indexOf("grid") >= 0;
+  const padOf = el => (el ? parseFloat(getComputedStyle(el).paddingTop) || 0 : 0);
+  const SPACE = 52;   // room for the button so it never covers the menu or the page
+  const basePad = { side: padOf(side), main: padOf(main) };
   const keep = { grid: parent ? parent.style.gridTemplateColumns : "", ml: main ? main.style.marginLeft : "", ps: main ? main.style.paddingLeft : "" };
 
   const btn = document.createElement("button");
   btn.id = "xSideToggle"; btn.type = "button"; btn.className = "btn secondary";
-  btn.style.cssText = "position:fixed;top:10px;right:10px;z-index:9500;padding:6px 12px;font-size:13px";
+  btn.style.cssText = "position:fixed;top:10px;left:10px;z-index:9500;padding:6px 12px;font-size:13px;min-width:128px;text-align:center";
   document.body.appendChild(btn);
 
   let hidden = false;
@@ -1863,6 +1873,8 @@ function installSidebarToggle() {
     side.style.display = h ? "none" : "";
     if (parentIsGrid) parent.style.gridTemplateColumns = h ? "minmax(0, 1fr)" : keep.grid;
     if (main && sideFixed) { main.style.marginLeft = h ? "0" : keep.ml; }
+    side.style.paddingTop = Math.max(basePad.side, SPACE) + "px";
+    if (main) main.style.paddingTop = h ? Math.max(basePad.main, SPACE) + "px" : "";
     document.body.classList.toggle("xside-off", h);
     btn.textContent = h ? "☰ Show menu" : "✕ Hide menu";
     btn.setAttribute("aria-expanded", String(!h));
