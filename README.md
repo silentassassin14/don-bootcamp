@@ -5,7 +5,7 @@
 **A fast, offline-friendly quiz app for exam preparation.**
 Randomized questions · Shuffled options · Passage sets · Resume anywhere
 
-[![Live App](https://img.shields.io/badge/▶_Open_Live_App-2ea44f?style=for-the-badge)](https://silentassassin14.github.io/mcq-practice/index.html)
+[![Live App](https://img.shields.io/badge/▶_Open_Live_App-2ea44f?style=for-the-badge)](https://silentassassin14.github.io/don-bootcamp/index.html)
 [![Android App](https://img.shields.io/badge/⬇_Download_Android_App-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://drive.google.com/file/d/1a-UV5E9MojZvuHuEheyBlLyqiWb4GjMV/view?usp=sharing)
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?logo=javascript&logoColor=black)
