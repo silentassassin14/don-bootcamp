@@ -26,9 +26,6 @@ const IMG_FOLDER = "images";
 const IMG_RAW_BASE = RAW_BASE + FOLDER + "/" + IMG_FOLDER + "/";     // latest copy from GitHub
 const IMG_LOCAL_BASE = FOLDER + "/" + IMG_FOLDER + "/";              // copy next to the app (fallback / offline bundle)
 const IMG_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,99}\.(webp|jpe?g)$/i;
-const IMG_MAX_INPUT = 10 * 1024 * 1024;                              // refuse pictures bigger than 10 MB
-const IMG_MAX_W = 900, IMG_MAX_H = 1200, IMG_TARGET_BYTES = 150 * 1024;
-const IDB_NAME = "mcq_images", IDB_STORE = "blobs";                  // admin: pictures waiting to be uploaded
 
 
 
@@ -43,41 +40,14 @@ let currentFile = "";                     // the file the person has chosen
 
 /* ───────── Config ───────── */
 const LETTERS = ["A", "B", "C", "D"];
-/* Settings come from the iframe tag on the blog page (data-user, data-pass, data-title, data-blog).
-   These defaults are only used when this file is opened on its own for testing. */
-const CFG = (function () {
-  const d = { user: "admin", pass: "admin123", title: "mcq-data", blog: "https://doninternationalwebsite.blogspot.com" };
-  try {
-    const ds = window.frameElement && window.frameElement.dataset;
-    if (ds) {
-      if (ds.user) d.user = ds.user;
-      if (ds.pass) d.pass = ds.pass;
-      if (ds.title) d.title = ds.title;
-      if (ds.blog) d.blog = ds.blog.replace(/\/+$/, "");
-    }
-  } catch (e) { /* not inside an iframe */ }
-  return d;
-})();
-const DRAFT_KEY = "mcq_blogger_draft_v1";
-const draftKey = () => DRAFT_KEY + ":" + currentFile;   // one draft per file
-const SESSION_KEY = "mcq_admin_session";
 const NAV_USER = [["Dashboard", "dashboard"], ["View Questions", "view"], ["Take Quiz", "quiz"]];
-const NAV_ADMIN = [
-  ["Dashboard", "dashboard"], ["Publish to Blog", "publish"], ["Add Question", "add"], ["Edit Question", "edit"],
-  ["Delete Question", "delete"], ["View Questions", "view"], ["Take Quiz", "quiz"],
-];
-
 /* ───────── State ───────── */
-let questions = [];          // what this person is looking at (live list, or the admin's working copy)
-let blogList = [];           // the list currently live on the blog
-let draft = null;            // admin's unpublished working copy
+let questions = [];          // the questions of the chosen file
 let bankInfo = null;         // {updated, count, name}
-let loadState = "loading";   // loading | ready | empty | error | nodb
+let loadState = "loading";   // loading | ready | empty | error
 let loadError = "";
-let isAdmin = false;
 let current = "dashboard";
 let quiz = freshQuiz();
-let pending = null;
 
 function freshQuiz() {
   return { active: false, results: false, retest: false, list: [], idx: 0, score: 0,
@@ -89,7 +59,6 @@ const $ = (s, r = document) => r.querySelector(s);
 const page = $("#page");
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const sortById = arr => [...arr].sort((a, b) => a.id - b.id);
-const nextId = () => questions.length ? Math.max(...questions.map(q => q.id)) + 1 : 1;
 const findQ = id => questions.find(q => q.id === id) || null;
 const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const fmtDate = iso => { try { return new Date(iso).toLocaleString(); } catch (e) { return ""; } };
@@ -111,9 +80,6 @@ const notice = (text, kind = "info") => `<div class="notice ${kind}">${esc(text)
    PICTURES IN QUESTIONS (NEW)
    ═════════════════════════════════════════════════════════════════════ */
 let normalizeWarnings = [];          // problems found by the most recent normalize() call
-let fileWarnings = [];               // problems found in the file that is currently loaded
-const pendingBlobs = new Map();      // admin: compressed pictures waiting for upload  (name -> Blob)
-const pendingUrls = new Map();       // admin: preview addresses for those pictures    (name -> blob: URL)
 
 /* Only plain file names (.webp/.jpg/.jpeg) or https links are accepted – never paths, scripts or other schemes */
 function isSafeImage(v) {
@@ -150,7 +116,6 @@ function cleanImages(o, label) {
 
 function imgSources(name) {
   name = String(name).trim();
-  if (pendingUrls.has(name)) return { src: pendingUrls.get(name), fb: "" };      // admin preview before upload
   if (/^https:\/\//i.test(name)) return { src: name, fb: "" };
   const f = encodeURIComponent(name);
   return { src: IMG_RAW_BASE + f, fb: IMG_LOCAL_BASE + f };                       // GitHub first, then the local copy
@@ -209,8 +174,6 @@ function injectImgStyles() {
     .qimg.optimg { display: block; max-height: 220px; margin: 8px 0 2px; }
     .qcard .qimg { max-height: 260px; }
     .passage .qimg { max-height: 360px; }
-    .imgprev { margin-top: 8px; }
-    .imgprev .qimg { max-height: 160px; }
     .imgfail { display: inline-block; padding: 14px 18px; border: 1px dashed rgba(127,127,127,.6);
                border-radius: 10px; font-size: 13px; opacity: .8; }
     .imgbox-overlay { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,.9); display: flex;
@@ -220,210 +183,6 @@ function injectImgStyles() {
     .resumecard .rtitle { font-weight: 700; margin-bottom: 4px; }
   `;
   document.head.appendChild(st);
-}
-
-/* ----- admin: keep compressed pictures in IndexedDB so a page reload does not lose them ----- */
-function idbOpen() {
-  return new Promise((resolve, reject) => {
-    if (!window.indexedDB) { reject(new Error("IndexedDB is not available")); return; }
-    let req;
-    try { req = indexedDB.open(IDB_NAME, 1); } catch (e) { reject(e); return; }
-    req.onupgradeneeded = () => { try { req.result.createObjectStore(IDB_STORE, { keyPath: "name" }); } catch (e) { /* ignore */ } };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error || new Error("IndexedDB error"));
-    req.onblocked = () => reject(new Error("IndexedDB is blocked"));
-  });
-}
-async function idbDo(mode, fn) {
-  const db = await idbOpen();
-  try {
-    return await new Promise((resolve, reject) => {
-      const tx = db.transaction(IDB_STORE, mode);
-      const r = fn(tx.objectStore(IDB_STORE));
-      tx.oncomplete = () => resolve(r ? r.result : undefined);
-      tx.onerror = () => reject(tx.error || new Error("IndexedDB error"));
-      tx.onabort = () => reject(tx.error || new Error("IndexedDB aborted"));
-    });
-  } finally { try { db.close(); } catch (e) { /* ignore */ } }
-}
-const idbPut = (name, blob) => idbDo("readwrite", st => st.put({ name, blob }));
-const idbAll = () => idbDo("readonly", st => st.getAll());
-const idbClear = () => idbDo("readwrite", st => st.clear());
-
-function registerPending(name, blob) {
-  const old = pendingUrls.get(name);
-  if (old) { try { URL.revokeObjectURL(old); } catch (e) { /* ignore */ } }
-  pendingBlobs.set(name, blob);
-  pendingUrls.set(name, URL.createObjectURL(blob));
-}
-async function loadPendingImages() {
-  try {
-    const all = await idbAll();
-    let n = 0;
-    (all || []).forEach(r => { if (r && r.name && r.blob && IMG_NAME_RE.test(r.name) && !pendingBlobs.has(r.name)) { registerPending(r.name, r.blob); n++; } });
-    if (n && ["dashboard", "view", "publish"].includes(current)) render();   // never redraw a form the person may be typing in
-  } catch (e) { /* storage unavailable: pictures just stay in memory */ }
-}
-async function clearPendingImages() {
-  pendingUrls.forEach(u => { try { URL.revokeObjectURL(u); } catch (e) { /* ignore */ } });
-  pendingUrls.clear(); pendingBlobs.clear();
-  try { await idbClear(); } catch (e) { /* ignore */ }
-}
-
-/* ----- admin: read, resize and convert a chosen picture to WebP (JPEG if WebP is not supported) ----- */
-async function decodeImage(file) {
-  if (window.createImageBitmap) {
-    try {
-      const bmp = await createImageBitmap(file);
-      return { src: bmp, w: bmp.width, h: bmp.height, close: () => { if (bmp.close) bmp.close(); } };
-    } catch (e) { /* fall back to <img> below */ }
-  }
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const im = new Image();
-    im.onload = () => resolve({ src: im, w: im.naturalWidth, h: im.naturalHeight, close: () => URL.revokeObjectURL(url) });
-    im.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error("This browser cannot read that picture. Please use a JPG, PNG or WebP file (iPhone HEIC photos only work in Safari)."));
-    };
-    im.src = url;
-  });
-}
-const toBlobP = (canvas, type, quality) => new Promise(res => {
-  try { canvas.toBlob(b => res(b), type, quality); } catch (e) { res(null); }
-});
-async function compressImage(file) {
-  const fname = String(file.name || ""), type = String(file.type || "").toLowerCase();
-  if (type.includes("svg") || /\.svgz?$/i.test(fname)) throw new Error("SVG pictures are not allowed. Please use a JPG, PNG or WebP picture.");
-  if (!/^image\//.test(type) && !/\.(jpe?g|png|webp|gif|heic|heif|avif|bmp)$/i.test(fname)) throw new Error("That file is not a picture.");
-  if (!file.size) throw new Error("That file is empty.");
-  if (file.size > IMG_MAX_INPUT) throw new Error("That picture is bigger than 10 MB. Please choose a smaller one.");
-  const img = await decodeImage(file);
-  try {
-    if (!img.w || !img.h) throw new Error("That picture has no size.");
-    const scale = Math.min(1, IMG_MAX_W / img.w, IMG_MAX_H / img.h);
-    const w = Math.max(1, Math.round(img.w * scale)), h = Math.max(1, Math.round(img.h * scale));
-    const canvas = document.createElement("canvas");
-    canvas.width = w; canvas.height = h;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("This browser cannot process pictures.");
-    ctx.drawImage(img.src, 0, 0, w, h);
-    let blob = null;
-    for (const q of [0.82, 0.72, 0.62, 0.5]) {                       // lower the quality until it is small enough
-      blob = await toBlobP(canvas, "image/webp", q);
-      if (!blob || blob.type !== "image/webp") { blob = null; break; }   // WebP not supported here
-      if (blob.size <= IMG_TARGET_BYTES) break;
-    }
-    if (!blob) {                                                      // JPEG on a white background instead
-      ctx.globalCompositeOperation = "destination-over";
-      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, w, h);
-      for (const q of [0.85, 0.75, 0.65, 0.55]) {
-        blob = await toBlobP(canvas, "image/jpeg", q);
-        if (!blob || blob.size <= IMG_TARGET_BYTES) break;
-      }
-    }
-    if (!blob) throw new Error("Could not convert that picture. Please try another one.");
-    return blob;
-  } finally { try { img.close(); } catch (e) { /* ignore */ } }
-}
-function makeImageName(orig, mime) {
-  const ext = mime === "image/jpeg" ? "jpg" : "webp";
-  let base = String(orig || "image").replace(/\.[^.]*$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
-  if (!base) base = "image";
-  let name;
-  do { name = base + "-" + Math.random().toString(36).slice(2, 7) + "." + ext; } while (pendingBlobs.has(name));
-  return name;
-}
-async function prepareImage(file) {
-  const blob = await compressImage(file);
-  const name = makeImageName(file.name, blob.type);
-  registerPending(name, blob);
-  let persisted = true;
-  try { await idbPut(name, blob); } catch (e) { persisted = false; }
-  return { name, persisted, kb: Math.max(1, Math.round(blob.size / 1024)) };
-}
-
-/* ----- admin: the "Question image" control used by Add and Edit ----- */
-function imagePickerHtml(p) {
-  return `<div class="field"><label class="lbl">Question image (optional)</label>
-    <input type="file" id="${p}File" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
-    <div class="btnrow"><button type="button" class="btn secondary" id="${p}Pick">Choose image</button>
-    <button type="button" class="btn secondary" id="${p}Clear" style="display:none">Remove image</button></div>
-    <div id="${p}Prev" class="imgprev"></div>
-    <p class="muted" style="font-size:12px;margin:6px 0 0">JPG, PNG, WebP or GIF up to 10 MB. It is resized and saved as WebP. When you publish, upload it to the ${esc(FOLDER + "/" + IMG_FOLDER)} folder.</p></div>`;
-}
-function bindImagePicker(p, initial) {
-  let name = initial || "", busy = false;
-  const prev = $("#" + p + "Prev"), clr = $("#" + p + "Clear"), pick = $("#" + p + "Pick"), file = $("#" + p + "File");
-  const draw = () => {
-    prev.innerHTML = name ? imgHtml(name, "Question image preview", { zoom: true }) + `<div class="muted" style="font-size:12px">${esc(name)}</div>` : "";
-    clr.style.display = name ? "" : "none";
-  };
-  pick.onclick = () => { if (!busy) file.click(); };
-  clr.onclick = () => { name = ""; draw(); };
-  file.onchange = async e => {
-    const f = e.target.files && e.target.files[0];
-    e.target.value = "";
-    if (!f || busy) return;
-    busy = true; pick.disabled = true;
-    const label = pick.textContent; pick.textContent = "Processing…";
-    try {
-      const r = await prepareImage(f);
-      name = r.name; draw();
-      toast(r.persisted ? `Picture ready (${r.kb} KB).` : `Picture ready (${r.kb} KB), but it could not be saved for later. Download it before closing this page.`, r.persisted ? "success" : "warn");
-    } catch (err) { toast(errText(err), "error"); }
-    finally { busy = false; pick.disabled = false; pick.textContent = label; }
-  };
-  draw();
-  return { get: () => name, set: n => { name = n || ""; draw(); }, reset: () => { name = ""; draw(); }, busy: () => busy };
-}
-
-/* ----- admin: pictures that still have to be uploaded to GitHub (shown on the Publish page) ----- */
-const imageNamesOf = q => {
-  const s = new Set();
-  [q.image, q.passageImage].forEach(n => { if (n) s.add(n); });
-  if (q.optionImages) Object.values(q.optionImages).forEach(n => { if (n) s.add(n); });
-  return s;
-};
-function pendingInUse() {
-  const used = new Set();
-  questions.forEach(q => imageNamesOf(q).forEach(n => used.add(n)));
-  return [...used].filter(n => pendingBlobs.has(n));
-}
-function pendingImagesHtml() {
-  if (!pendingBlobs.size) return "";
-  const used = pendingInUse().length, extra = pendingBlobs.size - used;
-  return `<h3>Images to upload</h3>
-    <p class="muted" style="margin-top:0">${used} picture(s) used by your working copy${extra > 0 ? ` (${extra} more saved but not used)` : ""}.
-    Upload them to the <b>${esc(FOLDER + "/" + IMG_FOLDER)}</b> folder of your GitHub repo, next to the JSON file.</p>
-    <div class="btnrow"><button class="btn" id="pbImgDown" ${used ? "" : "disabled"}>Download images</button>
-    <button class="btn danger" id="pbImgClear">Clear saved images</button></div>`;
-}
-async function downloadPendingImages() {
-  const names = pendingInUse();
-  if (!names.length) { toast("There are no new pictures to download.", "info"); return; }
-  for (const n of names) {
-    const blob = pendingBlobs.get(n);
-    if (!blob) continue;
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = n;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-    await new Promise(r => setTimeout(r, 400));          // gives the browser time between downloads
-  }
-  toast(`Downloaded ${names.length} picture(s). Upload them to ${FOLDER}/${IMG_FOLDER}/ on GitHub.`, "success");
-}
-function bindPendingImages() {
-  const d = $("#pbImgDown"), c = $("#pbImgClear");
-  if (d) d.onclick = async () => { d.disabled = true; try { await downloadPendingImages(); } finally { d.disabled = false; } };
-  if (c) c.onclick = async e => {
-    const b = e.currentTarget;
-    if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "Tap again (only after uploading them)"; return; }
-    await clearPendingImages();
-    toast("Saved pictures cleared.", "success");
-    render();
-  };
 }
 
 /* ───────── Rich text for passages and questions (NEW) ─────────
@@ -473,9 +232,6 @@ function qcard(q, showAnswer = true) {
 }
 
 const metric = (v, c, color) => `<div class="metric"><div class="v" style="color:${color}">${esc(v)}</div><div class="c">${esc(c)}</div></div>`;
-const idOptions = () => sortById(questions).map(q => `<option value="${q.id}">ID ${q.id}</option>`).join("");
-const optionInputs = (prefix, starred) => LETTERS.map(l =>
-  `<div class="cell"><small>${l}${starred ? " *" : ""}</small><input type="text" id="${prefix}${l}" autocomplete="off"></div>`).join("");
 
 
 /* ───────── Validation ───────── */
@@ -539,39 +295,9 @@ function normalize(data) {
 
 /* Shown on pages that need questions when none are available */
 function bankProblem() {
-  if (loadState === "loading") return notice("Loading the question bank…", "info");
-  if (loadState === "error") return notice("Could not load the question bank. " + loadError, "error");
-  if (loadState === "nodb") return notice("The blog data is not available in this view. Open the blog page, or load a file from the sidebar.", "warn");
-  return notice(isAdmin
-    ? "No questions are live on the blog yet. Add some, then use Publish to Blog."
-    : "No questions have been published yet. Please check back soon.", "info");
-}
-
-/* ───────── Draft storage (admin only) ───────── */
-function getDraft() { try { const s = localStorage.getItem(draftKey()); return s ? normalize(JSON.parse(s)) : null; } catch (e) { return null; } }
-function setDraft(list) { try { localStorage.setItem(draftKey(), JSON.stringify(list)); } catch (e) {} }
-function clearDraft() { try { localStorage.removeItem(draftKey()); } catch (e) {} }
-const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-function applyWorking() { questions = (isAdmin && draft) ? draft : blogList; }
-
-/* ───────── Load the live list from the blog ───────── */
-function blogBase() {
-  if (CFG.blog) return CFG.blog;
-  try { const o = window.parent.location.origin; if (o && /^https?:/.test(o)) return o; } catch (e) {}
-  return "";
-}
-
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cb = "__mcq_cb" + Date.now();
-    const s = document.createElement("script");
-    const done = () => { clearTimeout(timer); delete window[cb]; s.remove(); };
-    const timer = setTimeout(() => { done(); reject(new Error("The blog did not respond in time.")); }, 15000);
-    window[cb] = d => { done(); resolve(d); };
-    s.onerror = () => { done(); reject(new Error("Could not reach the blog feed.")); };
-    s.src = url + "&callback=" + cb;
-    document.head.appendChild(s);
-  });
+  if (loadState === "loading") return notice("Loading the questions…", "info");
+  if (loadState === "error") return notice("Could not load the questions. " + loadError, "error");
+  return notice("There are no questions in this file yet.", "info");
 }
 
 /* Work out where this site lives on GitHub: returns a list of {owner, repo, path} guesses */
@@ -661,9 +387,9 @@ async function discoverFiles() {
   return list.length ? list : [FALLBACK_FILE];
 }
 
-async function loadBlog() {
+async function loadQuestions() {
   loadState = "loading";
-  blogList = []; draft = null; fileWarnings = []; applyWorking();
+  questions = [];
   render();   // show loading state
 
   if (!availableFiles.length) availableFiles = await discoverFiles();
@@ -672,28 +398,18 @@ async function loadBlog() {
     try { saved = localStorage.getItem(LAST_FILE_KEY) || ""; } catch (e) {}
     currentFile = availableFiles.includes(saved) ? saved : availableFiles[0];
   }
-  draft = getDraft();   // the admin's unpublished copy belongs to this file only
 
   try {
     const { data, source } = await loadJSON(FOLDER + "/" + currentFile);   // online -> saved copy -> bundled copy
-    blogList = normalize(data);
-    fileWarnings = normalizeWarnings.slice();
-    bankInfo = { updated: null, count: blogList.length, name: currentFile, source };
-    loadState = blogList.length ? "ready" : "empty";
+    questions = normalize(data);
+    bankInfo = { updated: null, count: questions.length, name: currentFile, source };
+    loadState = questions.length ? "ready" : "empty";
   } catch (err) {
-    blogList = [];
+    questions = [];
     bankInfo = null;
     loadState = "error";
     loadError = errText(err) + " — Make sure " + currentFile + " is inside the " + FOLDER + " folder next to index.html and is valid JSON.";
   }
-
-  // Clear draft if it matches the live data
-  if (draft && blogList.length && same(draft, blogList)) {
-    draft = null;
-    clearDraft();
-  }
-
-  applyWorking();
   render();
 }
 
@@ -704,40 +420,15 @@ function selectFile(name) {
   saveQuiz();   // NEW: make sure the paused quiz is stored under the file it belongs to
   currentFile = name;
   try { localStorage.setItem(LAST_FILE_KEY, name); } catch (e) {}
-  quiz = freshQuiz(); pending = null;
-  loadBlog();
-}
-
-/* ───────── Admin login ───────── */
-function login(user, pass) {
-  if (user !== CFG.user || pass !== CFG.pass) return false;
-  isAdmin = true;
-  try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
-  buildNav(); applyWorking();
-  return true;
-}
-function logout() {
-  isAdmin = false;
-  try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
-  quiz = freshQuiz(); pending = null;
-  buildNav(); applyWorking(); go("dashboard");
-}
-
-/* Edits made by the admin are kept as a working copy until published */
-async function commit(list, okMsg) {
-  questions = list;
-  draft = list;
-  setDraft(list);
-  updateSide();
-  toast(okMsg + " (not live yet — use Publish to Blog)", "success");
-  return true;
+  quiz = freshQuiz();
+  loadQuestions();
 }
 
 /* ───────── Sidebar / nav ───────── */
 function buildNav() {
   const nav = $("#nav");
   nav.innerHTML = "";
-  (isAdmin ? NAV_ADMIN : NAV_USER).forEach(([label, key]) => {
+  NAV_USER.forEach(([label, key]) => {
     const b = document.createElement("button");
     b.textContent = label;
     b.dataset.page = key;
@@ -747,28 +438,22 @@ function buildNav() {
 }
 
 function updateSide() {
-  let h = isAdmin ? `<span class="role">Admin</span><br>` : "";
+  let h = "";
   if (availableFiles.length) {
     h += `<label class="lbl" for="fileSel" style="font-size:12px">Question file</label>
       <select id="fileSel" style="width:100%;min-width:0;margin-bottom:10px">${availableFiles.map(f =>
         `<option value="${esc(f)}"${f === currentFile ? " selected" : ""}>${esc(f)}</option>`).join("")}</select>`;
   }
-  if (loadState === "nodb") {
-    h += `Blog data not available here.${bankInfo && bankInfo.name ? `<br>Using <b>${esc(bankInfo.name)}</b>` : ""}<button class="btn secondary" id="localBtn">Open local JSON file</button>`;
-  } else if (bankInfo) {
+  if (bankInfo) {
     h += `<b>${bankInfo.count}</b> question(s) in this file${bankInfo.updated ? `<br>Updated ${esc(fmtDate(bankInfo.updated))}` : ""}`;
   } else if (loadState === "loading") {
     h += "Loading questions…";
   } else {
-    h += "No questions published yet.";
+    h += "No questions found.";
   }
-  if (isAdmin && draft) h += `<br><b style="color:#fcd34d">Unpublished changes</b>`;
   $("#bankBox").innerHTML = h;
   const fs = $("#fileSel");
   if (fs) fs.onchange = () => selectFile(fs.value);
-  const lb = $("#localBtn");
-  if (lb) lb.onclick = () => $("#localInput").click();
-  $("#authBtn").textContent = isAdmin ? "Log out" : "Admin login";
   $("#total").textContent = `Total Questions: ${questions.length}`;
 }
 
@@ -776,8 +461,7 @@ function go(name) { current = name; render(); window.scrollTo(0, 0); }
 
 function render() {
   closeLightbox();
-  const allowed = (isAdmin ? NAV_ADMIN : NAV_USER).map(n => n[1]);
-  if (!isAdmin) allowed.push("login");
+  const allowed = NAV_USER.map(n => n[1]);
   if (!allowed.includes(current)) current = "dashboard";
   document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("active", b.dataset.page === current));
   page.classList.remove("wide");   // NEW: only passage questions use the wide two-column layout (quizActive turns it on)
@@ -794,182 +478,13 @@ const PAGES = {
     h += `<h3 style="margin-top:0">Quick Actions</h3><div class="actions">
       <button class="btn" id="qaStart" ${questions.length ? "" : "disabled"}>Start Quiz</button>
       <button class="btn secondary" id="qaView">View Bank</button>
-      ${isAdmin ? `<button class="btn secondary" id="qaPub">Publish to Blog</button><button class="btn secondary" id="qaAdd">Add New Question</button>` : ""}</div>`;
-    if (isAdmin && draft) h += notice("You have unpublished changes. Open Publish to Blog to make them live for everyone.", "warn");
-    if (isAdmin && fileWarnings.length) h += notice(`${fileWarnings.length} picture problem(s) in this file. ${fileWarnings[0]}`, "warn");
+      </div>`;
     if (!questions.length) h += bankProblem();
     else h += `<h3>Recent Questions</h3>` + sortById(questions).reverse().slice(0, 3).map(q => qcard(q, false)).join("");
     page.innerHTML = h;
     $("#qaStart").onclick = startFullQuiz;
     bindResume();
     $("#qaView").onclick = () => go("view");
-    if (isAdmin) { $("#qaPub").onclick = () => go("publish"); $("#qaAdd").onclick = () => go("add"); }
-  },
-
-  login() {
-    page.innerHTML = header("Admin Login", "For the site owner only") + `
-      <div class="field"><label class="lbl" for="lUser">Username</label><input type="text" id="lUser" autocomplete="username"></div>
-      <div class="field"><label class="lbl" for="lPass">Password</label><input type="password" id="lPass" autocomplete="current-password"></div>
-      <button class="btn block" id="lGo">Log in</button>`;
-    const attempt = () => {
-      if (login($("#lUser").value.trim(), $("#lPass").value)) { toast("Logged in as admin.", "success"); go("dashboard"); }
-      else toast("Wrong username or password.", "error");
-    };
-    $("#lGo").onclick = attempt;
-    $("#lPass").onkeydown = e => { if (e.key === "Enter") attempt(); };
-    $("#lUser").onkeydown = e => { if (e.key === "Enter") $("#lPass").focus(); };
-  },
-
-  publish() {
-    let h = header("Publish to Blog", "Make your changes live for everyone");
-    h += `<div class="card infocard"><dl>
-      <dt>Live on the blog</dt><dd>${blogList.length ? blogList.length + " question(s)" : "nothing yet"}</dd>
-      <dt>Your working copy</dt><dd>${questions.length} question(s)</dd>
-      <dt>Unpublished changes</dt><dd>${draft ? "Yes" : "No"}</dd></dl></div>
-      <h3>1. Load a JSON file (optional)</h3>
-      <p class="muted" style="margin-top:0">Start from a JSON file on this device. It becomes your working copy; nothing goes live yet.</p>
-      <input type="file" id="pbFile" accept=".json,application/json" hidden>
-      <button class="btn secondary" id="pbPick">Choose JSON file</button><div id="pbPrev"></div>
-      <h3>2. Copy the JSON</h3>
-      <p class="muted" style="margin-top:0">This copies your working copy in a form that is safe to paste into Blogger.</p>
-      <div class="btnrow"><button class="btn" id="pbCopy" ${questions.length ? "" : "disabled"}>Copy JSON for Blogger</button>
-      <button class="btn secondary" id="pbDown" ${questions.length ? "" : "disabled"}>Download JSON</button></div>
-      ${pendingImagesHtml()}
-      <h3>3. Paste it into your blog</h3>
-      <ol class="steps">
-        <li>In Blogger, go to <b>Pages</b> and open the page titled <b>${esc(CFG.title)}</b>. Create it the first time, and do not add it to your menu.</li>
-        <li>Switch to <b>HTML view</b> (the &lt;&gt; button, never Compose view). Select everything, delete it, and paste.</li>
-        <li>Click <b>Publish</b> or <b>Update</b>. Visitors get the new questions within a few minutes.</li>
-      </ol>`;
-    if (draft) h += `<h3>Discard changes</h3><p class="muted" style="margin-top:0">Go back to what is live on the blog.</p><button class="btn danger" id="pbDiscard">Discard unpublished changes</button>`;
-    page.innerHTML = h;
-
-    $("#pbPick").onclick = () => $("#pbFile").click();
-    $("#pbFile").onchange = async e => {
-      const f = e.target.files[0];
-      e.target.value = "";
-      if (!f) return;
-      try {
-        const list = normalize(JSON.parse(await f.text()));
-        if (!list.length) throw new Error("The file has no questions.");
-        pending = { name: f.name, list, warnings: normalizeWarnings.slice() };
-      } catch (err) {
-        pending = null;
-        $("#pbPrev").innerHTML = notice("This file cannot be used. " + (err instanceof SyntaxError ? "It is not valid JSON." : errText(err)), "error");
-        return;
-      }
-      showPending();
-    };
-    if (pending) showPending();
-    $("#pbCopy").onclick = async () => {
-      const ok = await copyText(blogSafeJson(questions));
-      toast(ok ? "Copied. Now paste it into the blog page (HTML view)." : "Could not copy. Use Download JSON instead.", ok ? "success" : "error");
-    };
-    $("#pbDown").onclick = downloadJson;
-    bindPendingImages();
-    if (draft) $("#pbDiscard").onclick = e => {
-      const b = e.currentTarget;
-      if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "Click again to confirm"; return; }
-      draft = null; clearDraft(); applyWorking(); toast("Unpublished changes discarded.", "success"); render();
-    };
-  },
-
-  add() {
-    if (loadState === "loading" || loadState === "error") { page.innerHTML = header("Add New Question") + bankProblem(); return; }
-    page.innerHTML = header("Add New Question", "Create a new MCQ entry") + `
-      <div class="field"><label class="lbl" for="aQ">Question *</label><textarea id="aQ"></textarea></div>
-      ${imagePickerHtml("aImg")}
-      <div class="field"><label class="lbl">Options</label><div class="grid2">${optionInputs("aO", true)}</div></div>
-      <div class="field"><label class="lbl" for="aAns">Correct Answer *</label>
-        <select id="aAns">${LETTERS.map(l => `<option>${l}</option>`).join("")}</select></div>
-      <button class="btn block" id="aSave">Save Question</button>`;
-    const aImg = bindImagePicker("aImg", "");
-    $("#aSave").onclick = async () => {
-      if (aImg.busy()) { toast("Please wait, the picture is still being processed.", "warn"); return; }
-      const question = $("#aQ").value.trim();
-      const opts = {};
-      LETTERS.forEach(l => { opts[l] = $("#aO" + l).value.trim(); });
-      if (!question || !LETTERS.every(l => opts[l])) { toast("Please fill in the question and all four options.", "error"); return; }
-      const id = nextId();
-      const nq = { id, question, options: opts, answer: $("#aAns").value };
-      if (aImg.get()) nq.image = aImg.get();
-      const list = [...questions, nq];
-      if (await commit(list, `Question added successfully! (ID: ${id})`)) {
-        $("#aQ").value = "";
-        LETTERS.forEach(l => { $("#aO" + l).value = ""; });
-        $("#aAns").selectedIndex = 0;
-        aImg.reset();
-        updateSide();
-      }
-    };
-  },
-
-  edit() {
-    let h = header("Edit Question", "Update an existing MCQ");
-    if (!questions.length) { page.innerHTML = h + (bankProblem() || notice("No questions available to edit.", "warn")); return; }
-    h += `<div class="field"><label class="lbl" for="eSel">Select Question ID</label><select id="eSel">${idOptions()}</select></div>
-      <div class="field"><label class="lbl" for="eQ">Question</label><textarea id="eQ"></textarea></div>
-      ${imagePickerHtml("eImg")}
-      <div class="field"><label class="lbl">Options</label><div class="grid2">${optionInputs("eO", false)}</div></div>
-      <div class="field"><label class="lbl" for="eAns">Correct Answer</label>
-        <select id="eAns">${LETTERS.map(l => `<option>${l}</option>`).join("")}</select></div>
-      <button class="btn block" id="eSave">Update Question</button>`;
-    page.innerHTML = h;
-    const eImg = bindImagePicker("eImg", "");
-    const load = () => {
-      const q = findQ(Number($("#eSel").value));
-      if (!q) return;
-      $("#eQ").value = q.question;
-      LETTERS.forEach(l => { $("#eO" + l).value = q.options[l]; });
-      $("#eAns").value = q.answer;
-      eImg.set(q.image || "");
-    };
-    $("#eSel").onchange = load;
-    load();
-    $("#eSave").onclick = async () => {
-      const id = Number($("#eSel").value);
-      const nq = $("#eQ").value.trim();
-      const opts = {};
-      LETTERS.forEach(l => { opts[l] = $("#eO" + l).value.trim(); });
-      if (eImg.busy()) { toast("Please wait, the picture is still being processed.", "warn"); return; }
-      const cur = findQ(id);
-      if (!cur) { toast("That question no longer exists.", "error"); return; }
-      const hasOptImg = l => !!(cur.optionImages && cur.optionImages[l]);   // an option may be a picture only
-      if (!nq || !LETTERS.every(l => opts[l] || hasOptImg(l))) { toast("The question and all four options must be filled in.", "error"); return; }
-      const list = questions.map(q => {
-        if (q.id !== id) return q;
-        const u = { ...q, question: nq, options: opts, answer: $("#eAns").value };
-        if (eImg.get()) u.image = eImg.get(); else delete u.image;
-        return u;
-      });
-      await commit(list, "Question updated successfully!");
-    };
-  },
-
-  delete() {
-    let h = header("Delete Question", "Permanently remove a question");
-    if (!questions.length) { page.innerHTML = h + (bankProblem() || notice("No questions available to delete.", "warn")); return; }
-    h += `<div class="field"><label class="lbl" for="dSel">Select Question ID to delete</label><select id="dSel">${idOptions()}</select></div>
-      <h3 style="margin-top:0">Preview</h3><div id="dPrev"></div>
-      ${notice("This action cannot be undone. It changes the file for every user.", "warn")}
-      <label class="check" style="margin:8px 0 12px"><input type="checkbox" id="dConf"><span id="dConfText"></span></label>
-      <button class="btn danger block" id="dBtn" disabled>Delete Permanently</button>`;
-    page.innerHTML = h;
-    const refresh = () => {
-      const id = Number($("#dSel").value);
-      const q = findQ(id);
-      $("#dPrev").innerHTML = q ? qcard(q) : "";
-      $("#dConfText").textContent = `I confirm I want to delete Question ID ${id}`;
-      $("#dConf").checked = false;
-      $("#dBtn").disabled = true;
-    };
-    $("#dSel").onchange = refresh;
-    $("#dConf").onchange = e => { $("#dBtn").disabled = !e.target.checked; };
-    $("#dBtn").onclick = async () => {
-      const id = Number($("#dSel").value);
-      if (await commit(questions.filter(q => q.id !== id), `Question ID ${id} deleted.`)) go("delete");
-    };
-    refresh();
   },
 
   view() {
@@ -1000,25 +515,6 @@ const PAGES = {
   },
 };
 
-/* Admin: preview of a chosen file */
-function showPending() {
-  if (!pending) return;
-  $("#pbPrev").innerHTML = notice(`${pending.name} is valid: ${pending.list.length} question(s) found.`, "success") +
-    (pending.warnings || []).slice(0, 5).map(w => notice(w, "warn")).join("") +
-    `<p class="muted" style="margin:10px 0 6px;font-size:13px">First question in the file:</p>${qcard(pending.list[0])}
-     <div class="btnrow"><button class="btn" id="pbUse">Use as working copy</button><button class="btn secondary" id="pbCancel">Cancel</button></div>`;
-  $("#pbCancel").onclick = () => { pending = null; $("#pbPrev").innerHTML = ""; };
-  $("#pbUse").onclick = async () => {
-    const p = pending; pending = null;
-    await commit(p.list, `${p.name} loaded`);
-    render();
-  };
-}
-
-/* HTML-safe JSON, so it survives being pasted into Blogger's HTML view */
-function blogSafeJson(list) {
-  return JSON.stringify(list, null, 1).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 async function copyText(text) {
   try { await navigator.clipboard.writeText(text); return true; }
   catch (e) {
@@ -1031,17 +527,6 @@ async function copyText(text) {
     return ok;
   }
 }
-function downloadJson() {
-  const blob = new Blob([JSON.stringify(questions, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = currentFile || FALLBACK_FILE;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-}
-
 /* ═════════════════════════════════════════════════════════════════════
    SAVED QUIZ PROGRESS (NEW)
    After every step the quiz is stored in localStorage (one save per question file).
@@ -1152,7 +637,7 @@ function bindResume() {
 function resumeSavedQuiz() {
   const s = readSavedQuiz();
   if (!s) { toast("The saved quiz could not be restored.", "error"); render(); return; }
-  quiz = s.quiz; pending = null;
+  quiz = s.quiz;
   go("quiz");
 }
 
@@ -1449,32 +934,17 @@ function installQuizKeyboard() {
 }
 
 /* ───────── Init ───────── */
-/* Local-file fallback: only used when the page cannot reach a blog (e.g. opened as a plain file for testing) */
-$("#localInput").onchange = async e => {
-  const f = e.target.files[0];
-  e.target.value = "";
-  if (!f) return;
-  try {
-    blogList = normalize(JSON.parse(await f.text()));
-    bankInfo = { updated: null, count: blogList.length, name: f.name };
-    applyWorking();
-    quiz = freshQuiz();
-    toast(`Loaded ${blogList.length} question(s) from ${f.name}`, "success");
-    go("dashboard");
-  } catch (err) { toast("Could not load file: " + errText(err), "error"); }
-};
-$("#authBtn").onclick = () => { if (isAdmin) logout(); else go("login"); };
+/* Hide the old login button if index.html still has it */
+const authBtn = $("#authBtn");
+if (authBtn) authBtn.style.display = "none";
 
-try { isAdmin = sessionStorage.getItem(SESSION_KEY) === "1"; } catch (e) {}
 buildNav();
-applyWorking();
 installQuizKeyboard();   // keyboard navigation (see block above)
 injectImgStyles();       // picture styles (see PICTURES block)
 window.addEventListener("pagehide", saveQuiz);                                             // last-chance save when the page closes
 document.addEventListener("visibilitychange", () => { if (document.hidden) saveQuiz(); });  // and when the app goes to the background
 render();
-loadBlog();
-loadPendingImages();     // admin: pictures chosen earlier that are not uploaded yet
+loadQuestions();
 
 /* ═════════════════════════════════════════════════════════════════════
    CONTINUE THE QUIZ ON ANOTHER DEVICE (NEW – nothing above this line was changed)
@@ -1675,7 +1145,7 @@ async function xStartScan(onCode) {
     throw new Error("The camera is not available here (it needs a secure https page). Use \"Choose QR picture\" instead.");
   let stream;
   try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false }); }
-  catch (e) { throw new Error("The camera could not be opened. Allow camera access for this page (inside a blog the frame also needs permission), or use \"Choose QR picture\" instead."); }
+  catch (e) { throw new Error("The camera could not be opened. Allow camera access for this page (inside an embedded frame it also needs permission), or use \"Choose QR picture\" instead."); }
   const box = document.getElementById("xVideoBox");
   if (!box) { stream.getTracks().forEach(t => t.stop()); return; }
   const video = document.createElement("video");
