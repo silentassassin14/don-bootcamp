@@ -31,190 +31,6 @@ const IMG_MAX_W = 900, IMG_MAX_H = 1200, IMG_TARGET_BYTES = 150 * 1024;
 const IDB_NAME = "mcq_images", IDB_STORE = "blobs";                  // admin: pictures waiting to be uploaded
 
 
-/* ═════════════════════════════════════════════════════════════════════
-   CONTINUE THE QUIZ ON ANOTHER DEVICE (NEW – nothing above this line was changed)
-
-   PC:    press "Share quiz" -> a code is made and copied.
-   Phone: open the SAME question file, press "Enter code", paste it -> the quiz
-          continues at the same question, score and order, with the same shuffled options.
-
-   There is no server, so the code itself contains the progress. Its length depends on
-   the quiz size (a few hundred characters for ~100 questions). Send it to yourself
-   through WhatsApp, Telegram, e-mail, etc.
-   ═════════════════════════════════════════════════════════════════════ */
-const XFER_RAW = "MQR", XFER_ZIP = "MQZ";
-
-const xb64e = bytes => {
-  let s = "";
-  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-};
-const xb64d = str => {
-  str = str.replace(/-/g, "+").replace(/_/g, "/");
-  while (str.length % 4) str += "=";
-  const bin = atob(str), u = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-  return u;
-};
-async function xPipe(bytes, stream) {
-  const out = new Blob([bytes]).stream().pipeThrough(stream);
-  return new Uint8Array(await new Response(out).arrayBuffer());
-}
-
-/* Turn the live quiz into a code */
-async function xferEncode() {
-  const p = {
-    f: currentFile,
-    i: quiz.list.map(q => q.id),
-    x: quiz.idx,
-    s: quiz.score,
-    w: quiz.wrong.map(q => q.id),
-    d: quiz.details.map(d => {
-      const q = findQ(d.id), ya = String(d.yourAnswer), ca = String(d.correctAnswer);
-      const yo = q ? (LETTERS.find(l => q.options[l] === ya.slice(3)) || "") : "";
-      return [d.id, ya[0] || "", yo, ca[0] || ""];
-    }),
-    a: quiz.answered ? 1 : 0,
-    c: quiz.chosen || "",
-    o: quiz.opts && validOrder(quiz.opts.order) ? quiz.opts.order.join("") : "",
-    r: quiz.retest ? 1 : 0,
-    e: quiz.results ? 1 : 0,
-  };
-  const bytes = new TextEncoder().encode(JSON.stringify(p));
-  if (typeof CompressionStream === "function") {
-    try { return XFER_ZIP + xb64e(await xPipe(bytes, new CompressionStream("deflate-raw"))); } catch (e) { /* use raw */ }
-  }
-  return XFER_RAW + xb64e(bytes);
-}
-
-/* Turn a code back into a quiz save (same format saveQuiz writes) */
-async function xferDecode(code) {
-  code = String(code).replace(/\s+/g, "");
-  const kind = code.slice(0, 3), body = code.slice(3);
-  if ((kind !== XFER_RAW && kind !== XFER_ZIP) || !body) throw new Error("That is not a valid code.");
-  let p;
-  try {
-    let bytes = xb64d(body);
-    if (kind === XFER_ZIP) {
-      if (typeof DecompressionStream !== "function") throw new Error("This browser cannot read that code. Please update it.");
-      bytes = await xPipe(bytes, new DecompressionStream("deflate-raw"));
-    }
-    p = JSON.parse(new TextDecoder().decode(bytes));
-  } catch (e) {
-    throw new Error(e && /browser/.test(e.message) ? e.message : "The code is damaged or incomplete. Copy it again completely.");
-  }
-  if (!p || typeof p.f !== "string" || !Array.isArray(p.i) || !p.i.length || !Array.isArray(p.w) || !Array.isArray(p.d))
-    throw new Error("That is not a valid code.");
-  if (p.f !== currentFile)
-    throw new Error(`This code is for the file "${p.f}". Choose that file in the sidebar first, then enter the code again.`);
-
-  const byId = new Map(questions.map(q => [q.id, q]));
-  const details = p.d.map(d => {
-    const q = byId.get(d[0]);
-    if (!q) return null;
-    return {
-      id: q.id,
-      yourAnswer: `${d[1]}. ${d[2] && q.options[d[2]] !== undefined ? q.options[d[2]] : "?"}`,
-      correctAnswer: `${d[3]}. ${q.options[q.answer]}`,
-    };
-  }).filter(Boolean);
-  return {
-    v: 1, t: Date.now(), active: !p.e, results: !!p.e, retest: !!p.r,
-    ids: p.i, idx: Number(p.x), score: Number(p.s) || 0, wrong: p.w, details,
-    answered: !!p.a, chosen: String(p.c || ""), order: p.o ? String(p.o).split("") : null,
-  };
-}
-
-/* ----- small pop-up window ----- */
-function xferModal(title, bodyHtml) {
-  closeXferModal();
-  const o = document.createElement("div");
-  o.id = "xferModal";
-  o.style.cssText = "position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;padding:14px";
-  o.innerHTML = `<div class="card" style="max-width:520px;width:100%;max-height:90vh;overflow:auto;background:var(--card,#1e293b);color:inherit;padding:16px;border-radius:12px">
-    <h3 style="margin-top:0">${esc(title)}</h3>${bodyHtml}</div>`;
-  o.addEventListener("click", e => { if (e.target === o) closeXferModal(); });
-  document.body.appendChild(o);
-  return o;
-}
-function closeXferModal() { const o = document.getElementById("xferModal"); if (o) o.remove(); }
-
-/* ----- PC: Share ----- */
-async function shareQuiz() {
-  if (!(quiz.active || quiz.results) || !quiz.list.length) { toast("There is no quiz in progress to share.", "warn"); return; }
-  const m = xferModal("Share quiz progress", `<p class="muted">Making code…</p>`);
-  let code;
-  try { code = await xferEncode(); }
-  catch (e) { m.querySelector(".card").innerHTML += notice("Could not make the code. " + errText(e), "error"); return; }
-  m.querySelector(".card").innerHTML = `<h3 style="margin-top:0">Share quiz progress</h3>
-    <p class="muted" style="font-size:13px">On the other device open the file <b>${esc(currentFile)}</b>, press <b>Enter code</b> and paste this code.
-    Question ${quiz.results ? "results" : (quiz.idx + 1) + " of " + quiz.list.length} · ${code.length} characters.</p>
-    <textarea id="xCode" readonly rows="6" style="width:100%;font-family:monospace;font-size:12px;word-break:break-all">${esc(code)}</textarea>
-    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xCopy">Copy code</button>
-    <button class="btn secondary" id="xClose">Close</button></div>`;
-  const ta = $("#xCode");
-  $("#xCopy").onclick = async () => {
-    const ok = await copyText(code);
-    if (!ok) { ta.focus(); ta.select(); }
-    toast(ok ? "Code copied." : "Select the code and copy it manually.", ok ? "success" : "warn");
-  };
-  $("#xClose").onclick = closeXferModal;
-  if (await copyText(code)) toast("Code copied.", "success");
-}
-
-/* ----- Phone: Enter code ----- */
-function enterCodeDialog() {
-  if (!questions.length) { toast("Wait until the questions are loaded.", "warn"); return; }
-  xferModal("Enter code", `<p class="muted" style="font-size:13px">Paste the code made by "Share quiz" on the other device. Both devices must have <b>${esc(currentFile)}</b> open.</p>
-    <textarea id="xIn" rows="6" style="width:100%;font-family:monospace;font-size:12px" placeholder="Paste code here" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-    <div id="xErr"></div>
-    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xGo">Continue quiz here</button>
-    <button class="btn secondary" id="xCancel">Cancel</button></div>`);
-  $("#xCancel").onclick = closeXferModal;
-  $("#xGo").onclick = async () => {
-    const btn = $("#xGo"), err = $("#xErr");
-    err.innerHTML = "";
-    const text = $("#xIn").value.trim();
-    if (!text) { err.innerHTML = notice("Paste the code first.", "warn"); return; }
-    btn.disabled = true;
-    try {
-      const s = await xferDecode(text);
-      const hasQuiz = (quiz.active && !quiz.results) || readSavedQuiz();
-      if (hasQuiz && !confirm("This replaces the quiz saved on this device. Continue?")) { btn.disabled = false; return; }
-      localStorage.setItem(quizSaveKey(), JSON.stringify(s));
-      if (!readSavedQuiz()) { clearSavedQuiz(); throw new Error("The questions in this file do not match the code. Make sure both devices use the same, latest file."); }
-      closeXferModal();
-      resumeSavedQuiz();
-      toast("Quiz continued from the other device.", "success");
-    } catch (e) {
-      err.innerHTML = notice(errText(e), "error");
-      btn.disabled = false;
-    }
-  };
-  $("#xIn").focus();
-}
-
-/* ----- the two buttons (floating, so no existing page code is touched) ----- */
-function installTransferButtons() {
-  if (document.getElementById("xferBar")) return;
-  const bar = document.createElement("div");
-  bar.id = "xferBar";
-  bar.style.cssText = "position:fixed;right:12px;bottom:12px;z-index:9000;display:none;gap:8px;flex-wrap:wrap;justify-content:flex-end";
-  bar.innerHTML = `<button class="btn secondary" id="xShare" type="button">Share quiz</button>
-    <button class="btn secondary" id="xEnter" type="button">Enter code</button>`;
-  document.body.appendChild(bar);
-  $("#xShare").onclick = shareQuiz;
-  $("#xEnter").onclick = enterCodeDialog;
-  const sync = () => {
-    const onPage = current === "dashboard" || current === "quiz";
-    const sharable = (quiz.active || quiz.results) && quiz.list.length > 0;
-    bar.style.display = onPage && questions.length ? "flex" : "none";
-    $("#xShare").style.display = sharable ? "" : "none";
-  };
-  new MutationObserver(sync).observe(page, { childList: true });   // runs after every redraw of the page
-  sync();
-}
-installTransferButtons();
 
 
 
@@ -1659,3 +1475,188 @@ document.addEventListener("visibilitychange", () => { if (document.hidden) saveQ
 render();
 loadBlog();
 loadPendingImages();     // admin: pictures chosen earlier that are not uploaded yet
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONTINUE THE QUIZ ON ANOTHER DEVICE (NEW – nothing above this line was changed)
+
+   PC:    press "Share quiz" -> a code is made and copied.
+   Phone: open the SAME question file, press "Enter code", paste it -> the quiz
+          continues at the same question, score and order, with the same shuffled options.
+
+   There is no server, so the code itself contains the progress. Its length depends on
+   the quiz size (a few hundred characters for ~100 questions). Send it to yourself
+   through WhatsApp, Telegram, e-mail, etc.
+   ═════════════════════════════════════════════════════════════════════ */
+const XFER_RAW = "MQR", XFER_ZIP = "MQZ";
+
+const xb64e = bytes => {
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
+const xb64d = str => {
+  str = str.replace(/-/g, "+").replace(/_/g, "/");
+  while (str.length % 4) str += "=";
+  const bin = atob(str), u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return u;
+};
+async function xPipe(bytes, stream) {
+  const out = new Blob([bytes]).stream().pipeThrough(stream);
+  return new Uint8Array(await new Response(out).arrayBuffer());
+}
+
+/* Turn the live quiz into a code */
+async function xferEncode() {
+  const p = {
+    f: currentFile,
+    i: quiz.list.map(q => q.id),
+    x: quiz.idx,
+    s: quiz.score,
+    w: quiz.wrong.map(q => q.id),
+    d: quiz.details.map(d => {
+      const q = findQ(d.id), ya = String(d.yourAnswer), ca = String(d.correctAnswer);
+      const yo = q ? (LETTERS.find(l => q.options[l] === ya.slice(3)) || "") : "";
+      return [d.id, ya[0] || "", yo, ca[0] || ""];
+    }),
+    a: quiz.answered ? 1 : 0,
+    c: quiz.chosen || "",
+    o: quiz.opts && validOrder(quiz.opts.order) ? quiz.opts.order.join("") : "",
+    r: quiz.retest ? 1 : 0,
+    e: quiz.results ? 1 : 0,
+  };
+  const bytes = new TextEncoder().encode(JSON.stringify(p));
+  if (typeof CompressionStream === "function") {
+    try { return XFER_ZIP + xb64e(await xPipe(bytes, new CompressionStream("deflate-raw"))); } catch (e) { /* use raw */ }
+  }
+  return XFER_RAW + xb64e(bytes);
+}
+
+/* Turn a code back into a quiz save (same format saveQuiz writes) */
+async function xferDecode(code) {
+  code = String(code).replace(/\s+/g, "");
+  const kind = code.slice(0, 3), body = code.slice(3);
+  if ((kind !== XFER_RAW && kind !== XFER_ZIP) || !body) throw new Error("That is not a valid code.");
+  let p;
+  try {
+    let bytes = xb64d(body);
+    if (kind === XFER_ZIP) {
+      if (typeof DecompressionStream !== "function") throw new Error("This browser cannot read that code. Please update it.");
+      bytes = await xPipe(bytes, new DecompressionStream("deflate-raw"));
+    }
+    p = JSON.parse(new TextDecoder().decode(bytes));
+  } catch (e) {
+    throw new Error(e && /browser/.test(e.message) ? e.message : "The code is damaged or incomplete. Copy it again completely.");
+  }
+  if (!p || typeof p.f !== "string" || !Array.isArray(p.i) || !p.i.length || !Array.isArray(p.w) || !Array.isArray(p.d))
+    throw new Error("That is not a valid code.");
+  if (p.f !== currentFile)
+    throw new Error(`This code is for the file "${p.f}". Choose that file in the sidebar first, then enter the code again.`);
+
+  const byId = new Map(questions.map(q => [q.id, q]));
+  const details = p.d.map(d => {
+    const q = byId.get(d[0]);
+    if (!q) return null;
+    return {
+      id: q.id,
+      yourAnswer: `${d[1]}. ${d[2] && q.options[d[2]] !== undefined ? q.options[d[2]] : "?"}`,
+      correctAnswer: `${d[3]}. ${q.options[q.answer]}`,
+    };
+  }).filter(Boolean);
+  return {
+    v: 1, t: Date.now(), active: !p.e, results: !!p.e, retest: !!p.r,
+    ids: p.i, idx: Number(p.x), score: Number(p.s) || 0, wrong: p.w, details,
+    answered: !!p.a, chosen: String(p.c || ""), order: p.o ? String(p.o).split("") : null,
+  };
+}
+
+/* ----- small pop-up window ----- */
+function xferModal(title, bodyHtml) {
+  closeXferModal();
+  const o = document.createElement("div");
+  o.id = "xferModal";
+  o.style.cssText = "position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;padding:14px";
+  o.innerHTML = `<div class="card" style="max-width:520px;width:100%;max-height:90vh;overflow:auto;background:var(--card,#1e293b);color:inherit;padding:16px;border-radius:12px">
+    <h3 style="margin-top:0">${esc(title)}</h3>${bodyHtml}</div>`;
+  o.addEventListener("click", e => { if (e.target === o) closeXferModal(); });
+  document.body.appendChild(o);
+  return o;
+}
+function closeXferModal() { const o = document.getElementById("xferModal"); if (o) o.remove(); }
+
+/* ----- PC: Share ----- */
+async function shareQuiz() {
+  if (!(quiz.active || quiz.results) || !quiz.list.length) { toast("There is no quiz in progress to share.", "warn"); return; }
+  const m = xferModal("Share quiz progress", `<p class="muted">Making code…</p>`);
+  let code;
+  try { code = await xferEncode(); }
+  catch (e) { m.querySelector(".card").innerHTML += notice("Could not make the code. " + errText(e), "error"); return; }
+  m.querySelector(".card").innerHTML = `<h3 style="margin-top:0">Share quiz progress</h3>
+    <p class="muted" style="font-size:13px">On the other device open the file <b>${esc(currentFile)}</b>, press <b>Enter code</b> and paste this code.
+    Question ${quiz.results ? "results" : (quiz.idx + 1) + " of " + quiz.list.length} · ${code.length} characters.</p>
+    <textarea id="xCode" readonly rows="6" style="width:100%;font-family:monospace;font-size:12px;word-break:break-all">${esc(code)}</textarea>
+    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xCopy">Copy code</button>
+    <button class="btn secondary" id="xClose">Close</button></div>`;
+  const ta = $("#xCode");
+  $("#xCopy").onclick = async () => {
+    const ok = await copyText(code);
+    if (!ok) { ta.focus(); ta.select(); }
+    toast(ok ? "Code copied." : "Select the code and copy it manually.", ok ? "success" : "warn");
+  };
+  $("#xClose").onclick = closeXferModal;
+  if (await copyText(code)) toast("Code copied.", "success");
+}
+
+/* ----- Phone: Enter code ----- */
+function enterCodeDialog() {
+  if (!questions.length) { toast("Wait until the questions are loaded.", "warn"); return; }
+  xferModal("Enter code", `<p class="muted" style="font-size:13px">Paste the code made by "Share quiz" on the other device. Both devices must have <b>${esc(currentFile)}</b> open.</p>
+    <textarea id="xIn" rows="6" style="width:100%;font-family:monospace;font-size:12px" placeholder="Paste code here" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+    <div id="xErr"></div>
+    <div class="btnrow" style="margin-top:10px"><button class="btn" id="xGo">Continue quiz here</button>
+    <button class="btn secondary" id="xCancel">Cancel</button></div>`);
+  $("#xCancel").onclick = closeXferModal;
+  $("#xGo").onclick = async () => {
+    const btn = $("#xGo"), err = $("#xErr");
+    err.innerHTML = "";
+    const text = $("#xIn").value.trim();
+    if (!text) { err.innerHTML = notice("Paste the code first.", "warn"); return; }
+    btn.disabled = true;
+    try {
+      const s = await xferDecode(text);
+      const hasQuiz = (quiz.active && !quiz.results) || readSavedQuiz();
+      if (hasQuiz && !confirm("This replaces the quiz saved on this device. Continue?")) { btn.disabled = false; return; }
+      localStorage.setItem(quizSaveKey(), JSON.stringify(s));
+      if (!readSavedQuiz()) { clearSavedQuiz(); throw new Error("The questions in this file do not match the code. Make sure both devices use the same, latest file."); }
+      closeXferModal();
+      resumeSavedQuiz();
+      toast("Quiz continued from the other device.", "success");
+    } catch (e) {
+      err.innerHTML = notice(errText(e), "error");
+      btn.disabled = false;
+    }
+  };
+  $("#xIn").focus();
+}
+
+/* ----- the two buttons (floating, so no existing page code is touched) ----- */
+function installTransferButtons() {
+  if (document.getElementById("xferBar")) return;
+  const bar = document.createElement("div");
+  bar.id = "xferBar";
+  bar.style.cssText = "position:fixed;right:12px;bottom:12px;z-index:9000;display:none;gap:8px;flex-wrap:wrap;justify-content:flex-end";
+  bar.innerHTML = `<button class="btn secondary" id="xShare" type="button">Share quiz</button>
+    <button class="btn secondary" id="xEnter" type="button">Enter code</button>`;
+  document.body.appendChild(bar);
+  $("#xShare").onclick = shareQuiz;
+  $("#xEnter").onclick = enterCodeDialog;
+  const sync = () => {
+    const onPage = current === "dashboard" || current === "quiz";
+    const sharable = (quiz.active || quiz.results) && quiz.list.length > 0;
+    bar.style.display = onPage && questions.length ? "flex" : "none";
+    $("#xShare").style.display = sharable ? "" : "none";
+  };
+  new MutationObserver(sync).observe(page, { childList: true });   // runs after every redraw of the page
+  sync();
+}
+installTransferButtons();
