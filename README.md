@@ -52,7 +52,7 @@ Android users can also install the **[app](https://drive.google.com/file/d/1a-UV
 
 ## ➕ Adding your own questions
 
-1. Create a quiz file, for example `physics.json`, following the format below.
+1. Create a quiz file, for example `physics.json`, following the format below (or generate it with the [AI prompt](#-ai-prompt-convert-papers-or-notes-to-json)).
 2. Upload it to the **`qp/`** folder of the repo.
 3. Refresh the app. The new file appears in the file list, no code changes needed.
 
@@ -171,7 +171,116 @@ Keep the same number of columns in every row and leave a blank line before and a
 | Arrange in correct order | Plain question. Items on separate lines (`\n`), options are sequences. |
 | Statement I / Statement II, Assertion / Reason | Plain question. One statement per line, full-text options. |
 
-📄 The complete reference, including common mistakes and a **ready-to-paste AI prompt** that converts question papers or notes into valid JSON, is in [`question_bank_guidelines.md`](question_bank_guidelines.md).
+📄 The complete reference, including common mistakes, is in [`question_bank_guidelines.md`](question_bank_guidelines.md).
+
+---
+
+## 🤖 AI prompt: convert papers or notes to JSON
+
+Don't want to write JSON by hand? Paste this prompt into any AI assistant (Claude, ChatGPT, Gemini, etc.), then paste your question paper **or your study notes** at the very end. It returns a ready-to-use quiz file.
+
+1. Copy the prompt below.
+2. Replace the last line with your content.
+3. Save the AI's reply as `something.json` and upload it to `qp/`.
+4. If your questions have figures, create the `.webp` files with the exact names the AI used and put them in `qp/images/`.
+
+<details>
+<summary><b>📋 Click to open the copy-paste prompt</b></summary>
+
+```text
+Convert the question paper below into ONE JSON file for my quiz app.
+
+FILE
+- A single JSON array [ ]. Valid JSON: double quotes, no trailing commas, no comments.
+- Items are either PLAIN questions or PASSAGE SETS, in the same order as the paper.
+
+EVERY QUESTION (plain, or inside a set) has these four required fields:
+  "id": integer, unique, 1,2,3... in file order (sub-questions inside sets continue the numbering)
+  "question": string
+  "options": object with exactly the keys "A","B","C","D", each a string
+             (do NOT start an option with "A." or "(a)")
+  "answer": one capital letter "A"-"D". Exactly one correct answer.
+Options must be non-empty, EXCEPT an option that is itself a picture (see PICTURES), which is "".
+Optional picture fields ("image", "optionImages") are allowed ONLY where the paper really has a figure. No other fields.
+
+PICTURES
+Use a picture only for things that cannot be written as text: diagrams, graphs, maps, circuits, figures, photos.
+Data tables and anything readable as text must be typed out as text or a | table, never as a picture.
+I will create the image files myself, so you only write the file names, using these exact rules:
+- Figure belonging to one question: "image": "q<id>.webp"            e.g. "q12.webp"
+- Pictures as options: "optionImages": {"A":"q<id>-a.webp","B":"q<id>-b.webp", ...} using only the letters that are pictures, and "" as the text of those options
+- Figure shared by a whole passage set: put "image": "<group>.webp" on the SET itself (not inside its questions),
+  e.g. "map-set.webp". A set must still have passage text, so if there is only a figure write a short line such as "Study the figure and answer the questions."
+- File names: lowercase letters, digits and hyphens only, always ending in .webp. No spaces, no folders, no URLs, no capitals.
+- Optional "imageAlt": one short sentence describing the figure, only if you can see it clearly. Otherwise leave it out.
+- Never describe a figure with ASCII art, and never drop a question just because it has a figure.
+
+PLAIN QUESTION:
+{ "id": 1, "question": "...", "options": {"A":"...","B":"...","C":"...","D":"..."}, "answer": "B" }
+
+PLAIN QUESTION WITH A FIGURE:
+{ "id": 12, "question": "Identify the structure shown in the figure.", "image": "q12.webp", "options": {"A":"...","B":"...","C":"...","D":"..."}, "answer": "B" }
+
+QUESTION WHOSE OPTIONS ARE PICTURES:
+{ "id": 15, "question": "Which circuit diagram is correct?", "options": {"A":"","B":"","C":"","D":""},
+  "optionImages": {"A":"q15-a.webp","B":"q15-b.webp","C":"q15-c.webp","D":"q15-d.webp"}, "answer": "C" }
+
+PASSAGE SET (use it when several questions share one passage, one data table or one figure):
+{
+  "group": "short-unique-name",
+  "title": "Directions (Q1-5): Read the passage and answer the questions",
+  "passage": "Passage text. Write it ONCE.",
+  "image": "short-unique-name.webp",
+  "questions": [ { "id": 2, "question": "...", "options": {...}, "answer": "C" }, ... ]
+}
+A set has no "id". "image" on a set is optional. "group" is lowercase letters, digits and hyphens, unique in the file.
+Do not put "group" or "passage" inside its questions. A question inside a set may have its own "image" or "optionImages" only if it has its own figure.
+
+TEXT RULES
+- Plain text only (no HTML). Use Unicode for math and symbols: m², ₹, °C, →.
+- Line breaks inside strings are \n. Escape double quotes as \".
+- Tables: each row on its own line starting with |, second line |---|---|, same number of
+  columns in every row, a blank line before and after, written as \n inside the string.
+  Use this for data tables (put them in "passage") and for match-the-following tables
+  (put them in "question"; options are codes such as "A-2, B-1, C-4, D-3").
+- Options are shuffled by the app: never write "All of the above", "Both A and B",
+  or refer to option letters in the question or in another option.
+- For arrange-in-order questions, put the items on separate lines (\n) in the question.
+
+ANSWER LENGTH HEURISTIC (balance option lengths)
+- The correct option must NOT be noticeably longer or more detailed than the wrong options.
+- Keep all four options of a question close in length, wording style and level of detail, so the correct answer cannot be guessed from its length.
+- Do NOT add extra explanation, qualifiers or detail to the correct option to make it "more complete".
+- If the paper's original options differ a lot in length, keep their meaning and the correct answer unchanged, but tighten the longest option or lightly expand the shortest ones (without adding new facts) so the four look balanced.
+- Never change which option is correct, and never change the factual content of an option; only adjust its length and phrasing.
+- Do not apply this to options that are naturally short (numbers, names, years, single words, option codes like "A-2, B-1, C-4, D-3").
+
+INPUT TYPE (question paper OR notes)
+- First, decide what I pasted below:
+  (a) A QUESTION PAPER: it already contains questions (usually with options and/or answers). Convert it exactly as described above, keeping the questions, options and answers from the paper.
+  (b) NOTES / STUDY MATERIAL: it contains no ready-made questions (only facts, topics, explanations, or a chapter). In this case, create the questions and answers yourself from the notes.
+- If it is a mix, convert the existing questions as they are and create new questions only for the parts that are notes.
+- When creating questions from notes:
+  - Base every question and answer ONLY on facts in the notes. Do not add outside facts or guess.
+  - Cover all the important points of the notes as evenly as possible; skip trivial details.
+  - Write clear, exam-style multiple-choice questions with exactly four options and exactly one correct answer.
+  - Make the three wrong options believable (related terms, close values, common confusions), never silly or obviously wrong.
+  - Do not repeat the same question in different words.
+  - Spread the correct answers across A, B, C and D instead of favouring one letter.
+  - If the notes contain a passage, data table or figure that several questions depend on, use a PASSAGE SET as described above.
+  - Apply the ANSWER LENGTH HEURISTIC to the options you create.
+- If I mention a number of questions, create exactly that many; otherwise create as many as the notes reasonably support.
+- Do not tell me which type it was and do not add any explanation. All the same FILE, PICTURES and TEXT RULES apply, and the output is still only the JSON.
+
+Return only the JSON. Do not add a list of images; the file names follow the rules above.
+
+QUESTION PAPER OR NOTES:
+<paste the questions and answers here, or paste the notes>
+```
+
+</details>
+
+> 💡 **Tip:** to get a fixed number of questions from notes, add a line such as `Create exactly 30 questions.` just before the last line of the prompt.
 
 ---
 
