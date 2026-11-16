@@ -1,0 +1,108 @@
+[
+  {
+    "id": 1,
+    "question": "A vertical section through the soil showing its layers is called a:",
+    "options": {"A": "Soil catena", "B": "Soil texture", "C": "Soil profile", "D": "Soil structure"},
+    "answer": "C"
+  },
+  {
+    "id": 2,
+    "question": "The individual layers seen in a soil profile are known as:",
+    "options": {"A": "Horizons", "B": "Strata", "C": "Facies", "D": "Lamellae"},
+    "answer": "A"
+  },
+  {
+    "id": 3,
+    "question": "Which horizon consists of loose leaves and organic debris that are largely undecomposed?",
+    "options": {"A": "O2", "B": "A1", "C": "B1", "D": "O1"},
+    "answer": "D"
+  },
+  {
+    "id": 4,
+    "question": "Which horizon contains organic debris that is only partially decomposed?",
+    "options": {"A": "O1", "B": "O2", "C": "A1", "D": "A3"},
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "question": "Which dark horizon is made of mineral plus organic matter and shows much biological activity?",
+    "options": {"A": "A1", "B": "A2", "C": "A3", "D": "B1"},
+    "answer": "A"
+  },
+  {
+    "id": 6,
+    "question": "Which light-coloured horizon shows the maximum eluviation?",
+    "options": {"A": "A1", "B": "A3", "C": "A2", "D": "B2"},
+    "answer": "C"
+  },
+  {
+    "id": 7,
+    "question": "What is the A3 horizon?",
+    "options": {
+      "A": "Layer of maximum clay accumulation",
+      "B": "Transition layer between A and B, like A",
+      "C": "Weathered rock material above bedrock",
+      "D": "Consolidated rock beneath the soil"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "question": "Which horizon is transitional to A but is more like B?",
+    "options": {"A": "A3", "B": "B3", "C": "C", "D": "B1"},
+    "answer": "D"
+  },
+  {
+    "id": 9,
+    "question": "Which horizon shows the maximum accumulation of silicate clay minerals, oxides and organic matter?",
+    "options": {"A": "B1", "B": "B3", "C": "B2", "D": "A2"},
+    "answer": "C"
+  },
+  {
+    "id": 10,
+    "question": "The B3 horizon is transitional to which layer while being more like B?",
+    "options": {"A": "C horizon", "B": "A horizon", "C": "O horizon", "D": "A3 horizon"},
+    "answer": "A"
+  },
+  {
+    "id": 11,
+    "question": "Which horizon represents the weathered parent material?",
+    "options": {"A": "R horizon", "B": "C horizon", "C": "B2 horizon", "D": "A3 horizon"},
+    "answer": "B"
+  },
+  {
+    "id": 12,
+    "question": "The D horizon, a layer of consolidated rock beneath the soil, is equivalent to which horizon?",
+    "options": {"A": "O horizon", "B": "C horizon", "C": "B horizon", "D": "R horizon"},
+    "answer": "D"
+  },
+  {
+    "id": 13,
+    "question": "Which of the following transitional horizons may be absent from a soil profile?",
+    "options": {"A": "A3", "B": "A2", "C": "B2", "D": "A1"},
+    "answer": "A"
+  },
+  {
+    "id": 14,
+    "question": "Which layer of the soil profile is occasionally absent?",
+    "options": {"A": "A1 horizon", "B": "B2 horizon", "C": "C horizon", "D": "A2 horizon"},
+    "answer": "C"
+  },
+  {
+    "id": 15,
+    "question": "Match the horizons with their features:\n\n| List I | List II |\n|---|---|\n| A. A2 | 1. Loose, largely undecomposed leaves |\n| B. B2 | 2. Maximum eluviation |\n| C. O1 | 3. Maximum accumulation of clay and oxides |\n| D. C | 4. Weathered parent material |\n",
+    "options": {
+      "A": "A-3, B-2, C-1, D-4",
+      "B": "A-2, B-3, C-1, D-4",
+      "C": "A-2, B-3, C-4, D-1",
+      "D": "A-1, B-3, C-2, D-4"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "question": "In a soil profile, the A horizon is commonly known as the:",
+    "options": {"A": "Subsoil", "B": "Parent material", "C": "Bedrock", "D": "Topsoil"},
+    "answer": "D"
+  }
+]
