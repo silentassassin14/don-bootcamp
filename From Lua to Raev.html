@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>From Lua to Raev</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#e6e6e6;--mute:#7c7c7c;--line:#1f1f1f;--a:#fff;--b:#ff8fb1;--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.8 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:2px;width:100%;background:var(--b);transform-origin:left;transform:scaleX(0);z-index:11}
+
+.stage{height:220vh}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding:1.5rem;overflow:hidden}
+.name{position:relative;font:400 clamp(6rem,30vw,16rem)/.9 var(--serif);letter-spacing:-.03em;margin:0}
+.name span{display:block}
+#raev{position:absolute;inset:0;color:var(--b);opacity:0}
+.cap{margin:1.5rem 0 0;color:var(--mute);font-size:.95rem}
+.hint{position:absolute;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));left:0;right:0;color:var(--mute);font-size:.85rem;transition:opacity .4s}
+
+main{max-width:36rem;margin:0 auto;padding:0 1.5rem 8rem}
+section{padding-top:5rem}
+p{margin:0 0 1.4rem}
+.by{color:var(--mute);font-size:.9rem}
+.big{font:400 clamp(2.2rem,7vw,3.2rem)/1.15 var(--serif);margin:0 0 1.5rem}
+.hurt s{color:var(--mute);background:linear-gradient(var(--b),var(--b)) 0 56%/0 1px no-repeat;text-decoration:none;transition:background-size .9s ease .3s}
+.hurt.on s{background-size:100% 1px}
+.hurt em{color:var(--b)}
+
+.term{padding-top:3.5rem}
+.term h3{font:italic 400 2rem/1.1 var(--serif);margin:0 0 .6rem}
+.def{color:var(--mute);font-size:1rem;line-height:1.65;margin:0 0 1.25rem}
+.qa{display:flex;justify-content:space-between;gap:1.5rem;border-top:1px solid var(--line);padding:.7rem 0;font-size:1rem;line-height:1.55}
+.qa span:last-child{color:var(--mute);text-align:right;max-width:55%}
+.verdict{font:400 1.4rem/1.35 var(--serif);margin:1.25rem 0 0}
+
+.finale{padding-top:9rem;text-align:center}
+.finale .big{font-size:clamp(2.6rem,9vw,4.4rem)}
+.finale .big span{color:var(--mute)}
+.advice{margin:5rem 0 3rem;font:400 1.5rem/1.45 var(--serif);border-left:2px solid var(--b);padding-left:1.25rem}
+.sign{color:var(--mute);font-size:1rem}
+.sign strong{display:block;font:italic 400 1.5rem var(--serif);color:var(--ink)}
+:focus-visible{outline:2px solid var(--b);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="bar" aria-hidden="true"></div>
+
+<div class="stage" id="stage">
+  <div class="sticky">
+    <div>
+      <h1 class="name" aria-label="From Lua to Raev">
+        <span id="lua" aria-hidden="true">Lua</span>
+        <span id="raev" aria-hidden="true">Raev</span>
+        <span style="visibility:hidden" aria-hidden="true">Raev</span>
+      </h1>
+      <p class="cap" id="cap">A name that meant nothing, until it didn’t.</p>
+    </div>
+    <div class="hint" id="hint">Scroll</div>
+  </div>
+</div>
+
+<main>
+  <p class="by">Angela_Shafi, November</p>
+
+  <section>
+    <p>I tried coming with the title first today because I knew what I wanted to write. Idk if this will go exactly how I planned, but here it goes…</p>
+  </section>
+
+  <section>
+    <h2 class="big hurt" id="hurt"><s>I’m hurt.</s> More like <em>was</em> hurt.</h2>
+    <p>This month of November, which is supposedly a month of good things, was really a roller coaster of emotions for me. So I tried naming each feeling that I went through, only to realize there aren’t really enough terms for emotions.</p>
+  </section>
+
+  <section>
+    <p>So recently, I’ve nicknamed someone a certain something (more like giving them a pseudonym) so that they wouldn’t know when I talk about them. The name was just something I randomly took from some anime characters’ names split. So it didn’t mean much.</p>
+    <p>But later, when I was in my little corner wondering about synonymous words of something I absolutely love, this name came up. Crazy coincidence, right? My thoughts went kinda out of control then, and I went to a delusional world.</p>
+    <p>Infatuation, idk if it’s the right word or not. That thing happened, I guess. Let me decode it.</p>
+  </section>
+
+  <section class="term">
+    <h3>Infatuation</h3>
+    <p class="def">An intense, often foolish, or obsessive passion or admiration for someone or something that is usually short-lived and can cloud clear judgment.</p>
+    <div class="qa"><span>Was it intense?</span><span>Idk, maybe.</span></div>
+    <div class="qa"><span>Was it foolish?</span><span>Damn sure it is.</span></div>
+    <div class="qa"><span>Obsessive passion?</span><span>I don’t think so.</span></div>
+    <div class="qa"><span>Admiration?</span><span>Yeh, sure.</span></div>
+    <div class="qa"><span>Did it cloud my judgement?</span><span>I think so.</span></div>
+    <p class="verdict">So is it infatuation then? Idk.</p>
+  </section>
+
+  <section class="term">
+    <h3>Limerence</h3>
+    <p class="def">The mental state of being madly in love or intensely infatuated when reciprocation of the feeling is uncertain.</p>
+    <div class="qa"><span>Madly in love?</span><span>Definitely not, I think.</span></div>
+    <div class="qa"><span>Intensely infatuated?</span><span>At some point, I think.</span></div>
+    <div class="qa"><span>Is reciprocation uncertain?</span><span>Certain that it’s not gonna.</span></div>
+    <p class="verdict">In the end, limerence is a bit much. So that isn’t it, I think.</p>
+  </section>
+
+  <section class="term">
+    <h3>Admiration</h3>
+    <p class="def">A positive social emotion felt when observing someone’s competence, talent, skill, or virtuous actions that exceed typical standards.</p>
+    <div class="qa"><span>A positive social emotion?</span><span>At first. But the way someone’s action (unintentional, maybe) toys with your emotions is not something I’m happy about.</span></div>
+    <div class="qa"><span>Competence and the others?</span><span>They have, I believe.</span></div>
+    <div class="qa"><span>Exceeding typical standards?</span><span>Maybe it does, maybe it doesn’t.</span></div>
+  </section>
+
+  <section class="finale">
+    <h2 class="big"><span>So what exactly am I feeling?</span><br>I don’t know. I really don’t.</h2>
+  </section>
+
+  <section>
+    <p class="advice">My suggestion is to guard your emotions well. The moment you realize somebody has a bit too much influence on them, get away, which is what my plan is.</p>
+    <p class="sign">Till next time, bye.<br>(Btw, their new pseudonym is in Estonian.)<strong>Yours truly, Angela_Shafi</strong></p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var c=function(v,a,b){return Math.max(a,Math.min(b,v))};
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var stage=document.getElementById("stage"),lua=document.getElementById("lua"),raev=document.getElementById("raev"),
+      cap=document.getElementById("cap"),hint=document.getElementById("hint"),bar=document.getElementById("bar"),tick=false;
+  function update(){
+    tick=false;
+    var y=scrollY,H=innerHeight,p=c(y/(stage.offsetHeight-H),0,1);
+    var o=reduce?(p>.5?1:0):c((p-.25)/.5,0,1);
+    lua.style.opacity=1-o;lua.style.filter="blur("+o*14+"px)";lua.style.transform="translateY("+(-o*18)+"px)";
+    raev.style.opacity=o;raev.style.filter="blur("+(1-o)*14+"px)";raev.style.transform="translateY("+(1-o)*18+"px)";
+    cap.textContent=o>.6?"The name changed. So did something in her.":"A name that meant nothing, until it didn’t.";
+    hint.style.opacity=y>40?0:1;
+    bar.style.transform="scaleX("+c(y/(document.documentElement.scrollHeight-H),0,1)+")";
+  }
+  addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(update)}},{passive:true});
+  addEventListener("resize",update);update();
+  var h=document.getElementById("hurt");
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(e,ob){e.forEach(function(x){if(x.isIntersecting){h.classList.add("on");ob.disconnect()}})},{threshold:.8}).observe(h);
+  }else h.classList.add("on");
+})();
+</script>
+</body>
+</html>
